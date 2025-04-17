@@ -1,4 +1,4 @@
-package com.mycompany.oopproject;
+package src;
 
 import java.util.ArrayList;
 

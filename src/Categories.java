@@ -1,3 +1,4 @@
+package src;
 public class Categories {
 
     private String name;
