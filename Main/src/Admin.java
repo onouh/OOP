@@ -1,3 +1,4 @@
+package com.mycompany.oopproject;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,38 +37,19 @@ public class Admin extends Person implements Employee<Categories>{
     }
     
     
-    public void addRoom() {
+    public void addRoom(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter room capacity:");
         int capacity = scanner.nextInt();
         scanner.nextLine();
-
-        ArrayList<Calendar> availableHours = new ArrayList<>();
-        System.out.println("Enter available hours (comma-separated, e.g., 9,10,11):");
-        String[] hoursInput = scanner.nextLine().split(",");
-        for (String hour : hoursInput) {
-            try {
-            int hourInt = Integer.parseInt(hour.trim());
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, hourInt);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            availableHours.add(calendar);
-            } catch (NumberFormatException e) {
-            System.out.println("Invalid hour format. Please enter numbers only.");
-            }
-        }
-
-        Database.rooms.add(new Room(availableHours, capacity));
-        System.out.println("Room added successfully.");
+        Database.rooms.add(new Room(capacity));
     }
     
     @Override
-    public void create(Categories o){
-        o.setName(input.nextLine());
-        if (!o.getName().equals("<><><>")){
-            Database.categories.add(o);
-        }
+    public void create(){
+    Categories o = new Categories(input.nextLine());
+    if (!o.getName().equals("<><><>")){
+        Database.categories.add(o);
+     }
     }
     
     @Override
@@ -161,13 +143,11 @@ public class Admin extends Person implements Employee<Categories>{
                     break;
                 case "4":
                     System.out.println("What do you want to do?");
-                    System.out.println("1-create category"+"\n2-read category"+"\n3-update category"+"\n4-delete category");
+                    System.out.println("1-create category  2-read category 3-update category 4-delete category ");
                     String j = input.nextLine();
                     switch (j){
                         case "1":
-                            System.out.println("Enter the name of the new category:");
-                            Categories newCategory = new Categories(input.nextLine());
-                            this.create(newCategory);
+                            this.create();
                             break;
                         case "2":
                             System.out.println("Which category do you want to read");
@@ -202,6 +182,7 @@ public class Admin extends Person implements Employee<Categories>{
     
 
     }  
+    
     private void categorySelection(String mode){
         int l = 0;
         for(Categories c : Database.categories){
