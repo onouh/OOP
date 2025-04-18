@@ -1,4 +1,3 @@
-package com.mycompany.oopproject;
 import java.util.Scanner;
 import java.util.Calendar;
 import java.util.InputMismatchException;
