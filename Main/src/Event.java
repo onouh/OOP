@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
 public class Event {
-
+    static int intialCapacity = 1000;
     private String name;
     private Categories category;
     private int ticketPrice;
-    private Organizer MadeBy;
-    ArrayList<Attendee> inEvent = new ArrayList<Attendee>(100);
+    private Organizer madeBy;
+    ArrayList<Attendee> inEvent = new ArrayList<Attendee>(intialCapacity);
 
     Event(){
 
@@ -33,8 +33,8 @@ public class Event {
         this.ticketPrice = ticketPrice;
     }
 
-    public void getAttendee(){
-        return Attendee;
+    public ArrayList<Attendee> getAttendee(){
+        return inEvent;
     }
 
 

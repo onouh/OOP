@@ -63,8 +63,8 @@ public class Admin extends Person implements Employee<Categories>{
     }
     
     @Override
-    public void create(){
-        Categories o = new Categories(input.nextLine());
+    public void create(Categories o){
+        o.setName(input.nextLine());
         if (!o.getName().equals("<><><>")){
             Database.categories.add(o);
         }
@@ -161,11 +161,13 @@ public class Admin extends Person implements Employee<Categories>{
                     break;
                 case "4":
                     System.out.println("What do you want to do?");
-                    System.out.println("1-create category  2-read category 3-update category 4-delete category ");
+                    System.out.println("1-create category"+"\n2-read category"+"\n3-update category"+"\n4-delete category");
                     String j = input.nextLine();
                     switch (j){
                         case "1":
-                            this.create();
+                            System.out.println("Enter the name of the new category:");
+                            Categories newCategory = new Categories(input.nextLine());
+                            this.create(newCategory);
                             break;
                         case "2":
                             System.out.println("Which category do you want to read");
@@ -232,11 +234,5 @@ public class Admin extends Person implements Employee<Categories>{
                 System.out.println("please enter a number");
             }
         }while(true);
-    }
-
-    @Override
-    public void create(Categories o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 }

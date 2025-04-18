@@ -7,7 +7,7 @@ public abstract class Person {
     protected String username;
     protected String password;
     protected boolean loggedIn;
-    Scanner input = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
     
     Person(){
     }
@@ -54,7 +54,7 @@ public abstract class Person {
         }
     }
 
-    public void LogIn(){       
+    public static final void LogIn(){       
         System.out.println("Please write your username");
         String username = input.next();
         for(Person p : Database.people){
@@ -69,7 +69,7 @@ public abstract class Person {
                     wrongCount++;
                     }
                 }
-                if (loggedIn){
+                if (p.loggedIn){
                     System.out.println("Login successful");
                     if(p instanceof Attendee){
                     Attendee w = (Attendee)p;
