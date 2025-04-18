@@ -12,7 +12,17 @@ public class Attendee extends Person {
     Attendee(){
 
     }
-    Attendee(String name, Date dob, )
+    Attendee(Date dob, Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password){
+        super(username,password);
+        this.username = username;
+        this.password = password;
+        this.loggedIn = false;
+        this.dob = dob;
+        this.wallet = wallet;
+        this.address = address;
+        this.gender = gender;
+        this.interests = interests;
+    }
 
 
     @Override
