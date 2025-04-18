@@ -1,4 +1,3 @@
-package com.mycompany.oopproject;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,9 +38,41 @@ public class Admin extends Person implements Employee<Categories>{
     
     public void addRoom(){
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter room capacity:");
         int capacity = scanner.nextInt();
         scanner.nextLine();
-        Database.rooms.add(new Room(capacity));
+
+        ArrayList<Calendar> availableHours = new ArrayList<>(); // Define availableHours as Calendar type
+        System.out.println("Enter available hours (start and end time in 24-hour format, separated by a space):");
+        while (true) {
+            try {
+                String[] times = scanner.nextLine().split(" ");
+                if (times.length != 2) {
+                    System.out.println("Please enter exactly two times (start and end).");
+                    continue;
+                }
+
+                Calendar start = Calendar.getInstance();
+                Calendar end = Calendar.getInstance();
+
+                start.set(Calendar.HOUR_OF_DAY, Integer.parseInt(times[0]));
+                start.set(Calendar.MINUTE, 0);
+                end.set(Calendar.HOUR_OF_DAY, Integer.parseInt(times[1]));
+                end.set(Calendar.MINUTE, 0);
+
+                if (start.before(end)) {
+                    availableHours.add(start);
+                    availableHours.add(end);
+                    break;
+                } else {
+                    System.out.println("Start time must be before end time. Try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter numeric values for hours.");
+            }
+        }
+
+        Database.rooms.add(new Room(availableHours, capacity));
     }
     
     @Override
