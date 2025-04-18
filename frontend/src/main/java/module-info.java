@@ -1,4 +1,4 @@
-module asu.github {
+module GUI.UX {
     requires javafx.controls;
     requires javafx.fxml;
 

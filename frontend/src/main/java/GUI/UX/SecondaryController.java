@@ -1,4 +1,3 @@
-package asu.github;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
