@@ -120,13 +120,14 @@ public abstract class Person {
         }
     }while(continueInput);
     }
+    protected abstract void homeScreen();
     protected void setUsername(String username){
         this.username = username;
     }
     protected void setPassword(String password){
         this.password = password;
     }   
-    protected abstract void homeScreen();
     @Override   
-    public abstract String toString(); 
+    public abstract String toString();
+    
 }
