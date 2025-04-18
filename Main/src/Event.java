@@ -36,6 +36,4 @@ public class Event {
     public ArrayList<Attendee> getAttendee(){
         return inEvent;
     }
-
-
 }

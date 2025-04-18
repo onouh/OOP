@@ -1,5 +1,3 @@
-package com.mycompany.oopproject;
-
 import java.util.Scanner;
 
 public class Categories {
