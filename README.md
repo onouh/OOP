@@ -14,6 +14,6 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 > If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 
 ## UML Class Diagram 
-[![UML Class Diagram](https://drive.google.com/uc?id=YOUR_FILE_ID)]([UML Class](https://drive.google.com/file/d/1BiFN_bgoJVhFdSIyuiuE6RjRnAjdTBPB/view?usp=sharing))
+[[UML Class Diagram](https://drive.google.com/file/d/1BiFN_bgoJVhFdSIyuiuE6RjRnAjdTBPB/view?usp=sharing)]
 
 > Click the image to view the full-size UML Class Diagram.
