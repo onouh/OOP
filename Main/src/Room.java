@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -6,10 +7,11 @@ public class Room {
     private static int roomID = 0 ;
     private int roomNo;
     private int capacity;
+    ArrayList<Calendar> availableHours;
     
     
     
-    public Room( Calendar availableHours, int capacity) {
+    public Room(ArrayList<Calendar> availableHours, int capacity) {
         roomNo = roomID;
         roomID++;
         this.capacity = capacity;

@@ -36,19 +36,38 @@ public class Admin extends Person implements Employee<Categories>{
     }
     
     
-    public void addRoom(){
+    public void addRoom() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter room capacity:");
         int capacity = scanner.nextInt();
         scanner.nextLine();
-        Database.rooms.add(new Room(capacity));
+
+        ArrayList<Calendar> availableHours = new ArrayList<>();
+        System.out.println("Enter available hours (comma-separated, e.g., 9,10,11):");
+        String[] hoursInput = scanner.nextLine().split(",");
+        for (String hour : hoursInput) {
+            try {
+            int hourInt = Integer.parseInt(hour.trim());
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, hourInt);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            availableHours.add(calendar);
+            } catch (NumberFormatException e) {
+            System.out.println("Invalid hour format. Please enter numbers only.");
+            }
+        }
+
+        Database.rooms.add(new Room(availableHours, capacity));
+        System.out.println("Room added successfully.");
     }
     
     @Override
     public void create(){
-    Categories o = new Categories(input.nextLine());
-    if (!o.getName().equals("<><><>")){
-        Database.categories.add(o);
-     }
+        Categories o = new Categories(input.nextLine());
+        if (!o.getName().equals("<><><>")){
+            Database.categories.add(o);
+        }
     }
     
     @Override
@@ -213,5 +232,11 @@ public class Admin extends Person implements Employee<Categories>{
                 System.out.println("please enter a number");
             }
         }while(true);
+    }
+
+    @Override
+    public void create(Categories o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 }
