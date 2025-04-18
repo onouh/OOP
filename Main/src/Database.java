@@ -7,5 +7,5 @@ public class Database {
     public static ArrayList<Room> rooms = new ArrayList<>(100);
     public static ArrayList<Categories> categories = new ArrayList<>(100);
     
-    
+   
 }

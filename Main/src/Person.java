@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.Calendar;
+import java.util.InputMismatchException;
 
 public abstract class Person {
 
@@ -93,7 +95,37 @@ public abstract class Person {
             }
         }
     }
-    @Override
+
+    
+    protected void inputDate(Calendar cal){
+    boolean continueInput = true; 
+    do{
+        try{
+            cal.setLenient(false);
+            System.out.println("please enter the day");
+            cal.set(cal.DAY_OF_MONTH, input.nextInt());
+            
+            System.out.println("please enter the month");
+            cal.set(cal.MONTH, (input.nextInt()-1));
+            
+            System.out.println("please enter the year");
+            cal.set(cal.YEAR, input.nextInt());
+            continueInput = false;
+        }
+        catch(InputMismatchException ex){
+            System.out.println("please enter numbers only");
+            input.nextLine();
+        }
+        catch(IllegalArgumentException ex){
+            System.out.println("Make sure the date you inputted is correct");
+            input.nextLine();
+        }
+
+
+    }while(continueInput);
+    }
+            
+    @Override   
     public abstract String toString();
     
     protected abstract void homeScreen();

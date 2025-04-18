@@ -1,31 +1,28 @@
-import java.util.Date;
+import java.util.Calendar;
+
 
 public class Room {
 
-    private int roomID;
-    private Date availableHours;
+    private static int roomID = 0 ;
+    private int roomNo;
     private int capacity;
-
-    public Room(int roomID, Date availableHours, int capacity) {
-        this.roomID = roomID;
-        this.availableHours = availableHours;
+    
+    
+    
+    public Room( Calendar availableHours, int capacity) {
+        roomNo = roomID;
+        roomID++;
         this.capacity = capacity;
     }
-    public int getRoomID() {
-        return roomID;
+    
+    public int getRoomNo() {
+        return roomNo;
     }
-    public Date getAvailableHours() {
-        return availableHours;
-    }
+    
     public int getCapacity() {
         return capacity;
     }
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-    public void setAvailableHours(Date availableHours) {
-        this.availableHours = availableHours;
-    }
+    
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }

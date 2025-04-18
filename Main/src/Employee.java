@@ -1,9 +1,9 @@
-public interface Employee {
+    public interface Employee <T> {
 
-    public void create();
-    public void read();
-    public void update();
-    public void delete();
-    public void show();
+            public void create(T o);
+            public void read(T o);
+            public void update(T o);
+            public void delete(T o);
+            public void show();
 
 }
