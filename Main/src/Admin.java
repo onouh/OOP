@@ -170,7 +170,8 @@ public class Admin extends Person implements Employee<Categories>{
         String choice = input.nextLine();
         while(true){
             if(choice.toLowerCase().equals("y")){
-                Person.LogIn();
+                Person p = new Admin();
+                p.LogIn();
             }else if (choice.toLowerCase().equals("n")){
                 break;
             }else{

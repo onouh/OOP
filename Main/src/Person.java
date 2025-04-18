@@ -1,3 +1,4 @@
+package com.mycompany.oopproject;
 import java.util.Scanner;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -7,7 +8,7 @@ public abstract class Person {
     protected String username;
     protected String password;
     protected boolean loggedIn;
-    static Scanner input = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
     
     Person(){
     }
@@ -53,7 +54,7 @@ public abstract class Person {
         }
     }
 
-    public static final void LogIn(){       
+    public void LogIn(){       
         System.out.println("Please write your username");
         String username = input.next();
         for(Person p : Database.people){
@@ -66,9 +67,14 @@ public abstract class Person {
                         p.loggedIn = true;
                     }else{
                     wrongCount++;
+                        System.out.println("Wrong password please try again");
+                    }
+                    if (wrongCount == 3){
+                        System.out.println("failed to input proper password");
+                    //    App.systemStart(); we will decide what it is called when we start making the main function
                     }
                 }
-                if (p.loggedIn){
+                if (loggedIn){
                     System.out.println("Login successful");
                     if(p instanceof Attendee){
                     Attendee w = (Attendee)p;
@@ -118,15 +124,13 @@ public abstract class Person {
             System.out.println("Make sure the date you inputted is correct");
             input.nextLine();
         }
+
+
     }while(continueInput);
     }
-    protected void setUsername(String username){
-        this.username = username;
-    }
-    protected void setPassword(String password){
-        this.password = password;
-    }   
-    protected abstract void homeScreen();
+            
     @Override   
-    public abstract String toString(); 
+    public abstract String toString();
+    
+    protected abstract void homeScreen();
 }
