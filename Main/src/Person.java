@@ -1,3 +1,4 @@
+package com.mycompany.oopproject;
 import java.util.Scanner;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -29,6 +30,7 @@ public abstract class Person {
 
         System.out.println("Username already taken. Please enter a new username:");
         username = input.nextLine(); // read new username from user
+        
     }
         this.username = username;
         this.loggedIn = false;
@@ -55,17 +57,23 @@ public abstract class Person {
 
     public static final void LogIn(){       
         System.out.println("Please write your username");
-        String username = input.next();
+        String username = input.nextLine();
         for(Person p : Database.people){
             if (username.equals(p.username)){
                 int wrongCount = 0 ;
                 System.out.println("Username found please enter password");
                 while (wrongCount >= 3){    
-                    String password = input.next();
+                    String password = input.nextLine();
+                    
                     if (password.equals(p.password)){
                         p.loggedIn = true;
                     }else{
                     wrongCount++;
+                        System.out.println("Please input the correct password");
+                    }
+                    if(wrongCount == 3){
+                        System.out.println("failed to input password");
+                        //Main.systemStart(); (will decide name when we get there)
                     }
                 }
                 if (p.loggedIn){
@@ -102,12 +110,16 @@ public abstract class Person {
             cal.setLenient(false);
             System.out.println("please enter the day");
             cal.set(cal.DAY_OF_MONTH, input.nextInt());
+            input.nextLine();
             
             System.out.println("please enter the month");
             cal.set(cal.MONTH, (input.nextInt()-1));
+            input.nextLine();
             
             System.out.println("please enter the year");
             cal.set(cal.YEAR, input.nextInt());
+            input.nextLine();
+            
             continueInput = false;
         }
         catch(InputMismatchException ex){
