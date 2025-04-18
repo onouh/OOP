@@ -1,4 +1,3 @@
-package com.mycompany.oopproject;
 import java.util.Scanner;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -8,7 +7,7 @@ public abstract class Person {
     protected String username;
     protected String password;
     protected boolean loggedIn;
-    Scanner input = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
     
     Person(){
     }
@@ -54,7 +53,7 @@ public abstract class Person {
         }
     }
 
-    public static void LogIn(){       
+    public static final void LogIn(){       
         System.out.println("Please write your username");
         String username = input.next();
         for(Person p : Database.people){
@@ -69,7 +68,7 @@ public abstract class Person {
                     wrongCount++;
                     }
                 }
-                if (loggedIn){
+                if (p.loggedIn){
                     System.out.println("Login successful");
                     if(p instanceof Attendee){
                     Attendee w = (Attendee)p;
@@ -119,13 +118,15 @@ public abstract class Person {
             System.out.println("Make sure the date you inputted is correct");
             input.nextLine();
         }
-
-
     }while(continueInput);
     }
-            
-    @Override   
-    public abstract String toString();
-    
+    protected void setUsername(String username){
+        this.username = username;
+    }
+    protected void setPassword(String password){
+        this.password = password;
+    }   
     protected abstract void homeScreen();
+    @Override   
+    public abstract String toString(); 
 }
