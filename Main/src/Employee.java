@@ -1,6 +1,7 @@
+package com.mycompany.oopproject;
     public interface Employee <T> {
 
-            public void create(T o);
+            public void create();
             public void read(T o);
             public void update(T o);
             public void delete(T o);
