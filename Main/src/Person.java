@@ -44,14 +44,19 @@ public abstract class Person {
     return this.password;
     }
     
-    public boolean equals(Object o){
-        if (o instanceof Person){  
-            Person enemy = (Person)o;
-            return this.username.equals(((Person) o).username);
-        }
-        else{
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Person) {  
+            Person enemy = (Person) o;
+            return this.username.equals(enemy.username);
+        } else {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return username != null ? username.hashCode() : 0;
     }
 
     public static final void LogIn(){       
