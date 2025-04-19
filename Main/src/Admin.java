@@ -11,7 +11,7 @@ public class Admin extends Person implements Employee<Categories>{
     private Calendar workBegin = Calendar.getInstance();
     private Calendar workEnd = Calendar.getInstance();
     private String role;
-    Scanner input = new Scanner(System.in);
+    // Scanner in = new Scanner(System.in);
     
     Admin(){
     }
