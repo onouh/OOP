@@ -14,8 +14,6 @@ public class Attendee extends Person {
     }
     Attendee(Date dob, Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password){
         super(username,password);
-        this.username = username;
-        this.password = password;
         this.loggedIn = false;
         this.dob = dob;
         this.wallet = wallet;
@@ -30,11 +28,19 @@ public class Attendee extends Person {
     public Gender getGender() {
         return gender;
     }
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
     public void buy(Ticket ticket){
-        if (this.wallet.getBalance() >= ticket.getPrice()){
-            this.wallet.setBalance(this.wallet.getBalance() - ticket.getPrice());
+        if (this.wallet.getBalance() >= ticket.getTicketPrice()){
+            this.wallet.setBalance(this.wallet.getBalance() - ticket.getTicketPrice());
             System.out.println("Ticket bought successfully");
-        }else{
+        } else {
             System.out.println("Not enough balance");
         }
     }

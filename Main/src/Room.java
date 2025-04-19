@@ -8,7 +8,7 @@ public class Room {
     private int roomNo;
     private int capacity;
     private ArrayList<Calendar> availableHours;
-    
+    private int roomCost;
     
     
     Room(ArrayList<Calendar> availableHours, int capacity) {
@@ -29,8 +29,11 @@ public class Room {
         this.capacity = capacity;
     }
 
-    public static int getRoomcost() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRoomcost'");
+    public int getRoomCost() {
+        return roomCost;
+    }
+
+    public void setRoomCost(int roomCost) {
+        this.roomCost = roomCost;
     }
 }

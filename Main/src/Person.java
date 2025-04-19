@@ -6,7 +6,7 @@ public abstract class Person {
 
     private String username;
     private String password;
-    private boolean loggedIn;
+    protected boolean loggedIn;
     static Scanner input = new Scanner(System.in);
     
     Person(){
@@ -42,6 +42,9 @@ public abstract class Person {
     
     protected String getPassword(){
     return this.password;
+    }
+    protected boolean getLoggedIn(){
+    return this.loggedIn;
     }
     
     @Override

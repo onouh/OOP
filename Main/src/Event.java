@@ -7,6 +7,9 @@ public class Event {
     private int ticketPrice;
     private Organizer madeBy;
     private final ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
+    private int cost;
+    private int attendeeNum;
+    private Organizer organizer;
 
     Event(){
 
@@ -51,5 +54,29 @@ public class Event {
 
     public ArrayList<Attendee> getAttendee(){
         return IN_EVENT;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getAttendeeNum() {
+        return attendeeNum;
+    }
+
+    public void setAttendeeNum(int attendeeNum) {
+        this.attendeeNum = attendeeNum;
+    }
+
+    public Organizer getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(Organizer organizer) {
+        this.organizer = organizer;
     }
 }
