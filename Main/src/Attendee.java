@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Attendee extends Person {
     private String address;
@@ -54,7 +55,55 @@ public class Attendee extends Person {
     }
     @Override
     protected void homeScreen() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'homeScreen'");
+        Scanner input = new Scanner(System.in);
+        while (true) {
+            System.out.println("Welcome, " + this.getUsername() + "!");
+            System.out.println("What would you like to do?");
+            System.out.println("1- View Profile");
+            System.out.println("2- View Wallet Balance");
+            System.out.println("3- Buy a Ticket");
+            System.out.println("4- View Interests");
+            System.out.println("5- Log Out");
+
+            String choice = input.nextLine();
+
+            switch (choice) {
+                case "1" -> System.out.println(this.toString());
+                case "2" -> System.out.println("Wallet Balance: " + this.wallet.getBalance());
+                case "3" -> {
+                    System.out.println("Enter ticket details:");
+                    System.out.println("Enter ticket ID:");
+                    String ticketID = input.nextLine();
+                    System.out.println("Enter event name:");
+                    String eventName = input.nextLine();
+                    System.out.println("Enter event date:");
+                    String eventDate = input.nextLine();
+                    System.out.println("Enter event time:");
+                    String eventTime = input.nextLine();
+                    System.out.println("Enter event location:");
+                    String eventLocation = input.nextLine();
+                    System.out.println("Enter ticket price:");
+                    double ticketPrice = input.nextDouble();
+                    input.nextLine(); // Consume newline
+                    Ticket ticket = new Ticket(ticketID, eventName, eventDate, eventTime, eventLocation,  ticketPrice);
+                    this.buy(ticket);
+                }
+                case "4" -> {
+                    System.out.println("Your Interests:");
+                    for (String interest : this.interests) {
+                        System.out.println("- " + interest);
+                    }
+                }
+                case "5" -> {
+                    System.out.println("Logging out...");
+                    break;
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+
+            if (choice.equals("5")) {
+                break;
+            }
+        }
     }
 }
