@@ -9,7 +9,6 @@ public class Admin extends Person implements Employee<Categories>{
     private final Calendar workBegin = Calendar.getInstance();
     private final Calendar workEnd = Calendar.getInstance();
     private String role;
-    static Scanner input = new Scanner(System.in);
         
     Admin(){
     }
@@ -18,12 +17,13 @@ public class Admin extends Person implements Employee<Categories>{
           int monthOfBirth, int dayOfBirth, int start, int End) {
         super(username, password);
         this.role = role;
-        this.dateOfBirth.set(Calendar.YEAR, yearOfBirth); // Corrected
-        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1); // Corrected
-        this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth); // Corrected
-        this.workBegin.set(Calendar.HOUR_OF_DAY, start); // Corrected
-        this.workEnd.set(Calendar.HOUR_OF_DAY, End); // Corrected
+        this.dateOfBirth.set(Calendar.YEAR, yearOfBirth);
+        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth);
+        this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth);
+        this.workBegin.set(Calendar.HOUR_OF_DAY, start);
+        this.workEnd.set(Calendar.HOUR_OF_DAY, End);
     }
+    // This constructor is reserved for future use when Admin instances need to be initialized with specific data.
     
     
     public String getRole(){
