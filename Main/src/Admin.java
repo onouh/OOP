@@ -5,9 +5,9 @@ import java.util.InputMismatchException;
      
 
 public class Admin extends Person implements Employee<Categories>{
-    private Calendar dateOfBirth = Calendar.getInstance() ;
-    private Calendar workBegin = Calendar.getInstance();
-    private Calendar workEnd = Calendar.getInstance();
+    private final Calendar dateOfBirth = Calendar.getInstance() ;
+    private final Calendar workBegin = Calendar.getInstance();
+    private final Calendar workEnd = Calendar.getInstance();
     private String role;
     Scanner input = new Scanner(System.in);
     
@@ -32,7 +32,7 @@ public class Admin extends Person implements Employee<Categories>{
 
 
     public int getWorkingHours(){
-        return (workEnd.get(workEnd.HOUR_OF_DAY)-workBegin.get(workBegin.HOUR_OF_DAY));
+        return (workEnd.get(Calendar.HOUR_OF_DAY) - workBegin.get(Calendar.HOUR_OF_DAY));
     }
     
     
