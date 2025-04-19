@@ -25,7 +25,7 @@ public class Organizer extends Person {
         return wallet != null ? wallet.getBalance() : 0;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         if (wallet != null) {
             wallet.setBalance(balance);
         }
