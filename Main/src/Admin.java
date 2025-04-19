@@ -79,7 +79,7 @@ public class Admin extends Person implements Employee<Categories>{
         ArrayList<String> attendees = new ArrayList<>();
         for(Person p:Database.people){
             if(p instanceof Attendee){
-                attendees.add(p.username);
+                attendees.add(p.getUsername());
             }
         }
         int max1 = Math.max(Database.events.size(),Database.rooms.size());
@@ -109,9 +109,9 @@ public class Admin extends Person implements Employee<Categories>{
 
     for (Person p : Database.people) {
         if (p instanceof Attendee) {
-            attendees.add(p.username);
+            attendees.add(p.getUsername());
         } else if (p instanceof Organizer) {
-            organizers.add(p.username);
+            organizers.add(p.getUsername());
         }
     }
     
