@@ -45,8 +45,12 @@ public class Attendee extends Person {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toString'");
+        return "Attendee{" +
+                "address='" + address + '\'' +
+                ", wallet=" + wallet +
+                ", gender=" + gender +
+                ", interests=" + interests +
+                '}';
     }
     @Override
     protected void homeScreen() {
