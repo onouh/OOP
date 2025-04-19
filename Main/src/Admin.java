@@ -1,7 +1,7 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
+import java.util.Scanner;
      
 
 public class Admin extends Person implements Employee<Categories>{
@@ -36,11 +36,13 @@ public class Admin extends Person implements Employee<Categories>{
     }
     
     
-    public void addRoom(){
-        Scanner scanner = new Scanner(System.in);
-        int capacity = scanner.nextInt();
-        scanner.nextLine();
-        Database.rooms.add(new Room(capacity));
+    public void addRoom() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int capacity = scanner.nextInt();
+            scanner.nextLine();
+            ArrayList<Calendar> availableHours = new ArrayList<>();
+            Database.rooms.add(new Room(availableHours, capacity));
+        }
     }
     
     @Override
@@ -95,7 +97,7 @@ public class Admin extends Person implements Employee<Categories>{
     
     @Override
     public String toString(){
-    String adminInfo= "Username: " + this.username + " role: " + this.role +  " Working hours: " + 
+    String adminInfo= "Username: " + this.getUsername() + " role: " + this.role +  " Working hours: " + 
             (workEnd.get(workEnd.HOUR_OF_DAY)-workBegin.get(workBegin.HOUR_OF_DAY));  
         
     return adminInfo;

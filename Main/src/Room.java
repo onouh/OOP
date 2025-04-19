@@ -11,7 +11,7 @@ public class Room {
     
     
     
-    public Room(ArrayList<Calendar> availableHours, int capacity) {
+    Room(ArrayList<Calendar> availableHours, int capacity) {
         roomNo = roomID;
         roomID++;
         this.capacity = capacity;
