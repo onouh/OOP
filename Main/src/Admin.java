@@ -18,7 +18,7 @@ public class Admin extends Person implements Employee<Categories>{
         super(username, password);
         this.role = role;
         this.dateOfBirth.set(Calendar.YEAR, yearOfBirth);
-        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth);
+        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1);
         this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth);
         this.workBegin.set(Calendar.HOUR_OF_DAY, start);
         this.workEnd.set(Calendar.HOUR_OF_DAY, End);
