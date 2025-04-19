@@ -98,7 +98,7 @@ public class Admin extends Person implements Employee<Categories>{
     @Override
     public String toString(){
     String adminInfo= "Username: " + this.getUsername() + " role: " + this.role +  " Working hours: " + 
-            (workEnd.get(workEnd.HOUR_OF_DAY)-workBegin.get(workBegin.HOUR_OF_DAY));  
+            (workEnd.get(Calendar.HOUR_OF_DAY)-workBegin.get(Calendar.HOUR_OF_DAY));  
         
     return adminInfo;
     }
@@ -132,53 +132,52 @@ public class Admin extends Person implements Employee<Categories>{
         System.out.println("1-View own profile  2-show(rooms events and attendees)  3-Add a room  4-create and manage categories");
     while(true){
         String i = input.nextLine();
-            switch(i){
-                case "1":
-                    System.out.println(this.toString());
-                    break;
-                case "2":
-                    this.show();
-                    break;
-                case "3":
-                    this.addRoom();
-                    break;
-                case "4":
+            switch (i) {
+                case "1" -> System.out.println(this.toString());
+                case "2" -> this.show();
+                case "3" -> this.addRoom();
+                case "4" -> {
                     System.out.println("What do you want to do?");
                     System.out.println("1-create category  2-read category 3-update category 4-delete category ");
                     String j = input.nextLine();
-                    switch (j){
-                        case "1":
-                            this.create();
-                            break;
-                        case "2":
+                    switch (j) {
+                        case "1" -> this.create();
+                        case "2" -> {
                             System.out.println("Which category do you want to read");
                             this.categorySelection("read");
-                            break;
-                        case "3":
+                        }
+                        case "3" -> {
                             System.out.println("Which category do you want to update");
-                             this.categorySelection("update");
-                            break;
-                        case "4":
+                            this.categorySelection("update");
+                        }
+                        case "4" -> {
                             System.out.println("Which category do you want to delete");
                             this.categorySelection("delete");
-                            break;   
-                            default:System.out.println("please enter a valid option");
+                        }
+                        default -> System.out.println("please enter a valid option");
                     }
-                break;
-                default: System.out.println("please enter one of the options");
+                }
+                default -> System.out.println("please enter one of the options");
             }
         System.out.println("Do you want to log out?(y/n)");
         String choice = input.nextLine();
         while(true){
-            if(choice.toLowerCase().equals("y")){
-                //Main.systemStart(); (will decide name when we get there)
-            }else if (choice.toLowerCase().equals("n")){
-                break;
-            }else{
-                System.out.println("please enter y to refer to yes or n to refer to no");
+            switch (choice.toLowerCase()) {
+                case "y" -> {
+                    // Main.systemStart(); (will decide name when we get there)
+                    
+                }
+                case "n" -> {
+                    
+                }
+                default -> {
+                    System.out.println("please enter y to refer to yes or n to refer to no");
+                    continue;
+                }
             }
+            break;
         }
-        
+
     }
     
 
@@ -196,17 +195,12 @@ public class Admin extends Person implements Employee<Categories>{
                 input.nextLine();
                 do{
                     if(k < l && k >= 0 ){
-                        switch(mode){
-                            case "read":
-                            this.read(Database.categories.get(k));
-                            break;
-                            case "update":
-                            this.update(Database.categories.get(k));
-                            break;
-                            case "delete":
-                            this.delete(Database.categories.get(k));
-                            break;      
-                        }                        break;
+                        switch (mode) {
+                            case "read" -> this.read(Database.categories.get(k));
+                            case "update" -> this.update(Database.categories.get(k));
+                            case "delete" -> this.delete(Database.categories.get(k));
+                        }
+                        break;
                     }else{
                         System.out.println("please enter a number within the valid range");
                     }
