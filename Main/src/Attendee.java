@@ -101,6 +101,8 @@ public class Attendee extends Person {
             }
 
             if (choice.equals("5")) {
+                this.loggedIn = false;
+                System.out.println("You have logged out successfully.");
                 break;
             }
         }
