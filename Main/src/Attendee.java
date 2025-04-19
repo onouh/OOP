@@ -30,7 +30,14 @@ public class Attendee extends Person {
     public Gender getGender() {
         return gender;
     }
-    
+    public void buy(Ticket ticket){
+        if (this.wallet.getBalance() >= ticket.getPrice()){
+            this.wallet.setBalance(this.wallet.getBalance() - ticket.getPrice());
+            System.out.println("Ticket bought successfully");
+        }else{
+            System.out.println("Not enough balance");
+        }
+    }
 
     @Override
     public String toString() {
