@@ -24,6 +24,13 @@ public class Attendee extends Person {
         this.interests = interests;
     }
 
+    public String getAddress() {
+        return address;
+    }
+    public Gender getGender() {
+        return gender;
+    }
+    
 
     @Override
     public String toString() {
