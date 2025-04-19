@@ -6,7 +6,7 @@ public class Event {
     private Categories category;
     private int ticketPrice;
     private Organizer madeBy;
-    private ArrayList<Attendee> inEvent = new ArrayList<Attendee>(intialCapacity);
+    private final ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
 
     Event(){
 
@@ -17,6 +17,14 @@ public class Event {
         this.category = category;
         this.ticketPrice = ticketPrice;
 
+    }
+
+    public Organizer getMadeBy() {
+        return madeBy;
+    }
+
+    public void setMadeBy(Organizer madeBy) {
+        this.madeBy = madeBy;
     }
 
     public String getName(){
@@ -33,7 +41,15 @@ public class Event {
         this.ticketPrice = ticketPrice;
     }
 
+    public Categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(Categories category) {
+        this.category = category;
+    }
+
     public ArrayList<Attendee> getAttendee(){
-        return inEvent;
+        return IN_EVENT;
     }
 }

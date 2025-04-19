@@ -1,8 +1,8 @@
 public class Organizer extends Person {
-    private String companyName;
-    private String companyAddress;
-    private String companyPhoneNumber;
-    private String companyEmail;
+    private final String companyName;
+    private final String companyAddress;
+    private final String companyPhoneNumber;
+    private final String companyEmail;
 
     Organizer(String companyName, String companyAddress, String companyPhoneNumber, String companyEmail, String username, String password) {
         super(username, password);
