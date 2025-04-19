@@ -1,5 +1,3 @@
-package com.mycompany.oopproject;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,12 +5,12 @@ import java.util.InputMismatchException;
      
 
 public class Admin extends Person implements Employee<Categories>{
-    private Calendar dateOfBirth = Calendar.getInstance() ;
-    private Calendar workBegin = Calendar.getInstance();
-    private Calendar workEnd = Calendar.getInstance();
+    private final Calendar dateOfBirth = Calendar.getInstance() ;
+    private final Calendar workBegin = Calendar.getInstance();
+    private final Calendar workEnd = Calendar.getInstance();
     private String role;
-    // Scanner in = new Scanner(System.in);
-    
+    static Scanner input = new Scanner(System.in);
+        
     Admin(){
     }
     
@@ -20,11 +18,11 @@ public class Admin extends Person implements Employee<Categories>{
           int monthOfBirth, int dayOfBirth, int start, int End) {
         super(username, password);
         this.role = role;
-        this.dateOfBirth.set(Calendar.YEAR, yearOfBirth); 
-        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1); 
-        this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth); 
-        this.workBegin.set(Calendar.HOUR_OF_DAY, start); 
-        this.workEnd.set(Calendar.HOUR_OF_DAY, End); 
+        this.dateOfBirth.set(Calendar.YEAR, yearOfBirth); // Corrected
+        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1); // Corrected
+        this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth); // Corrected
+        this.workBegin.set(Calendar.HOUR_OF_DAY, start); // Corrected
+        this.workEnd.set(Calendar.HOUR_OF_DAY, End); // Corrected
     }
     
     
@@ -34,7 +32,7 @@ public class Admin extends Person implements Employee<Categories>{
 
 
     public int getWorkingHours(){
-        return (workEnd.get(Calendar.HOUR_OF_DAY)-workBegin.get(Calendar.HOUR_OF_DAY));// Corrected
+        return (workEnd.get(Calendar.HOUR_OF_DAY) - workBegin.get(Calendar.HOUR_OF_DAY));
     }
     
     
@@ -81,7 +79,7 @@ public class Admin extends Person implements Employee<Categories>{
         ArrayList<String> attendees = new ArrayList<>();
         for(Person p:Database.people){
             if(p instanceof Attendee){
-                attendees.add(p.getUsername());// Corrected
+                attendees.add(p.username);
             }
         }
         int max1 = Math.max(Database.events.size(),Database.rooms.size());
@@ -97,8 +95,8 @@ public class Admin extends Person implements Employee<Categories>{
     
     @Override
     public String toString(){
-    String adminInfo= "Username: " + this.getUsername() + " role: " + this.role +  " Working hours: " + // Corrected
-            (workEnd.get(Calendar.HOUR_OF_DAY)-workBegin.get(Calendar.HOUR_OF_DAY));  // Corrected
+    String adminInfo= "Username: " + this.username + " role: " + this.role +  " Working hours: " + 
+            (workEnd.get(workEnd.HOUR_OF_DAY)-workBegin.get(workBegin.HOUR_OF_DAY));  
         
     return adminInfo;
     }
@@ -111,9 +109,9 @@ public class Admin extends Person implements Employee<Categories>{
 
     for (Person p : Database.people) {
         if (p instanceof Attendee) {
-            attendees.add(p.getUsername());// Corrected
+            attendees.add(p.username);
         } else if (p instanceof Organizer) {
-            organizers.add(p.getUsername());// Corrected
+            organizers.add(p.username);
         }
     }
     
