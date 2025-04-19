@@ -7,7 +7,7 @@ public class Room {
     private static int roomID = 0 ;
     private int roomNo;
     private int capacity;
-    ArrayList<Calendar> availableHours;
+    private ArrayList<Calendar> availableHours;
     
     
     

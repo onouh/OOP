@@ -1,12 +1,12 @@
-import java.util.Scanner;
 import java.util.Calendar;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public abstract class Person {
 
-    protected String username;
-    protected String password;
-    protected boolean loggedIn;
+    private String username;
+    private String password;
+    private boolean loggedIn;
     static Scanner input = new Scanner(System.in);
     
     Person(){

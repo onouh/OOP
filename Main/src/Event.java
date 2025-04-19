@@ -6,7 +6,7 @@ public class Event {
     private Categories category;
     private int ticketPrice;
     private Organizer madeBy;
-    ArrayList<Attendee> inEvent = new ArrayList<Attendee>(intialCapacity);
+    private ArrayList<Attendee> inEvent = new ArrayList<Attendee>(intialCapacity);
 
     Event(){
 

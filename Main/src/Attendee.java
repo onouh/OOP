@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Attendee extends Person {
-    String address;
-    Date dob;
-    Wallet wallet;
-    Gender gender;
-    ArrayList<String> interests;
+    private String address;
+    private Date dob;
+    private Wallet wallet;
+    private Gender gender;
+    private ArrayList<String> interests;
 
     
     Attendee(){
