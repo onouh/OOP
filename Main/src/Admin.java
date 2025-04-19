@@ -14,15 +14,15 @@ public class Admin extends Person implements Employee<Categories>{
     Admin(){
     }
     
-    Admin (String username , String password , String role , int yearOfBirth, 
-            int monthOfBirth , int dayOfBirth , int start,int End){
-        super(username , password);
+    Admin(String username, String password, String role, int yearOfBirth, 
+          int monthOfBirth, int dayOfBirth, int start, int End) {
+        super(username, password);
         this.role = role;
-        this.dateOfBirth.set(dateOfBirth.YEAR, yearOfBirth);
-        this.dateOfBirth.set(dateOfBirth.MONTH, monthOfBirth-1);
-        this.dateOfBirth.set(dateOfBirth.DAY_OF_MONTH, dayOfBirth);
-        this.workBegin.set(workBegin.HOUR_OF_DAY,start);
-        this.workEnd.set(workEnd.HOUR_OF_DAY, End);
+        this.dateOfBirth.set(Calendar.YEAR, yearOfBirth); // Corrected
+        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1); // Corrected
+        this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth); // Corrected
+        this.workBegin.set(Calendar.HOUR_OF_DAY, start); // Corrected
+        this.workEnd.set(Calendar.HOUR_OF_DAY, End); // Corrected
     }
     
     
