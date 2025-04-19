@@ -3,7 +3,6 @@ import java.util.Date;
 
 public class Attendee extends Person {
     private String address;
-    private Date dob;
     private Wallet wallet;
     private Gender gender;
     private ArrayList<String> interests;
@@ -12,10 +11,9 @@ public class Attendee extends Person {
     Attendee(){
 
     }
-    Attendee(Date dob, Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password){
-        super(username,password);
+    Attendee(Date dob, Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
+        super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
         this.loggedIn = false;
-        this.dob = dob;
         this.wallet = wallet;
         this.address = address;
         this.gender = gender;

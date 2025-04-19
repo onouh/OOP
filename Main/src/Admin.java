@@ -5,7 +5,6 @@ import java.util.Scanner;
      
 
 public class Admin extends Person implements Employee<Categories>{
-    private final Calendar dateOfBirth = Calendar.getInstance() ;
     private final Calendar workBegin = Calendar.getInstance();
     private final Calendar workEnd = Calendar.getInstance();
     private String role;
@@ -15,11 +14,8 @@ public class Admin extends Person implements Employee<Categories>{
     
     Admin(String username, String password, String role, int yearOfBirth, 
           int monthOfBirth, int dayOfBirth, int start, int End) {
-        super(username, password);
-        this.role = role;
-        this.dateOfBirth.set(Calendar.YEAR, yearOfBirth);
-        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1);
-        this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth);
+        super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
+        this.role = role; 
         this.workBegin.set(Calendar.HOUR_OF_DAY, start);
         this.workEnd.set(Calendar.HOUR_OF_DAY, End);
     }

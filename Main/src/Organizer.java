@@ -5,8 +5,8 @@ public class Organizer extends Person {
     private final String companyEmail;
     private Wallet wallet;
 
-    Organizer(String companyName, String companyAddress, String companyPhoneNumber, String companyEmail, String username, String password) {
-        super(username, password);
+    Organizer(String companyName, String companyAddress, String companyPhoneNumber, String companyEmail, String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
+        super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
         this.companyName = companyName;
         this.companyAddress = companyAddress;
         this.companyPhoneNumber = companyPhoneNumber;

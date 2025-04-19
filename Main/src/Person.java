@@ -6,13 +6,14 @@ public abstract class Person {
 
     private String username;
     private String password;
+    private final Calendar dateOfBirth = Calendar.getInstance() ;
     protected boolean loggedIn;
     static Scanner input = new Scanner(System.in);
     
     Person(){
     }
     
-    Person(String username,String password){
+    Person(String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth){
     while (true) {
         boolean taken = false;
 
@@ -34,6 +35,9 @@ public abstract class Person {
         this.username = username;
         this.loggedIn = false;
         this.password = password;
+        this.dateOfBirth.set(Calendar.YEAR, yearOfBirth);
+        this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1);
+        this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth);
     }
     
     protected String getUsername(){
