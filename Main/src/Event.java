@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 public class Event {
     static int intialCapacity = 1000;
+    private Calendar eventTime;
     private String name;
     private Categories category;
     private int ticketPrice;
@@ -75,6 +76,6 @@ public class Event {
     }
 
     public Organizer getOrganizer() {
-        return Organizer;
+        return madeBy;
     }
 }
