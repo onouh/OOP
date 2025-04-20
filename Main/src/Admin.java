@@ -36,8 +36,7 @@ public class Admin extends Person implements Employee<Categories>{
         try (Scanner scanner = new Scanner(System.in)) {
             int capacity = scanner.nextInt();
             scanner.nextLine();
-            ArrayList<Calendar> availableHours = new ArrayList<>();
-            Database.rooms.add(new Room(availableHours, capacity));
+            Database.rooms.add(new Room(capacity));
         }
     }
     
@@ -83,7 +82,7 @@ public class Admin extends Person implements Employee<Categories>{
         int max1 = Math.max(Database.events.size(),Database.rooms.size());
         int max= Math.max(attendees.size(), max1);
         for(int i = 0 ; i < max ; i++){
-        String room = (i<Database.rooms.size()? String.valueOf(Database.rooms.get(i).getRoomNo()) : "");
+        String room = (i<Database.rooms.size()? String.valueOf(Database.rooms.get(i).getRoomID()) : "");
         String event = (i<Database.events.size()? Database.events.get(i).getName() : "");
         String attendee = (i<attendees.size()? attendees.get(i) : "");
         
