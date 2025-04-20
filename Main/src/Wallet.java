@@ -26,12 +26,7 @@ public class Wallet {
         }
     }
 
-    public void pay(Organizer organizer) {
-        if (organizer != null && organizer.getWallet() != null) {
-            balance -= organizer.getWallet().getBalance();
-            organizer.getWallet().setBalance(organizer.getWallet().getBalance() + organizer.getWallet().getBalance());
-        }
-    }
+
 
     public void pay(Attendee attendee) {
         if (attendee != null) {
