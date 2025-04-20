@@ -7,7 +7,8 @@ public class Attendee extends Person {
     private Wallet wallet;
     private Gender gender;
     private ArrayList<String> interests;
-
+    boolean buysuccess = false;
+    boolean logout = false;
     
     Attendee(){
 
@@ -34,12 +35,23 @@ public class Attendee extends Person {
         this.wallet = wallet;
     }
 
-    public void buy(Ticket ticket){
-        if (this.wallet.getBalance() >= ticket.getTicketPrice()){
-            this.wallet.setBalance(this.wallet.getBalance() - ticket.getTicketPrice());
-            System.out.println("Ticket bought successfully");
-        } else {
-            System.out.println("Not enough balance");
+    public void buy(Event event){
+        if (this.wallet.getBalance() >= event.getTicketPrice()){
+            if(event.getAttendeeNum() < event.getRoom().getCapacity()){
+                this.wallet.pay(event);
+                event.setAttendeeNum(event.getAttendeeNum()+1);
+                System.out.println("Ticket bought successfully");
+                event.getAttendee().add(this);
+                buysuccess = true;
+            }
+            else{
+                System.out.println("Event number of attendees is complete.");
+                System.out.println("Choose another event.");
+
+            }
+        }
+        else {
+            System.out.println("Balance is not sufficient");
         }
     }
 
@@ -54,16 +66,15 @@ public class Attendee extends Person {
     }
     @Override
     protected void homeScreen() {
-        input = new Scanner(System.in);
-        try {
-            while (true) {
+       Scanner input = new Scanner(System.in);
+
+            while (!logout) {
                 System.out.println("Welcome, " + this.getUsername() + "!");
                 System.out.println("What would you like to do?");
                 System.out.println("1- View Profile");
                 System.out.println("2- View Wallet Balance");
                 System.out.println("3- Buy a Ticket");
-                System.out.println("4- View Interests");
-                System.out.println("5- Log Out");
+                System.out.println("4- Log Out");
 
                 String choice = input.nextLine();
 
@@ -71,46 +82,34 @@ public class Attendee extends Person {
                     case "1" -> System.out.println(this.toString());
                     case "2" -> System.out.println("Wallet Balance: " + this.wallet.getBalance());
                     case "3" -> {
-                        System.out.println("Enter ticket details:");
-                        System.out.println("Enter ticket ID:");
-                        String ticketID = input.nextLine();
-                        System.out.println("Enter event name:");
-                        String eventName = input.nextLine();
-                        System.out.println("Enter event date:");
-                        String eventDate = input.nextLine();
-                        System.out.println("Enter event time:");
-                        String eventTime = input.nextLine();
-                        System.out.println("Enter event location:");
-                        String eventLocation = input.nextLine();
-                        System.out.println("Enter ticket price:");
-                        double ticketPrice = input.nextDouble();
-                        input.nextLine(); // Consume newline
-                        Ticket ticket = new Ticket(ticketID, eventName, eventDate, eventTime, eventLocation, ticketPrice);
-                        this.buy(ticket);
-                    }
-                    case "4" -> {
-                        System.out.println("Your Interests:");
-                        for (String interest : this.interests) {
-                            System.out.println("- " + interest);
+
+                        while(!buysuccess){
+                            for( int i=0; i < Database.events.size(); i++){
+                                System.out.print(i+1);
+                                System.out.print("- ");
+                                System.out.print(Database.events.get(i).toString());
+
+                            }
+                            System.out.println("Enter event number:");
+                            int eventNum = input.nextInt();
+                            this.buy(Database.events.get(eventNum));
+
                         }
                     }
-                    case "5" -> {
+
+                    case "4" -> {
                         System.out.println("Logging out...");
-                        break;
+                        this.loggedIn = false;
+                        System.out.println("You have logged out successfully.");
+                        logout = true;
+                        Main.main(null);
+
                     }
                     default -> System.out.println("Invalid choice. Please try again.");
                 }
 
-                if (choice.equals("5")) {
-                    this.loggedIn = false;
-                    System.out.println("You have logged out successfully.");
-                    break;
-                }
             }
-        } finally {
-            if (input != null) {
-                input.close();
-            }
+
         }
     }
-}
+

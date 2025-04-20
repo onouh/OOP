@@ -10,7 +10,7 @@ public class Event {
     private Categories category;
     private int ticketPrice;
     private Organizer madeBy;
-    private final ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
+    private ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
     private int attendeeNum;
     
     Event(){
