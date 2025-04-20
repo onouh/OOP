@@ -36,7 +36,7 @@ public class Reservations {
                         break;
                 }
         }while(continueInput);
-        room.getUnavalabledates().add(this);
+        room.getUnavailabledates().add(this);
         
         
     }
