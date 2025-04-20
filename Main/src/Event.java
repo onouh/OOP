@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 public class Event {
     static int intialCapacity = 1000;
+    private Room room;
     private Calendar eventTime;
     private String name;
     private Categories category;
@@ -25,6 +26,14 @@ public class Event {
 
     public Organizer getMadeBy() {
         return madeBy;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public void setMadeBy(Organizer madeBy) {
