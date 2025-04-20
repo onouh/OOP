@@ -4,15 +4,15 @@ import java.util.Scanner;
 
 public class Reservations {
     private Calendar Reservationtime=Calendar.getInstance();
-    boolean nightAvalable ;
-    boolean dayAvalable ;
+    boolean nightAvailable ;
+    boolean dayAvailable ;
     static Scanner input = new Scanner(System.in);
     public Reservations() {
     }
 
-    public Reservations(boolean nightAvalable, boolean dayAvalable) {
-        this.nightAvalable = true;
-        this.dayAvalable = true;
+    public Reservations(boolean nightAvailable, boolean dayAvailable) {
+        this.nightAvailable = true;
+        this.dayAvailable = true;
     }
     
     public void reserve(Room room,Calendar reservetime , String choice){
@@ -23,11 +23,11 @@ public class Reservations {
             choice = input.nextLine();
                 switch(choice){
                     case "1" : 
-                        this.dayAvalable = false;
+                        this.dayAvailable = false;
                         continueInput = false;
                         break;
                     case "2" : 
-                        this.nightAvalable = false;
+                        this.nightAvailable = false;
                         continueInput = false;
                         break;
                     default: 
