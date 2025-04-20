@@ -1,4 +1,5 @@
-
+package com.mycompany.curroop;
+// to check function
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -35,7 +36,7 @@ public class Reservations {
                         break;
                 }
         }while(continueInput);
-        room.get;
+        room.getUnavalabledates().add(this);
         
         
     }
