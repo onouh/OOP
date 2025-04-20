@@ -1,4 +1,7 @@
+package com.mycompany.curroop;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Event {
     static int intialCapacity = 1000;
@@ -9,8 +12,7 @@ public class Event {
     private final ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
     private int cost;
     private int attendeeNum;
-    private Organizer organizer;
-
+    
     Event(){
 
     }
@@ -73,10 +75,6 @@ public class Event {
     }
 
     public Organizer getOrganizer() {
-        return organizer;
-    }
-
-    public void setOrganizer(Organizer organizer) {
-        this.organizer = organizer;
+        return Organizer;
     }
 }
