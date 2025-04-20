@@ -27,26 +27,11 @@ public class Wallet {
     }
 
 
-
-    public void pay(Attendee attendee) {
-        if (attendee != null) {
-            balance -= attendee.getWallet().getBalance();
-            attendee.getWallet().setBalance(attendee.getWallet().getBalance() + attendee.getWallet().getBalance());
-        }
-    } 
-
-    public void pay(Room room) {
-        if (room != null) {
-            balance -= room.getRoomCost(); // Fixed method name
-            room.setRoomCost(room.getRoomCost() + room.getRoomCost()); // Fixed method name
-        }
-    }
-
-    public void addMoney(int amount) {
+    public void addMoney(double amount) {
         balance += amount;
     }
 
-    public void withdrawMoney(int amount) {
+    public void withdrawMoney(double amount) {
         if (amount > balance) {
             System.out.println("Insufficient balance");
         } else {
