@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class Room {
 
     private static int roomID = 0 ;
-    private int roomNo;
+    private final int roomNo;
     private int capacity;
     private ArrayList<Calendar> availableHours;
     private int roomCost;
@@ -15,6 +15,14 @@ public class Room {
         roomNo = roomID;
         roomID++;
         this.capacity = capacity;
+    }
+
+    public ArrayList<Calendar> getAvailableHours() {
+        return availableHours;
+    }
+
+    public void setAvailableHours(ArrayList<Calendar> availableHours) {
+        this.availableHours = availableHours;
     }
     
     public int getRoomNo() {

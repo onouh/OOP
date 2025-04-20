@@ -53,8 +53,7 @@ public abstract class Person {
     
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Person) {  
-            Person enemy = (Person) o;
+        if (o instanceof Person enemy) {
             return this.username.equals(enemy.username);
         } else {
             return false;
@@ -89,17 +88,14 @@ public abstract class Person {
                 }
                 if (p.loggedIn){
                     System.out.println("Login successful");
-                    if(p instanceof Attendee){
-                    Attendee w = (Attendee)p;
-                    p.homeScreen();
-                    }
-                    else if(p instanceof Organizer){
-                    Organizer w = (Organizer)p;
-                    p.homeScreen();
-                    }
-                    else if(p instanceof Admin){
-                    Admin w = (Admin)p;
-                    p.homeScreen();
+                    switch (p) {
+                        case Attendee w -> w.homeScreen();
+                        case Organizer w -> w.homeScreen();
+                        case Admin w -> w.homeScreen();
+                        default -> {
+                            // Handle the case where p is not Attendee, Organizer, or Admin
+                            System.out.println("Unknown person type");
+                        }
                     }
                 }
                 else{
@@ -120,15 +116,15 @@ public abstract class Person {
         try{
             cal.setLenient(false);
             System.out.println("please enter the day");
-            cal.set(cal.DAY_OF_MONTH, input.nextInt());
+            cal.set(Calendar.DAY_OF_MONTH, input.nextInt());
             input.nextLine();
             
             System.out.println("please enter the month");
-            cal.set(cal.MONTH, (input.nextInt()-1));
+            cal.set(Calendar.MONTH, (input.nextInt()-1));
             input.nextLine();
             
             System.out.println("please enter the year");
-            cal.set(cal.YEAR, input.nextInt());
+            cal.set(Calendar.YEAR, input.nextInt());
             input.nextLine();
             
             continueInput = false;
