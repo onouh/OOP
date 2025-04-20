@@ -66,12 +66,12 @@ public abstract class Person {
     }
 
     public static final void LogIn(){       
-        System.out.println("Please write your username");
+        System.out.println("Please write your username: ");
         String username = input.nextLine();
         for(Person p : Database.people){
             if (username.equals(p.username)){
                 int wrongCount = 0 ;
-                System.out.println("Username found please enter password");
+                System.out.println("Username found. Please enter your password: ");
                 while (wrongCount >= 3){    
                     String password = input.nextLine();
                     
@@ -82,7 +82,7 @@ public abstract class Person {
                         System.out.println("Please input the correct password");
                     }
                     if(wrongCount == 3){
-                        System.out.println("failed to input password");
+                        System.out.println("Failed to input password");
                         //Main.systemStart(); (will decide name when we get there)
                     }
                 }
