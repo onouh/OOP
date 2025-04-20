@@ -20,8 +20,8 @@ public class Wallet {
 
     public void pay(Event event) {
         if (event != null && event.getOrganizer() != null) {
-            balance -= event.getCost();
-            event.getOrganizer().setBalance(event.getOrganizer().getBalance() + event.getCost());
+            balance -= event.getTicketPrice();
+            event.getOrganizer().setBalance(event.getOrganizer().getBalance() + event.getTicketPrice());
             event.setAttendeeNum(event.getAttendeeNum() + 1); // Fixed method name
         }
     }

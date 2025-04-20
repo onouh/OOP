@@ -1,6 +1,4 @@
-package com.mycompany.curroop;
-
-public class Organizer extends Person implements Employee<Event> {
+public class Organizer extends Person{
 
     private Wallet wallet;
 
