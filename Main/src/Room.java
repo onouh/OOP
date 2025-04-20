@@ -1,5 +1,5 @@
-import java.util.Calendar;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Room {
     private int roomid, capacity;
@@ -42,16 +42,20 @@ public class Room {
         this.capacity = capacity;
     }
 
-    public int getRoomid() {
+    public int getRoomID() {
         return roomid;
     }
 
-    public void setRoomid(int roomid) {
+    public void setRoomID(int roomid) {
         this.roomid = roomid;
     }
 
-    public int getRoomcost() {
+    public int getRoomCost() {
         return roomcost;
+    }
+
+    public void setRoomCost(int roomcost) {
+        this.roomcost = roomcost;
     }
 
 
