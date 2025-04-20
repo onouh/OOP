@@ -1,28 +1,16 @@
-public class Organizer extends Person {
-    private final String companyName;
-    private final String companyAddress;
-    private final String companyPhoneNumber;
-    private final String companyEmail;
+package com.mycompany.curroop;
+
+public class Organizer extends Person implements Employee<Event> {
+
     private Wallet wallet;
 
-    Organizer(String companyName, String companyAddress, String companyPhoneNumber, String companyEmail, String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
+    Organizer( String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth , int balance) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
-        this.companyName = companyName;
-        this.companyAddress = companyAddress;
-        this.companyPhoneNumber = companyPhoneNumber;
-        this.companyEmail = companyEmail;
-    }
-
-    public Wallet getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
+        this.wallet = new Wallet(balance);
     }
 
     public double getBalance() {
-        return wallet != null ? wallet.getBalance() : 0;
+        return (wallet != null) ? wallet.getBalance() : 0;
     }
 
     public void setBalance(double balance) {
@@ -34,10 +22,9 @@ public class Organizer extends Person {
     @Override
     public String toString() {
         return "Organizer{" +
-                "companyName='" + companyName + '\'' +
-                ", companyAddress='" + companyAddress + '\'' +
-                ", companyPhoneNumber='" + companyPhoneNumber + '\'' +
-                ", companyEmail='" + companyEmail + '\'' +
+                "Name='" + getUsername() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", ='" + wallet.getBalance() + '\'' +
                 '}';
     }
 
