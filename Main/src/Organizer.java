@@ -1,12 +1,10 @@
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Organizer extends Person implements Employee<Event> {
 
     private Wallet wallet;
-    Scanner input= new Scanner(System.in);
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     Organizer( String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth , int balance) {
@@ -68,20 +66,38 @@ public class Organizer extends Person implements Employee<Event> {
             myRoom = Database.rooms.get(index);
             break;
         }
-        String myTime = myRoom.chooseAvalableTimes();
+        String myTime = myRoom.chooseAvailableTime();
         String calvalue = myTime.substring(0,11);
         String State = myTime.substring(14,myTime.length());
         LocalDate date = LocalDate.parse(calvalue, format);
         Calendar cal = Calendar.getInstance();
         cal.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth());
         Reservations res = new Reservations();
-        res.reserve(myRoom, cal, State);
-        Database.events.add(new Event(name,myCat,price,cal,myRoom));    
+        res.reserve(myRoom, State);
+        Database.events.add(new Event(name,myCat,price,cal,myRoom));
     }
     
+     @Override
+    public void show() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'show'");
+    }
+
+    @Override
+    public void delete(Event t) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    @Override
+    public void update(Event t) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
     @Override
     public void read(Event e){
-        System.out.println(e.toString);
+        System.out.println(e.toString());
     }
     @Override
     public String toString() {

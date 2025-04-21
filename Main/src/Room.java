@@ -104,36 +104,4 @@ public class Room {
             }
         }
     }
-
-class Reservations {
-    private Calendar reservationTime;
-    private boolean dayAvailability; // true if morning is available
-    private boolean nightAvailability; // true if night is available
-
-    public Reservations(Date reservationTime, boolean dayAvailability, boolean nightAvailability) {
-        this.reservationTime = Calendar.getInstance();
-        this.reservationTime.setTime(reservationTime);
-        this.dayAvailability = dayAvailability;
-        this.nightAvailability = nightAvailability;
-    }
-
-    public Calendar getReservationTime() {
-        return reservationTime;
-    }
-
-    public boolean getDayAvailability() {
-        return dayAvailability;
-    }
-
-    public boolean getNightAvailability() {
-        return nightAvailability;
-    }
-
-    public void setDayAvailability(boolean dayAvailability) {
-        this.dayAvailability = dayAvailability;
-    }
-
-    public void setNightAvailability(boolean nightAvailability) {
-        this.nightAvailability = nightAvailability;
-    }
 }

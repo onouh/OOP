@@ -1,9 +1,8 @@
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Calendar;
+import java.util.Scanner;
 
 public abstract class Person {
 
@@ -132,6 +131,7 @@ public abstract class Person {
         System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
     }
     }while(continueInput);
+    return null;
     }
     protected abstract void homeScreen();
     protected void setUsername(String username){

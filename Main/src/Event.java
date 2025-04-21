@@ -79,6 +79,10 @@ public class Event implements Cloneable{
     public Organizer getOrganizer() {
         return madeBy;
     }
+
+    public Room getRoom () {
+        return room;
+    }
     
       @Override
     public String toString() {

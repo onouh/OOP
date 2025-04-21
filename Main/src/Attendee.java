@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Attendee extends Person {
     private String address;
@@ -66,8 +65,6 @@ public class Attendee extends Person {
     }
     @Override
     public void homeScreen() {
-       Scanner input = new Scanner(System.in);
-
             while (!logout) {
                 System.out.println("Welcome, " + this.getUsername() + "!");
                 System.out.println("What would you like to do?");
