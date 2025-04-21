@@ -49,6 +49,7 @@ public class Room {
     
 public String[][] getAvailableRooms(){
         String[][] availableDates = new String[500][2];
+        System.out.println("Available Days (from today to end of month):");
         int k =1 ;        
         int m =0 ;
         for (int day = today + 3; day < maxDay; day++) {
