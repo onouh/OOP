@@ -1,16 +1,14 @@
 
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.InputMismatchException;
 
 public class Organizer extends Person implements Employee<Event> {    
     private Wallet wallet;
-    Scanner input= new Scanner(System.in);
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     ArrayList<Event> mine = new ArrayList<>(1000);
     
@@ -35,6 +33,7 @@ public class Organizer extends Person implements Employee<Event> {
         }
         System.out.println("Please Choose the category");
         while(true){
+            input.nextLine();
             String choice = input.nextLine();
             if ((Integer.parseInt(choice) > Database.categories.size()) || Integer.parseInt(choice) < 0){
                 System.out.println("Please choose something in range");
@@ -44,7 +43,9 @@ public class Organizer extends Person implements Employee<Event> {
             break;
         }
         System.out.println("Please Enter the name of the event");
+        input.nextLine();
         String name = input.nextLine();
+        input.nextLine();
         int price = Integer.parseInt(input.nextLine());
         int t = 1;
         for(Room r: Database.rooms){
@@ -54,6 +55,7 @@ public class Organizer extends Person implements Employee<Event> {
         }
         System.out.println("Please Choose a room");
         while(true){
+            input.nextLine();
             String choice = input.nextLine();
             if ((Integer.parseInt(choice) > Database.rooms.size()) || Integer.parseInt(choice) < 0 ){
                 System.out.println("please choose something in range");
@@ -97,6 +99,7 @@ public class Organizer extends Person implements Employee<Event> {
     public void update(Event o){
         for(Event e : Database.events){
             if(o == e){
+                input.nextLine();
                 o.setName(input.nextLine());
                 break;
             }
@@ -176,13 +179,15 @@ public class Organizer extends Person implements Employee<Event> {
         System.out.println("3 - manage and create events");
         System.out.println("4 - log out");
           while(true){
-          String i = input.nextLine();
+            input.nextLine();
+            String i = input.nextLine();
             switch (i) {
                 case "1" -> System.out.println(this.toString());
                 case "2" -> this.show();
                 case "3" -> {
                     System.out.println("What do you want to do?");
                     System.out.println("1-create event  2-read event 3-update event name 4-delete event");
+                    input.nextLine();
                     String j = input.nextLine();
                     switch (j) {
                         case "1" -> this.create();
@@ -203,6 +208,7 @@ public class Organizer extends Person implements Employee<Event> {
                 }
                 case "4" -> {     
                     System.out.println("Are you  you want to log out?(y/n)");
+                    input.nextLine();
                     String choice = input.nextLine();
                     while(true){
                     switch (choice.toLowerCase()) {
@@ -239,9 +245,8 @@ public class Organizer extends Person implements Employee<Event> {
         }
         do{
             try{
-                int k = input.nextInt();
                 input.nextLine();
-               
+                int k = input.nextInt();               
                     if(k < l && k >= 0 ){
                         switch (mode) {
                             case "read" -> this.read(mine.get(k));

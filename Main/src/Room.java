@@ -131,6 +131,7 @@ public String[][] getAvailableRooms(){
         }
         System.out.println("please input one of these times to reserve");
          while(true){
+            input.nextLine();
             String choice = input.nextLine();
             if (Integer.parseInt(choice) > k || Integer.parseInt(choice) < 0){
                 System.out.println("please choose somthing in range");
@@ -139,6 +140,7 @@ public String[][] getAvailableRooms(){
         System.out.println("please enter 1 for morning and 2 for night reservation");
         boolean continueInput =true;
         do{
+            input.nextLine();
             String MorOrNigh = input.nextLine();
                 m = switch (MorOrNigh) {
                     case "0" -> {

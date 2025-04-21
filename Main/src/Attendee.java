@@ -72,7 +72,7 @@ public class Attendee extends Person {
                 System.out.println("2- View Wallet Balance");
                 System.out.println("3- Buy a Ticket");
                 System.out.println("4- Log Out");
-
+                input.nextLine();
                 String choice = input.nextLine();
 
                 switch (choice) {
@@ -88,6 +88,7 @@ public class Attendee extends Person {
 
                             }
                             System.out.println("Enter event number:");
+                            input.nextLine();
                             int eventNum = input.nextInt();
                             this.buy(Database.events.get(eventNum));
 

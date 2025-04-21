@@ -29,6 +29,7 @@ public class Categories {
 
         System.out.println("Username already taken. Please enter a new username:");
         System.out.println("if you no longer want to create category enter 0");
+        input.nextLine();
         name = input.nextLine(); // read new category name from user
         if(name.equals("0")) {
             name = "<><><>";

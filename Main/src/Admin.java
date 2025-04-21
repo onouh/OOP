@@ -34,18 +34,19 @@ public class Admin extends Person implements Employee<Categories>{
     
     public void addRoom() {
         try (Scanner scanner = new Scanner(System.in)) {
-            int capacity = scanner.nextInt();
             scanner.nextLine();
+            int capacity = scanner.nextInt();
             Database.rooms.add(new Room(capacity));
         }
     }
     
     @Override
     public void create(){
-    Categories o = new Categories(input.nextLine());
-    if (!o.getName().equals("<><><>")){
-        Database.categories.add(o);
-     }
+        input.nextLine();
+        Categories o = new Categories(input.nextLine());
+        if (!o.getName().equals("<><><>")){
+            Database.categories.add(o);
+        }
     }
     
     @Override
@@ -57,6 +58,7 @@ public class Admin extends Person implements Employee<Categories>{
     public void update(Categories o){
         for(Categories c : Database.categories){
             if(o == c){
+                input.nextLine();
                 o.setName(input.nextLine());
                 break;
             }
@@ -130,6 +132,7 @@ public class Admin extends Person implements Employee<Categories>{
         System.out.println("4-create and manage categories");
         System.out.println("5-Logout");
     while(true){
+        input.nextLine();
         String i = input.nextLine();
             switch (i) {
                 case "1" -> System.out.println(this.toString());
@@ -138,6 +141,7 @@ public class Admin extends Person implements Employee<Categories>{
                 case "4" -> {
                     System.out.println("What do you want to do?");
                     System.out.println("1-create category  2-read category 3-update category 4-delete category ");
+                    input.nextLine();
                     String j = input.nextLine();
                     switch (j) {
                         case "1" -> this.create();
@@ -158,6 +162,7 @@ public class Admin extends Person implements Employee<Categories>{
                 }
                 case "5" ->{
             System.out.println("Are you sure you want to log out?(y/n)");
+            input.nextLine();
             String choice = input.nextLine();
             while(true){
                 switch (choice.toLowerCase()) {
@@ -189,9 +194,8 @@ public class Admin extends Person implements Employee<Categories>{
         }
         do{
             try{
-                int k = input.nextInt();
                 input.nextLine();
-
+                int k = input.nextInt();
                     if(k < l && k >= 0 ){
                         switch (mode) {
                             case "read" -> this.read(Database.categories.get(k));

@@ -18,6 +18,7 @@ public class Reservations {
         this.Reservationtime = reserveTime;
         boolean continueInput =true;
         do{
+            input.nextLine();
             String choice = input.nextLine();
                 switch(DnN){
                     case "Morning" : 

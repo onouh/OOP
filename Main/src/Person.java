@@ -2,11 +2,10 @@
 
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Calendar;
+import java.util.Scanner;
 
 public abstract class Person {
 
@@ -35,6 +34,7 @@ public abstract class Person {
         }
 
         System.out.println("Username already taken. Please enter a new username:");
+        input.nextLine();
         username = input.nextLine(); // read new username from user
         
     }
@@ -73,12 +73,14 @@ public abstract class Person {
 
     public static final void LogIn(){       
         System.out.println("Please write your username");
+        input.nextLine();
         String username = input.nextLine();
         for(Person p : Database.people){
             if (username.equals(p.username)){
                 int wrongCount = 0 ;
                 System.out.println("Username found please enter password");
-                while (wrongCount >= 3){    
+                while (wrongCount >= 3){ 
+                    input.nextLine();
                     String password = input.nextLine();
                     
                     if (password.equals(p.password)){
@@ -120,18 +122,19 @@ public abstract class Person {
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     System.out.println("please enter a day with the format (dd/MM/yyyy)");
     while(true){
-    String date = input.nextLine();
-    try{
-        LocalDate dateInst = LocalDate.parse(date,format);
-        Calendar cal = Calendar.getInstance();
-        cal.set(
-        dateInst.getYear(),
-        dateInst.getMonthValue()- 1,
-        dateInst.getDayOfMonth()
+        input.nextLine();
+        String date = input.nextLine();
+        try{
+            LocalDate dateInst = LocalDate.parse(date,format);
+            Calendar cal = Calendar.getInstance();
+            cal.set(
+            dateInst.getYear(),
+            dateInst.getMonthValue()- 1,
+            dateInst.getDayOfMonth()
         );
         return cal;
-    }catch(DateTimeParseException ex){
-        System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
+        }catch(DateTimeParseException ex){
+            System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
         }
     }
     }
