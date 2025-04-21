@@ -75,8 +75,14 @@ public class Organizer extends Person implements Employee<Event> {
         LocalDate date = LocalDate.parse(calvalue, format);
         Calendar cal = Calendar.getInstance();
         cal.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth());
-   
+        Reservations res = new Reservations();
+        res.reserve(myRoom, cal, State);
         Database.events.add(new Event(name,myCat,price,cal,myRoom));    
+    }
+    
+    @Override
+    public void read(Event e){
+        System.out.println(e.toString);
     }
     @Override
     public String toString() {
