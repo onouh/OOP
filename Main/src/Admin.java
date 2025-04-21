@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -34,13 +36,9 @@ public class Admin extends Person implements Employee<Categories>{
     
     public void addRoom() {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Enter the capacity of the new room:");
             int capacity = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
             Database.rooms.add(new Room(capacity));
-            System.out.println("Room added successfully.");
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input for capacity. Please enter a number.");
         }
     }
     
@@ -87,9 +85,9 @@ public class Admin extends Person implements Employee<Categories>{
         int max= Math.max(attendees.size(), max1);
         for(int i = 0 ; i < max ; i++){
         String room = (i<Database.rooms.size()? String.valueOf(Database.rooms.get(i).getRoomNo()) : "");
-        String event = (i<Database.events.size()? ((Event)Database.events.get(i)).getName() : "");
+        String event = (i<Database.events.size()? Database.events.get(i).getName() : "");
         String attendee = (i<attendees.size()? attendees.get(i) : "");
-
+        
         System.out.printf("%-20s %-20s %-20s %n", room,event,attendee );
         }
     }
@@ -128,7 +126,11 @@ public class Admin extends Person implements Employee<Categories>{
         System.out.printf("%-20s %-20s %-20s%n", attendee, organizer, event);
     }
         System.out.println("What would you like to do?");
-        System.out.println("1-View own profile  2-show(rooms events and attendees)  3-Add a room  4-create and manage categories");
+        System.out.println("1-View own profile");
+        System.out.println("2-show(rooms events and attendees)");
+        System.out.println("3-Add a room");
+        System.out.println("4-create and manage categories");
+        System.out.println("5-Logout");
     while(true){
         String i = input.nextLine();
             switch (i) {
@@ -156,30 +158,29 @@ public class Admin extends Person implements Employee<Categories>{
                         default -> System.out.println("please enter a valid option");
                     }
                 }
+                case "5" ->{
+            System.out.println("Are you sure you want to log out?(y/n)");
+            String choice = input.nextLine();
+            while(true){
+                switch (choice.toLowerCase()) {
+                    case "y" -> {
+                        // Main.systemStart(); (will decide name when we get there)
+
+                    }
+                    case "n" -> {
+
+                    }
+                    default -> {
+                        System.out.println("please enter y to refer to yes or n to refer to no");
+                        continue;
+                    }
+                }
+                break;
+            }                
+                }
                 default -> System.out.println("please enter one of the options");
             }
-        System.out.println("Do you want to log out?(y/n)");
-        String choice = input.nextLine();
-        while(true){
-            switch (choice.toLowerCase()) {
-                case "y" -> {
-                    Main.main(null);
-                    
-                }
-                case "n" -> {
-                    
-                }
-                default -> {
-                    System.out.println("please enter y to refer to yes or n to refer to no");
-                    continue;
-                }
-            }
-            break;
-        }
-
     }
-    
-
     }  
     
     private void categorySelection(String mode){
@@ -192,7 +193,7 @@ public class Admin extends Person implements Employee<Categories>{
             try{
                 int k = input.nextInt();
                 input.nextLine();
-                do{
+
                     if(k < l && k >= 0 ){
                         switch (mode) {
                             case "read" -> this.read(Database.categories.get(k));
@@ -203,10 +204,10 @@ public class Admin extends Person implements Employee<Categories>{
                     }else{
                         System.out.println("please enter a number within the valid range");
                     }
-                }while(true);
+
                 break;
             }catch(InputMismatchException ex){
-                System.out.println("please enter a number");
+                System.out.println("please enter a number in range");
             }
         }while(true);
     }

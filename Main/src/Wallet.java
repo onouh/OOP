@@ -1,3 +1,5 @@
+
+
 public class Wallet {
 
     private double balance;
@@ -20,17 +22,38 @@ public class Wallet {
 
     public void pay(Event event) {
         if (event != null && event.getOrganizer() != null) {
-            balance -= event.getTicketPrice();
-            event.getOrganizer().setBalance(event.getOrganizer().getBalance() + event.getTicketPrice());
+            balance -= event.getCost();
+            event.getOrganizer().getWallet().setBalance(event.getOrganizer().getBalance() + event.getCost());
             event.setAttendeeNum(event.getAttendeeNum() + 1); // Fixed method name
         }
     }
 
-    public void addMoney(double amount) {
+    public void pay(Attendee attendee) {
+        if (attendee != null) {
+            balance -= attendee.getWallet().getBalance();
+            attendee.getWallet().setBalance(attendee.getWallet().getBalance() + attendee.getWallet().getBalance());
+        }
+    } 
+    
+    public void pay(Organizer o ,Room room) {
+        if (o != null) {
+            balance -= o.getWallet().getBalance();
+            o.getWallet().setBalance(o.getWallet().getBalance() - room.getRoomCost());
+        }
+    }
+    
+    public void pay(Room room) {
+        if (room != null) {
+            balance -= room.getRoomCost(); // Fixed method name
+            room.setRoomCost(room.getRoomCost() + room.getRoomCost()); // Fixed method name
+        }
+    }
+
+    public void addMoney(int amount) {
         balance += amount;
     }
 
-    public void withdrawMoney(double amount) {
+    public void withdrawMoney(int amount) {
         if (amount > balance) {
             System.out.println("Insufficient balance");
         } else {
