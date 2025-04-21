@@ -1,6 +1,3 @@
-package com.mycompany.curroop;
-
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,11 +42,11 @@ public class Room {
         this.roomcost = roomcost;
     }
 
-    public ArrayList getUnavalableDates(){
+    public ArrayList getUnavailableDates(){
     return unavalabledates;
     }
     
-public String[][] getAvalableRooms(){
+public String[][] getAvailableRooms(){
         String[][] availableDates = new String[500][2];
         System.out.println("Available Days (from today to end of month):");
         int k =1 ;        
@@ -62,14 +59,14 @@ public String[][] getAvalableRooms(){
             String theDate = dateFormat.format(currentDate);
         for(Reservations r : unavalabledates){
             if(currentDate.equals(r.getReservationTime().getTime()) ){
-                if(!r.getDayAvalability()){
+                if(!r.getDayAvailability()){
                 inHere=true;
                 }else{
                     availableDates[k-1][0] =theDate + " - Morning";
                     inHere=true;
                     k++;
                 }
-                if(!r.getnightAvalability()){
+                if(!r.getNightAvailability()){
                 inThere = true;
                 }else{
                     availableDates[k-2][1] =theDate + " - Night";
@@ -90,7 +87,7 @@ public String[][] getAvalableRooms(){
         return availableDates;
 }
     
-    public String chooseAvalableTimes(){
+    public String chooseAvailableTime(){
                 String[][] availableDates = new String[500][2];
         System.out.println("Available Days (from today to end of month):");
         int k =1 ;        
@@ -103,7 +100,7 @@ public String[][] getAvalableRooms(){
             String theDate = dateFormat.format(currentDate);
         for(Reservations r : unavalabledates){
             if(currentDate.equals(r.getReservationTime().getTime()) ){
-                if(!r.getDayAvalability()){
+                if(!r.getDayAvailability()){
                 inHere=true;
                 }else{
                     availableDates[k-1][0] =theDate + " - Morning";
@@ -111,7 +108,7 @@ public String[][] getAvalableRooms(){
                     inHere=true;
                     k++;
                 }
-                if(!r.getnightAvalability()){
+                if(!r.getNightAvailability()){
                 inThere = true;
                 }else{
                     availableDates[k-2][1] =theDate + " - Night";
