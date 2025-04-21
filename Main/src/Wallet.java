@@ -26,7 +26,6 @@ public class Wallet {
         }
     }
 
-
     public void addMoney(double amount) {
         balance += amount;
     }

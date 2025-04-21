@@ -34,9 +34,13 @@ public class Admin extends Person implements Employee<Categories>{
     
     public void addRoom() {
         try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Enter the capacity of the new room:");
             int capacity = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Consume the newline character
             Database.rooms.add(new Room(capacity));
+            System.out.println("Room added successfully.");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input for capacity. Please enter a number.");
         }
     }
     
@@ -82,10 +86,10 @@ public class Admin extends Person implements Employee<Categories>{
         int max1 = Math.max(Database.events.size(),Database.rooms.size());
         int max= Math.max(attendees.size(), max1);
         for(int i = 0 ; i < max ; i++){
-        String room = (i<Database.rooms.size()? String.valueOf(Database.rooms.get(i).getRoomID()) : "");
-        String event = (i<Database.events.size()? Database.events.get(i).getName() : "");
+        String room = (i<Database.rooms.size()? String.valueOf(Database.rooms.get(i).getRoomNo()) : "");
+        String event = (i<Database.events.size()? ((Event)Database.events.get(i)).getName() : "");
         String attendee = (i<attendees.size()? attendees.get(i) : "");
-        
+
         System.out.printf("%-20s %-20s %-20s %n", room,event,attendee );
         }
     }

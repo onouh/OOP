@@ -1,5 +1,3 @@
-package com.mycompany.curroop;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 

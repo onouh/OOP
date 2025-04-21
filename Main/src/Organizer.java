@@ -1,4 +1,3 @@
-package com.mycompany.curroop;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Scanner;

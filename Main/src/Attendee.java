@@ -39,7 +39,7 @@ public class Attendee extends Person {
         if (this.wallet.getBalance() >= event.getTicketPrice()){
             if(event.getAttendeeNum() < event.getRoom().getCapacity()){
                 this.wallet.pay(event);
-                event.setAttendeeNum(event.getAttendeeNum()+1);
+                event.setAttendeeNum(event.getAttendeeNum() + 1);
                 System.out.println("Ticket bought successfully");
                 event.getAttendee().add(this);
                 buysuccess = true;
