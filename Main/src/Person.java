@@ -39,7 +39,7 @@ public abstract class Person {
         this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1);
         this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth);
     }
-    
+
     protected String getUsername(){
     return this.username;
     }
@@ -139,7 +139,7 @@ public abstract class Person {
         }
     }while(continueInput);
     }
-    protected abstract void homeScreen();
+    public abstract void homeScreen();
     protected void setUsername(String username){
         this.username = username;
     }

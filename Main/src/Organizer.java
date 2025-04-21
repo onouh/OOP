@@ -2,6 +2,12 @@ public class Organizer extends Person{
 
     private Wallet wallet;
 
+
+    Organizer(){
+        super(null, null, 0, 0, 0);
+        this.wallet = new Wallet(0);
+    }
+
     Organizer( String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth , int balance) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
         this.wallet = new Wallet(balance);
@@ -17,6 +23,14 @@ public class Organizer extends Person{
         }
     }
 
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
     @Override
     public String toString() {
         return "Organizer{" +
@@ -27,9 +41,8 @@ public class Organizer extends Person{
     }
 
     @Override
-    protected void homeScreen() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'homeScreen'");
+    public void homeScreen() {
+
     }
     
 }

@@ -65,7 +65,7 @@ public class Attendee extends Person {
                 '}';
     }
     @Override
-    protected void homeScreen() {
+    public void homeScreen() {
        Scanner input = new Scanner(System.in);
 
             while (!logout) {
