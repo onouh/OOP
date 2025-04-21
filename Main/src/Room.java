@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Room {
+    private static final int INITIAL_CAPACITY = 1000;
     static Scanner input = new Scanner(System.in);
     private int roomNo, capacity;
     private static int roomID = 0;
@@ -14,7 +15,7 @@ public class Room {
     int today = calendar.get(Calendar.DAY_OF_MONTH);
     int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private ArrayList<Reservations> unavalabledates = new ArrayList<>(50);
+    private ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
    
     public Room(int capacity) {
         this.roomNo = Room.roomID;
@@ -42,13 +43,12 @@ public class Room {
         this.roomcost = roomcost;
     }
 
-    public ArrayList getUnavailableDates(){
+    public ArrayList<Reservations> getUnavailableDates(){
     return unavalabledates;
     }
     
 public String[][] getAvailableRooms(){
         String[][] availableDates = new String[500][2];
-        System.out.println("Available Days (from today to end of month):");
         int k =1 ;        
         int m =0 ;
         for (int day = today + 3; day < maxDay; day++) {
@@ -139,19 +139,20 @@ public String[][] getAvailableRooms(){
         boolean continueInput =true;
         do{
             String MorOrNigh = input.nextLine();
-                switch(MorOrNigh){
-                    case "0" : 
-                        m = 0; 
+                m = switch (MorOrNigh) {
+                    case "0" -> {
                         continueInput = false;
-                        break;
-                    case "1" : 
-                        m=1;
+                        yield 0;
+                    }
+                    case "1" -> {
                         continueInput = false;
-                        break;
-                    default: 
+                        yield 1;
+                    }
+                    default -> {
                         System.out.println("proper input must be either 1 or 2");
-                        break;
-                }
+                        yield m;
+                    }
+                };
         }while(continueInput);
               String theTime = availableDates[k][m];
             return theTime;
