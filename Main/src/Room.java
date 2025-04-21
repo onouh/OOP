@@ -89,7 +89,7 @@ public String[][] getAvailableRooms(){
 }
     
     public String chooseAvailableTime(){
-                String[][] availableDates = new String[500][2];
+        String[][] availableDates = new String[500][2];
         System.out.println("Available Days (from today to end of month):");
         int k =1 ;        
         int m =0 ;
