@@ -135,8 +135,8 @@ public class Organizer extends Person implements Employee<Event> {
         for(Room r : Database.rooms){
             boolean AV = false;
             for(int i = 0; i<16; i++ ){
-                String theDateA = r.availableDates[i][0].substring(0, 11);
-                String theDateB = r.availableDates[i][1].substring(0, 11);
+                String theDateA = r.getAvailableRooms()[i][0].substring(0, 11);
+                String theDateB = r.getAvailableRooms()[i][1].substring(0, 11);
                 if(theDateA.equals(formattedDate)){
                 AV = true;
                 break;
