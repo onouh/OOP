@@ -1,6 +1,12 @@
+package com.mycompany.curroop;
+
+
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public abstract class Person {
 
@@ -39,7 +45,7 @@ public abstract class Person {
         this.dateOfBirth.set(Calendar.MONTH, monthOfBirth - 1);
         this.dateOfBirth.set(Calendar.DAY_OF_MONTH, dayOfBirth);
     }
-
+    
     protected String getUsername(){
     return this.username;
     }
@@ -66,12 +72,12 @@ public abstract class Person {
     }
 
     public static final void LogIn(){       
-        System.out.println("Please write your username: ");
+        System.out.println("Please write your username");
         String username = input.nextLine();
         for(Person p : Database.people){
             if (username.equals(p.username)){
                 int wrongCount = 0 ;
-                System.out.println("Username found. Please enter your password: ");
+                System.out.println("Username found please enter password");
                 while (wrongCount >= 3){    
                     String password = input.nextLine();
                     
@@ -82,7 +88,7 @@ public abstract class Person {
                         System.out.println("Please input the correct password");
                     }
                     if(wrongCount == 3){
-                        System.out.println("Failed to input password");
+                        System.out.println("failed to input password");
                         //Main.systemStart(); (will decide name when we get there)
                     }
                 }
@@ -110,36 +116,27 @@ public abstract class Person {
         }
     }
 
-    protected void inputDate(Calendar cal){
+    protected static Calendar inputDate(){
     boolean continueInput = true; 
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    System.out.println("please enter a day with the format (dd/MM/yyyy)");
     do{
-        try{
-            cal.setLenient(false);
-            System.out.println("please enter the day");
-            cal.set(Calendar.DAY_OF_MONTH, input.nextInt());
-            input.nextLine();
-            
-            System.out.println("please enter the month");
-            cal.set(Calendar.MONTH, (input.nextInt()-1));
-            input.nextLine();
-            
-            System.out.println("please enter the year");
-            cal.set(Calendar.YEAR, input.nextInt());
-            input.nextLine();
-            
-            continueInput = false;
-        }
-        catch(InputMismatchException ex){
-            System.out.println("please enter numbers only");
-            input.nextLine();
-        }
-        catch(IllegalArgumentException ex){
-            System.out.println("Make sure the date you inputted is correct");
-            input.nextLine();
-        }
+    String date = input.nextLine();
+    try{
+        LocalDate dateInst = LocalDate.parse(date,format);
+        Calendar cal = Calendar.getInstance();
+        cal.set(
+        dateInst.getYear(),
+        dateInst.getMonthValue()- 1,
+        dateInst.getDayOfMonth()
+        );
+        return cal;
+    }catch(DateTimeParseException ex){
+        System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
+    }
     }while(continueInput);
     }
-    public abstract void homeScreen();
+    protected abstract void homeScreen();
     protected void setUsername(String username){
         this.username = username;
     }

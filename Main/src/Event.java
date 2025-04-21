@@ -1,39 +1,33 @@
+package com.mycompany.curroop;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Event {
+
+public class Event implements Cloneable{
     static int intialCapacity = 1000;
-    private Room room;
-    private Calendar eventTime;
+    private Calendar eventTime = Calendar.getInstance();
     private String name;
     private Categories category;
     private int ticketPrice;
     private Organizer madeBy;
     private ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
+    private int cost;
     private int attendeeNum;
     
     Event(){
 
     }
 
-    Event(String name , Categories category , int ticketPrice){
+    Event(String name , Categories category , int ticketPrice , Calendar eventTime ,Room room) {
         this.name = name;
         this.category = category;
         this.ticketPrice = ticketPrice;
-
-    }
+        this.eventTime = (Calendar) eventTime.clone() ;
+       }
 
     public Organizer getMadeBy() {
         return madeBy;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
     }
 
     public void setMadeBy(Organizer madeBy) {
@@ -64,6 +58,14 @@ public class Event {
 
     public ArrayList<Attendee> getAttendee(){
         return IN_EVENT;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public int getAttendeeNum() {

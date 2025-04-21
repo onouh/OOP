@@ -1,3 +1,5 @@
+package com.mycompany.curroop;
+
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -12,18 +14,18 @@ public class Reservations {
         this.dayAvailable = true;
     }
     
-    public void reserve(Room room,Calendar reserveTime){
+    public void reserve(Room room,Calendar reserveTime,String DnN){
         this.Reservationtime = reserveTime;
         System.out.println("please enter 1 for morning and 2 for night reservation");
         boolean continueInput =true;
         do{
             String choice = input.nextLine();
-                switch(choice){
-                    case "1" : 
+                switch(DnN){
+                    case "Morning" : 
                         this.dayAvailable = false;
                         continueInput = false;
                         break;
-                    case "2" : 
+                    case "Night" : 
                         this.nightAvailable = false;
                         continueInput = false;
                         break;
@@ -33,6 +35,7 @@ public class Reservations {
                 }
         }while(continueInput);
         room.getUnavalableDates().add(this);
+        
     }
     
     public boolean getDayAvalability() {
