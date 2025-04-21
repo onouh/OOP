@@ -1,5 +1,4 @@
 
-import static com.mycompany.curroop.Person.input;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -28,34 +27,36 @@ public class Organizer extends Person implements Employee<Event> {
     public void create(){
         Categories myCat ;
         Room myRoom;
-        int k = 0;
+        int k = 1;
         for(Categories c: Database.categories){
-            System.out.println(k + c.getName());
+            System.out.print(k + "-");
+            System.out.print(c.getName());
             k++;
         }
-        System.out.println("please choose the category");
+        System.out.println("Please Choose the category");
         while(true){
             String choice = input.nextLine();
-            if (Integer.parseInt(choice) > Database.categories.size() || Integer.parseInt(choice) < 0){
-                System.out.println("please choose somthing in range");
+            if ((Integer.parseInt(choice) > Database.categories.size()) || Integer.parseInt(choice) < 0){
+                System.out.println("Please choose something in range");
                 continue;
             }
-            myCat = Database.categories.get(Integer.parseInt(choice));
+            myCat = Database.categories.get(Integer.parseInt(choice)-1);
             break;
         }
-        System.out.println("please enter the name of the event");
+        System.out.println("Please Enter the name of the event");
         String name = input.nextLine();
         int price = Integer.parseInt(input.nextLine());
-        int t = 0;    
+        int t = 1;
         for(Room r: Database.rooms){
-            System.out.println(t + r.getRoomNo());
+            System.out.print(t + "-");
+            System.out.print( r.getRoomNo());
             t++;
         }
-        System.out.println("please choose a room");
+        System.out.println("Please Choose a room");
         while(true){
             String choice = input.nextLine();
-            if (Integer.parseInt(choice) > Database.rooms.size() || Integer.parseInt(choice) < 0 ){
-                System.out.println("please choose somthing in range");
+            if ((Integer.parseInt(choice) > Database.rooms.size()) || Integer.parseInt(choice) < 0 ){
+                System.out.println("please choose something in range");
                 continue;
             }
             int index = -1;
@@ -68,7 +69,7 @@ public class Organizer extends Person implements Employee<Event> {
             myRoom = Database.rooms.get(index);
             break;
         }
-        String myTime = myRoom.chooseAvalableTimes();
+        String myTime = myRoom.chooseAvailableTime();
         String calvalue = myTime.substring(0,11);
         String State = myTime.substring(14,myTime.length());
         LocalDate date = LocalDate.parse(calvalue, format);
