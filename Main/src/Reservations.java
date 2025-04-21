@@ -19,19 +19,16 @@ public class Reservations {
         boolean continueInput =true;
         do{
             input.nextLine();
-            String choice = input.nextLine();
-                switch(DnN){
-                    case "Morning" : 
+                switch (DnN) {
+                    case "Morning" -> {
                         this.dayAvailable = false;
                         continueInput = false;
-                        break;
-                    case "Night" : 
+                    }
+                    case "Night" -> {
                         this.nightAvailable = false;
                         continueInput = false;
-                        break;
-                    default: 
-                        System.out.println("proper input must be either 1 or 2");
-                        break;
+                    }
+                    default -> System.out.println("proper input must be either 1 or 2");
                 }
         }while(continueInput);
         room.getUnavailableDates().add(this);

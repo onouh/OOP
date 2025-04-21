@@ -11,6 +11,10 @@ public class Organizer extends Person implements Employee<Event> {
     private Wallet wallet;
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     ArrayList<Event> mine = new ArrayList<>(1000);
+
+    Organizer(){
+    
+    }
     
     Organizer( String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth , int balance) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
@@ -129,7 +133,7 @@ public class Organizer extends Person implements Employee<Event> {
                 }
             }
         }
-        Calendar cal = Calendar.getInstance();
+        Calendar cal;
         cal = this.inputDate();
         Instant instant = cal.toInstant();
         LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
@@ -156,12 +160,11 @@ public class Organizer extends Person implements Employee<Event> {
         
         int max1 = Math.max(attendees.size(),myEvents.size());
         int max= Math.max(AvRooms.size(), max1);
-        int b = 1;
         for(int i = 0 ; i < max ; i++){
         
-        String room = (i<AvRooms.size()? AvRooms.get(i) : "");
-        String event = (i<myEvents.size()? myEvents.get(i) : "");
-        String attendee = (i<attendees.size()? attendees.get(i) : "");
+            String room = (i<AvRooms.size()? AvRooms.get(i) : "");
+            String event = (i<myEvents.size()? myEvents.get(i) : "");
+            String attendee = (i<attendees.size()? attendees.get(i) : "");
 
             System.out.printf("%-20s %-20s %-20s %n", room,event,attendee );
         } 

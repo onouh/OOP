@@ -11,7 +11,7 @@ public class Event implements Cloneable{
     private Categories category;
     private int ticketPrice;
     private Organizer madeBy;
-    private ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
+    private final ArrayList<Attendee> IN_EVENT = new ArrayList<>(intialCapacity);
     private int cost;
     private int attendeeNum;
     private Room room;
@@ -29,7 +29,7 @@ public class Event implements Cloneable{
         this.eventTime = (Calendar) eventTime.clone() ;
         this.room = room;
         this.madeBy = madeBy;
-       }
+    }
 
     public Organizer getMadeBy() {
         return madeBy;

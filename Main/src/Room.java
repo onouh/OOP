@@ -7,18 +7,18 @@ import java.util.Scanner;
 public class Room {
     private static final int INITIAL_CAPACITY = 1000;
     static Scanner input = new Scanner(System.in);
-    private int roomNo, capacity;
+    private final int roomNo;
+    private int capacity;
     private static int roomID = 0;
     static private int roomcost = 3000;
-    private static 
-    Calendar calendar = Calendar.getInstance();
+    private final Calendar calendar = Calendar.getInstance();
     int today = calendar.get(Calendar.DAY_OF_MONTH);
     int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
-   
-    public Room(int capacity) {
-        this.roomNo = Room.roomID;
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
+
+public Room(int capacity) {
+    this.roomNo = Room.roomID;
         this.capacity = capacity;
         roomID++;
     }
@@ -40,7 +40,7 @@ public class Room {
     }
 
     public void setRoomCost(int roomcost) {
-        this.roomcost = roomcost;
+        Room.roomcost = roomcost;
     }
 
     public ArrayList<Reservations> getUnavailableDates(){
@@ -50,8 +50,7 @@ public class Room {
 public String[][] getAvailableRooms(){
         String[][] availableDates = new String[500][2];
         System.out.println("Available Days (from today to end of month):");
-        int k =1 ;        
-        int m =0 ;
+        int k = 1 ;
         for (int day = today + 3; day < maxDay; day++) {
             boolean inHere = false;
             boolean inThere = false;
