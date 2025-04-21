@@ -33,15 +33,15 @@ public class Reservations {
                         break;
                 }
         }while(continueInput);
-        room.getUnavalableDates().add(this);
+        room.getUnavailableDates().add(this);
         
     }
     
-    public boolean getDayAvalability() {
+    public boolean getDayAvailability() {
         return this.dayAvailable;
     }
     
-    public boolean getnightAvalability() {
+    public boolean getNightAvailability() {
         return this.nightAvailable;
     }
     

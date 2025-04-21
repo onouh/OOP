@@ -1,5 +1,3 @@
-
-
 public class Wallet {
 
     private double balance;
