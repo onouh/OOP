@@ -1,4 +1,3 @@
-import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -11,23 +10,42 @@ import java.util.*;
 
 public class App {
 
+
+
     static Scanner input = new Scanner(System.in);
+    static Calendar calendar = Calendar.getInstance();
+    static Calendar calendar1 = Calendar.getInstance();
+    static Calendar calendar2 = Calendar.getInstance();
+    static Calendar calendar3 = Calendar.getInstance();
+    static{
+        calendar1.set(2025, Calendar.JULY, 4, 8, 0, 0);
+        calendar2.set(2025, Calendar.AUGUST, 15, 8, 0, 0);
+        calendar3.set(2025, Calendar.SEPTEMBER, 27, 8, 0, 0);
+    }
 
 
-    Attendee attendee1  = new Attendee(new Wallet(250000), Gender.MALE, "Nasr City", new ArrayList<>(List.of("Birthdays", "Football", "Tv Shows")), "Mohamed", "MyPassword", 1, 1, 2000 );
+    Attendee attendee1  = new Attendee(new Wallet(25000), Gender.MALE, "Nasr City", new ArrayList<>(List.of("Birthdays", "Football", "Tv Shows")), "Mohamed", "MyPassword", 1, 1, 2000 );
     Attendee attendee2 = new Attendee(new Wallet(20000), Gender.FEMALE, "Tagamo3", new ArrayList<>(List.of("Wedding", "Movies", "Skating")), "Mariam", "MyPassword", 2, 2, 2000 );
     Attendee attendee3 = new Attendee(new Wallet(15000), Gender.MALE, "Rehab", new ArrayList<>(List.of("Parties", "Snorkling", "Bachelor Party")), "Omar", "MyPassword", 5, 5, 2000 );
 
-    Organizer oragnizer1 = new Organizer("Maged", "MyPassword", 3, 3, 2000, 50000);
-    Organizer oragnizer2 = new Organizer("Farah", "MyPassword", 4, 4, 2000, 40000);
-    Organizer oragnizer3= new Organizer("Sarah", "MyPassword", 6, 6, 2000, 30000);
+    Room room1 = new Room(100);
+    Room room2 = new Room(60);
+    Room room3 = new Room(30);
 
+    Categories Wedding = new Categories("Wedding");
+    Categories Birthday = new Categories("Birthday Party");
+    Categories Conference = new Categories("Conference");
 
+    Organizer organizer1 = new Organizer("Maged", "MyPassword", 3, 3, 2000, 50000);
+    Organizer organizer2 = new Organizer("Farah", "MyPassword", 4, 4, 2000, 40000);
+    Organizer organizer3= new Organizer("Sarah", "MyPassword", 6, 6, 2000, 30000);
 
-
+    Event event1 = new Event("Ali's Wedding", Wedding , 1000, calendar1, room1, organizer1);
+    Event event2 = new Event("John's Birthday", Birthday , 500, calendar2, room3, organizer2);
+    Event event3 = new Event("Siemens Conference", Conference , 700, calendar3, room2, organizer3);
 
     {
-        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, oragnizer1, oragnizer2, oragnizer3));
+        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3));
 
     }
 
@@ -96,7 +114,7 @@ public class App {
                                 month = date.getMonthValue();
                                 year = date.getYear();
 
-                                if (year < 1900 || year > 2100) {
+                                if (year < 1900 || year > calendar.get(Calendar.YEAR)) {
                                     System.out.println("Year is out of valid range");
                                     continue;
                                 }
