@@ -11,9 +11,9 @@ public class Room {
     private int capacity;
     private static int roomID = 0;
     static private int roomcost = 3000;
-    private final Calendar calendar = Calendar.getInstance();
-    int today = calendar.get(Calendar.DAY_OF_MONTH);
-    int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+    // private final Calendar calendar = Calendar.getInstance();
+    // int today = calendar.get(Calendar.DAY_OF_MONTH);
+    // int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
 
@@ -106,12 +106,10 @@ public Room(int capacity) {
         System.out.println("Available Time Slots:");
         int optionCounter = 1;
         ArrayList<String> optionsList = new ArrayList<>(); // To map choice number to actual slot string
-
         // Display available slots with numbers
-        for (int i = 0; i < availableRooms.length; i++) {
-            String morning = availableRooms[i][0];
-            String night = availableRooms[i][1];
-
+        for (String[] availableRoom : availableRooms) {
+            String morning = availableRoom[0];
+            String night = availableRoom[1];
             if (morning != null) {
                 System.out.println(optionCounter + ": " + morning);
                 optionsList.add(morning); // Add morning slot to options
@@ -132,10 +130,10 @@ public Room(int capacity) {
             // Input validation: Check if it's a number
             if (!choice.matches("\\d+")) {
                 System.out.println("Invalid input. Please enter a numeric value.");
-                choiceInt = -1; // Invalid choice to continue the loop
                 continue;
             }
             choiceInt = Integer.parseInt(choice);
+            // Now that we have a valid number, proceed to check if it's 0 or within the valid range
 
             // Handle cancellation
             if (choiceInt == 0) {

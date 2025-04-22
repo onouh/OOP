@@ -6,7 +6,11 @@ public class Ticket {
     private String eventLocation;
     private double ticketPrice;
 
-    public Ticket(String ticketID, String eventName, String eventDate, String eventTime, String eventLocation, double ticketPrice) {
+    Ticket() {
+        this(null, null, null, null, null, 0.0);
+    }
+
+    Ticket(String ticketID, String eventName, String eventDate, String eventTime, String eventLocation, double ticketPrice) {
         this.ticketID = ticketID;
         this.eventName = eventName;
         this.eventDate = eventDate;
