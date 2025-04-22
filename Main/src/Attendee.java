@@ -13,7 +13,7 @@ public class Attendee extends Person {
     Attendee(){
         super(null,null,0,0,0);
     }
-    Attendee(Date dob, Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
+    Attendee(Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
         this.wallet = wallet;
         this.address = address;

@@ -14,7 +14,7 @@ public class Wallet {
         balance = 0;
     }
 
-    public Wallet(int balance) {
+    public Wallet(double balance) {
         this.balance = balance;
     }
 
