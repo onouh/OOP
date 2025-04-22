@@ -14,11 +14,17 @@ public class Room {
     // private final Calendar calendar = Calendar.getInstance();
     // int today = calendar.get(Calendar.DAY_OF_MONTH);
     // int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
 
-public Room(int capacity) {
-    this.roomNo = Room.roomID;
+    public Room() {
+        this(0);
+    }
+
+
+
+    Room(int capacity) {
+        this.roomNo = Room.roomID;
         this.capacity = capacity;
         roomID++;
     }
