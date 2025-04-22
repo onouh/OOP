@@ -1,4 +1,6 @@
-package com.mycompany.curroop;
+
+package com.mycompany.app;
+
 public interface Employee <T> {
         public void create();
         public void read(T o);

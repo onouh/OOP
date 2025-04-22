@@ -1,4 +1,6 @@
-package com.mycompany.curroop;
+
+package com.mycompany.app;
+
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -124,7 +126,6 @@ public class Organizer extends Person implements Employee<Event> {
     
     @Override
     public void show(){
-        System.out.printf("%-20s %-20s %-20s %n", "Free rooms","events","attendees" );
         ArrayList<String> attendees = new ArrayList<>(1000); //represents his attnedees
         ArrayList<String> myEvents = new ArrayList<>(1000);
         ArrayList<String> AvRooms = new ArrayList<>(1000);
@@ -162,13 +163,13 @@ public class Organizer extends Person implements Employee<Event> {
         }
         
         int max1 = Math.max(attendees.size(),myEvents.size());
-        int max= Math.max(AvRooms.size(), max1);
+        int max  = Math.max(AvRooms.size(), max1);
         for(int i = 0 ; i < max ; i++){
         
             String room = (i<AvRooms.size()? AvRooms.get(i) : "");
             String event = (i<myEvents.size()? myEvents.get(i) : "");
             String attendee = (i<attendees.size()? attendees.get(i) : "");
-
+            System.out.printf("%-20s %-20s %-20s %n", "Free rooms","events","attendees" );
             System.out.printf("%-20s %-20s %-20s %n", room,event,attendee );
         } 
     }

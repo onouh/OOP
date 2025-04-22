@@ -1,4 +1,6 @@
-package com.mycompany.curroop;
+
+package com.mycompany.app;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +13,7 @@ public class Admin extends Person implements Employee<Categories>{
     private String role;
         
     Admin(){
+        this(null,null,null, 0,0,0,0,0);
     }
     
     Admin(String username, String password, String role, int yearOfBirth, 
@@ -56,8 +59,8 @@ public class Admin extends Person implements Employee<Categories>{
     
     @Override
     public void create(){
-        try (Scanner input = new Scanner(System.in)) {
-            Categories o = new Categories(input.nextLine());
+        try (Scanner scanner = new Scanner(System.in)) {
+            Categories o = new Categories(scanner.nextLine());
             if (!o.getName().equals("<><><>")){
                 Database.categories.add(o);
             }
@@ -73,8 +76,8 @@ public class Admin extends Person implements Employee<Categories>{
     public void update(Categories o){
         for(Categories c : Database.categories){
             if(o == c){
-                try (Scanner input = new Scanner(System.in)) {
-                    o.setName(input.nextLine());
+                try (Scanner scanner = new Scanner(System.in)) {
+                    o.setName(scanner.nextLine());
                 }
                 break;
             }
@@ -148,8 +151,8 @@ public class Admin extends Person implements Employee<Categories>{
         System.out.println("4-create and manage categories");
         System.out.println("5-Logout");
         while(true){
-            try (Scanner input = new Scanner(System.in)) {
-                String i = input.nextLine();
+            try (Scanner scanner = new Scanner(System.in)) {
+                String i = scanner.nextLine();
                     switch (i) {
                         case "1" -> System.out.println(this.toString());
                         case "2" -> this.show();
@@ -208,8 +211,8 @@ public class Admin extends Person implements Employee<Categories>{
         }
         do{
             try{
-                try (Scanner input = new Scanner(System.in)) {
-                    int k = input.nextInt();
+                try (Scanner scanner = new Scanner(System.in)) {
+                    int k = scanner.nextInt();
                         if(k < l && k >= 0 ){
                             switch (mode) {
                                 case "read" -> this.read(Database.categories.get(k));

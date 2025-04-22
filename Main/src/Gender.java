@@ -1,4 +1,6 @@
-package com.mycompany.curroop;
+
+package com.mycompany.app;
+
 public enum Gender {
     MALE, FEMALE;
 }

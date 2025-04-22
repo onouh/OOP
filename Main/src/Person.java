@@ -1,5 +1,4 @@
-package com.mycompany.curroop;
-
+package com.mycompany.app;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,7 +13,9 @@ public abstract class Person {
     protected boolean loggedIn;
     static Scanner input = new Scanner(System.in);
     
-    Person(){}
+    Person(){
+        this(null,null,0,0,0);
+    }
     
     Person(String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth){
 
@@ -50,53 +51,64 @@ public abstract class Person {
         return username != null ? username.hashCode() : 0;
     }
 
-    public static final void LogIn(){       
-        System.out.println("Please write your username");
-        String username = input.nextLine();
-        for(Person p : Database.people){
-            if (username.equals(p.username)){
-                System.out.println("Username found. Please Enter password: ");
-                PasswordCheck(p);
-                if (p.loggedIn){
-                    System.out.println("Login successful");
-                    switch (p) {
-                        case Attendee w -> w.homeScreen();
-                        case Organizer w -> w.homeScreen();
-                        case Admin w -> w.homeScreen();
-                        default -> {
-                            System.out.println("Error 404");
-                            App.main(null);
-                        }
+    public static final void LogIn(){
+
+        while(true) {
+
+            System.out.println("Please write your username");
+            String username = input.nextLine().trim();
+            Person foundUser = null;
+            for (Person p : Database.people) {
+                if (username.equals(p.username)) {
+                    foundUser = p;
+                    break;
+                }
+            }
+            if (foundUser == null) {
+                System.out.println("Username not found. Try again.");
+                continue;
+            }
+
+            System.out.println("Username found. Please enter password:");
+            PasswordCheck(foundUser);
+            if (foundUser.loggedIn) {
+                System.out.println("Login successful");
+                switch (foundUser) {
+                    case Attendee w -> w.homeScreen();
+                    case Organizer w -> w.homeScreen();
+                    case Admin w -> w.homeScreen();
+                    default -> {
+                        System.out.println("Error 404");
+                        return;
                     }
                 }
+            }
+            return;
+        }
 
+    }
+    protected Calendar inputDate () {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("please enter a day with the format (dd/MM/yyyy)");
+        while (true) {
+           // input.nextLine();
+            String date = input.nextLine();
+            try {
+                LocalDate dateInst = LocalDate.parse(date, format);
+                Calendar cal = Calendar.getInstance();
+                cal.set(
+                        dateInst.getYear(),
+                        dateInst.getMonthValue() - 1,
+                        dateInst.getDayOfMonth()
+                );
+                return cal;
+            } catch (DateTimeParseException ex) {
+                System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
             }
         }
-
-        System.out.println("Username not found. Try again");
-        LogIn();
     }
 
-    protected  Calendar inputDate(){
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    System.out.println("please enter a day with the format (dd/MM/yyyy)");
-    while(true){
-        input.nextLine();
-        String date = input.nextLine();
-        try{
-            LocalDate dateInst = LocalDate.parse(date,format);
-            Calendar cal = Calendar.getInstance();
-            cal.set(
-            dateInst.getYear(),
-            dateInst.getMonthValue()- 1,
-            dateInst.getDayOfMonth()
-        );
-        return cal;
-        }catch(DateTimeParseException ex){
-            System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
-        }
-    }
-    }
+
     protected abstract void homeScreen();
     protected void setUsername(String username){
         this.username = username;
@@ -116,6 +128,7 @@ public abstract class Person {
 
             if (password.equals(p.password)){
                 p.loggedIn = true;
+                break; //fixed
             }else{
                 wrongCount++;
                 System.out.println("Please input the correct password");

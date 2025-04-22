@@ -1,6 +1,7 @@
-package com.mycompany.curroop;
-
 // import javax.xml.crypto.Data;
+
+package com.mycompany.app;
+
 import java.util.ArrayList;
 
 public class Attendee extends Person {
@@ -10,6 +11,10 @@ public class Attendee extends Person {
     private Wallet wallet;
     boolean buysuccess = false;
     boolean logout = false;
+
+    Attendee() {
+        this(null, null, null, null, null, null, 0, 0, 0);
+    }
     
    
     Attendee(Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {

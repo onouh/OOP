@@ -1,4 +1,5 @@
-package com.mycompany.curroop;
+
+package com.mycompany.app;
 
 public class Wallet {
 
