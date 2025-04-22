@@ -52,7 +52,7 @@ public abstract class Person {
 
     public static final void LogIn(){
 
-        while(true){
+        while(true) {
 
             System.out.println("Please write your username");
             String username = input.nextLine().trim();
@@ -70,61 +70,21 @@ public abstract class Person {
 
             System.out.println("Username found. Please enter password:");
             PasswordCheck(foundUser);
-            if (foundUser.loggedIn){
+            if (foundUser.loggedIn) {
                 System.out.println("Login successful");
                 switch (foundUser) {
                     case Attendee w -> w.homeScreen();
                     case Organizer w -> w.homeScreen();
                     case Admin w -> w.homeScreen();
                     default -> {
-                                System.out.println("Error 404");
-                                return;
+                        System.out.println("Error 404");
+                        return;
                     }
                 }
             }
             return;
-    public static final void LogIn(){
-        System.out.println("Please write your username");
-        String username = input.nextLine();
-        for(Person p : Database.people){
-            if (username.equals(p.username)){
-                System.out.println("Username found. Please Enter password: ");
-                PasswordCheck(p);
-                if (p.loggedIn){
-                    System.out.println("Login successful");
-                    switch (p) {
-                        case Attendee w -> w.homeScreen();
-                        case Organizer w -> w.homeScreen();
-                        case Admin w -> w.homeScreen();
-                        default -> {
-                            System.out.println("Error 404");
-                            App.main(null);
-                        }
-                    }
-                }
-
         }
-    }
 
-    protected  Calendar inputDate(){
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    System.out.println("please enter a day with the format (dd/MM/yyyy)");
-    while(true){
-        input.nextLine();
-        String date = input.nextLine();
-        try{
-            LocalDate dateInst = LocalDate.parse(date,format);
-            Calendar cal = Calendar.getInstance();
-            cal.set(
-            dateInst.getYear(),
-            dateInst.getMonthValue()- 1,
-            dateInst.getDayOfMonth()
-        );
-        return cal;
-        }catch(DateTimeParseException ex){
-            System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
-        }
-    }
     }
     protected abstract void homeScreen();
     protected void setUsername(String username){
