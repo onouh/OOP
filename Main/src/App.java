@@ -10,8 +10,8 @@ public class App {
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
         System.out.println("2- Signup");
-        String i = input.nextLine();
         while(true){
+            String i = input.nextLine();
             switch(i){
                 case "1" -> {
                     Person.LogIn();
