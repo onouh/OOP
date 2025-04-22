@@ -14,13 +14,11 @@ public class Organizer extends Person implements Employee<Event> {
 
     Organizer(){
         super(null,null,0,0,0);
-        Database.organizers.add(this);
     
     }
     
     Organizer( String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth , int balance) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
-        Database.organizers.add(this);
         this.wallet = new Wallet(balance);
     }
 

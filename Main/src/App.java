@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Scanner;
 public class App {
 
@@ -11,6 +12,8 @@ public class App {
         System.out.println("2- Signup");
         String i = input.nextLine();
 
+
+        Database.people.add(new Attendee());
 
     }
 }

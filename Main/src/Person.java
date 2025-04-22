@@ -30,7 +30,6 @@ public abstract class Person {
 
             if (!taken)
             {
-                Database.people.add(this);
                 break; // username is available!
             }
 
