@@ -55,9 +55,7 @@ public class App {
 
 
     public static void clearInputBuffer(Scanner scanner) {
-        if (scanner.hasNextLine()) {
-            scanner.nextLine(); // Read and discard the leftover newline or input
-        }
+
     }
 
     public static void main(String[] args){

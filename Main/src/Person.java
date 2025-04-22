@@ -127,6 +127,7 @@ public abstract class Person {
 
             if (password.equals(p.password)){
                 p.loggedIn = true;
+                break;
             }else{
                 wrongCount++;
                 System.out.println("Please input the correct password");
