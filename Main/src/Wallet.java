@@ -33,11 +33,18 @@ public class Wallet {
         }
     } 
     
-    public void pay(Organizer o ,Room room) {
+    public boolean pay(Organizer o ,Room room) {
         if (o != null) {
-            balance -= o.getWallet().getBalance();
-            o.getWallet().setBalance(o.getWallet().getBalance() - room.getRoomCost());
+            if (o.getWallet().balance < room.getRoomCost()) {
+                System.out.println("Insufficient balance");
+                return false;
+            } else{
+                balance -= o.getWallet().getBalance();
+                o.getWallet().setBalance(o.getWallet().getBalance() - room.getRoomCost());
+                return true;
+            }
         }
+        return false;
     }
     
     public void pay(Room room) {
