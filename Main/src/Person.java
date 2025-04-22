@@ -86,6 +86,28 @@ public abstract class Person {
         }
 
     }
+    protected Calendar inputDate () {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("please enter a day with the format (dd/MM/yyyy)");
+        while (true) {
+            input.nextLine();
+            String date = input.nextLine();
+            try {
+                LocalDate dateInst = LocalDate.parse(date, format);
+                Calendar cal = Calendar.getInstance();
+                cal.set(
+                        dateInst.getYear(),
+                        dateInst.getMonthValue() - 1,
+                        dateInst.getDayOfMonth()
+                );
+                return cal;
+            } catch (DateTimeParseException ex) {
+                System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
+            }
+        }
+    }
+
+
     protected abstract void homeScreen();
     protected void setUsername(String username){
         this.username = username;
