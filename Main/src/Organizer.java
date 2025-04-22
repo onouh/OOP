@@ -219,7 +219,6 @@ public class Organizer extends Person implements Employee<Event> {
                     switch (choice.toLowerCase()) {
                     case "y" -> {
                         App.main(null);
-                        Main.systemStart();
                     }
                     case "n" -> {
                     
