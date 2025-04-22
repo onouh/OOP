@@ -1,3 +1,4 @@
+package com.mycompany.curroop;
 import java.util.Scanner;
 
 public class Categories {
@@ -5,10 +6,10 @@ public class Categories {
     Scanner input = new Scanner(System.in);
     private String name;
 
-    Categories() {
+    public Categories() {
     }
     
-    Categories(String name){
+    public Categories(String name){
        while (true) {
         boolean taken = false;
         

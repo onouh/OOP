@@ -1,4 +1,4 @@
-
+package com.mycompany.curroop;
 
 import java.util.Calendar;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ public class Reservations {
     private boolean dayAvailable ;
     static Scanner input = new Scanner(System.in);
 
-    Reservations() {
+    public Reservations() {
         this.nightAvailable = true;
         this.dayAvailable = true;
     }

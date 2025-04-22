@@ -1,5 +1,5 @@
+package com.mycompany.curroop;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Database {
     static final int INITIAL_CAPACITY = 1000;
@@ -8,4 +8,3 @@ public class Database {
     public static ArrayList<Room> rooms = new ArrayList<>(INITIAL_CAPACITY);
     public static ArrayList<Categories> categories = new ArrayList<>(INITIAL_CAPACITY);
 }
-
