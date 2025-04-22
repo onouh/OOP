@@ -2,17 +2,14 @@
 import java.util.ArrayList;
 
 public class Attendee extends Person {
-    private String address;
+    private final String address;
+    private final Gender gender;
+    private final ArrayList<String> interests;
     private Wallet wallet;
-    private Gender gender;
-    private ArrayList<String> interests;
     boolean buysuccess = false;
     boolean logout = false;
     
-    @SuppressWarnings("unused")
-    Attendee(){
-        super(null,null,0,0,0);
-    }
+   
     Attendee(Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
         this.wallet = wallet;
