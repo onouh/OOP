@@ -47,118 +47,200 @@ public Room(int capacity) {
     return unavalabledates;
     }
     
-public String[][] getAvailableRooms(){
-        String[][] availableDates = new String[500][2];
-        System.out.println("Available Days (from today to end of month):");
-        int k = 1 ;
-        for (int day = today + 3; day < maxDay; day++) {
-            boolean inHere = false;
-            boolean inThere = false;
-            calendar.set(Calendar.DAY_OF_MONTH, day); 
-            Date currentDate = calendar.getTime();
+    public String[][] getAvailableRooms() {
+        ArrayList<String[]> availableDatesList = new ArrayList<>();
+        System.out.println("Available Days (next 15 days starting from 3 days ahead):");
+
+        // Create a calendar instance for iteration, starting 3 days from today
+        Calendar baseCalendar = Calendar.getInstance();
+        Calendar iterationCalendar = (Calendar) baseCalendar.clone();
+        iterationCalendar.add(Calendar.DAY_OF_MONTH, 3); // Start 3 days ahead
+
+        // Loop for the next 15 days
+        for (int i = 0; i < 15; i++) {
+            boolean isMorningAvailable = true;
+            boolean isNightAvailable = true;
+            Date currentDate = iterationCalendar.getTime();
             String theDate = dateFormat.format(currentDate);
-        for(Reservations r : unavalabledates){
-            if(currentDate.equals(r.getReservationTime().getTime()) ){
-                if(!r.getDayAvailability()){
-                inHere=true;
-                }else{
-                    availableDates[k-1][0] =theDate + " - Morning";
-                    inHere=true;
-                    k++;
-                }
-                if(!r.getNightAvailability()){
-                inThere = true;
-                }else{
-                    availableDates[k-2][1] =theDate + " - Night";
-                    inThere = true;
-                    k++;
-                }
-            }           
-            }   
-                if(!inHere){
-                availableDates[k-1][0] = theDate + " - Morning";
-                k++;
-                }
-                if(!inThere){
-                availableDates[k-2][1] = theDate + " - Night";
-                k++;
-                }
-        }
-        return availableDates;
-}
-    
-    public String chooseAvailableTime(){
-        String[][] availableDates = new String[500][2];
-        System.out.println("Available Days (from today to end of month):");
-        int k =1 ;        
-        int m =0 ;
-        for (int day = today + 3; day < maxDay; day++) {
-            boolean inHere = false;
-            boolean inThere = false;
-            calendar.set(Calendar.DAY_OF_MONTH, day); 
-            Date currentDate = calendar.getTime();
-            String theDate = dateFormat.format(currentDate);
-        for(Reservations r : unavalabledates){
-            if(currentDate.equals(r.getReservationTime().getTime()) ){
-                if(!r.getDayAvailability()){
-                inHere=true;
-                }else{
-                    availableDates[k-1][0] =theDate + " - Morning";
-                    System.out.println(k + availableDates[k-1][0]);
-                    inHere=true;
-                    k++;
-                }
-                if(!r.getNightAvailability()){
-                inThere = true;
-                }else{
-                    availableDates[k-2][1] =theDate + " - Night";
-                    inThere = true;
-                    k++;
-                }
-            }           
-            }   
-                if(!inHere){
-                availableDates[k-1][0] = theDate + " - Morning";
-                System.out.println(k + availableDates[k-1][0]);
-                k++;
-                }
-                if(!inThere){
-                availableDates[k-2][1] = theDate + " - Night";
-                System.out.println(k + availableDates[k-2][1]);
-                k++;
-                }
-        }
-        System.out.println("please input one of these times to reserve");
-         while(true){
-            input.nextLine();
-            String choice = input.nextLine();
-            if (Integer.parseInt(choice) > k || Integer.parseInt(choice) < 0){
-                System.out.println("please choose somthing in range");
-                continue;
-            }        
-        System.out.println("please enter 1 for morning and 2 for night reservation");
-        boolean continueInput =true;
-        do{
-            input.nextLine();
-            String MorOrNigh = input.nextLine();
-                m = switch (MorOrNigh) {
-                    case "0" -> {
-                        continueInput = false;
-                        yield 0;
+            String formattedDateOnly = dateFormat.format(currentDate); // For comparison
+
+            // Check against unavailable dates
+            for (Reservations r : unavalabledates) {
+                // Compare only the date part, ignoring time
+                String reservationDateOnly = dateFormat.format(r.getReservationTime().getTime());
+                if (formattedDateOnly.equals(reservationDateOnly)) {
+                    if (!r.getDayAvailability()) {
+                        isMorningAvailable = false;
                     }
-                    case "1" -> {
-                        continueInput = false;
-                        yield 1;
+                    if (!r.getNightAvailability()) {
+                        isNightAvailable = false;
                     }
-                    default -> {
-                        System.out.println("proper input must be either 1 or 2");
-                        yield m;
-                    }
-                };
-        }while(continueInput);
-              String theTime = availableDates[k][m];
-            return theTime;
+                }
+            }
+
+            // Add available slots for the current day to the list
+            String morningSlot = isMorningAvailable ? theDate + " - Morning" : null;
+            String nightSlot = isNightAvailable ? theDate + " - Night" : null;
+
+            // Only add the row if at least one slot is available for that day
+            if (isMorningAvailable || isNightAvailable) {
+                availableDatesList.add(new String[]{morningSlot, nightSlot});
+            }
+
+            // Move to the next day
+            iterationCalendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
+        return availableDatesList.toArray(new String[0][0]);
     }
+
+    /**
+     * Allows the user to choose an available time slot from the list
+     * generated by getAvailableRooms().
+     *
+     * @return The chosen time slot string (e.g., "25/04/2025 - Morning")
+     * or null if the user cancels.
+     */
+    public String chooseAvailableTime() {
+        // Get available rooms based on the updated 15-day logic
+        String[][] availableRooms = getAvailableRooms();
+
+        if (availableRooms.length == 0) {
+            System.out.println("Sorry, no rooms available in the next 15 days (starting 3 days from now).");
+            return null;
+        }
+
+        System.out.println("Available Time Slots:");
+        int optionCounter = 1;
+        ArrayList<String> optionsList = new ArrayList<>(); // To map choice number to actual slot string
+
+        // Display available slots with numbers
+        for (int i = 0; i < availableRooms.length; i++) {
+            String morning = availableRooms[i][0];
+            String night = availableRooms[i][1];
+
+            if (morning != null) {
+                System.out.println(optionCounter + ": " + morning);
+                optionsList.add(morning); // Add morning slot to options
+                optionCounter++;
+            }
+            if (night != null) {
+                System.out.println(optionCounter + ": " + night);
+                optionsList.add(night); // Add night slot to options
+                optionCounter++;
+            }
+        }
+
+        System.out.println("Please input the number of the time slot to reserve (or 0 to cancel):");
+        String choice;
+        int choiceInt;
+        do {
+            choice = input.nextLine();
+            // Input validation: Check if it's a number
+            if (!choice.matches("\\d+")) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                choiceInt = -1; // Invalid choice to continue the loop
+                continue;
+            }
+            choiceInt = Integer.parseInt(choice);
+
+            // Handle cancellation
+            if (choiceInt == 0) {
+                System.out.println("Reservation cancelled.");
+                return null;
+            }
+
+            // Validate if the choice number is within the range of displayed options
+            if (choiceInt > 0 && choiceInt <= optionsList.size()) {
+                // Return the selected time slot using the index (choiceInt - 1)
+                return optionsList.get(choiceInt - 1);
+            } else {
+                System.out.println("Please choose a number corresponding to one of the available options.");
+            }
+        } while (true); // Loop until a valid choice is made or cancelled
+    }
+    // public String[][] getAvailableRooms(){
+//         ArrayList<String[]> availableDatesList = new ArrayList<>();
+//         System.out.println("Available Days (from today to end of month):");
+//         int startDay = Math.min(today + 3, maxDay);
+//         for (int day = startDay; day < maxDay; day++) {
+//             boolean isMorningAvailable = true;
+//             boolean isNightAvailable = true;
+//             calendar.set(Calendar.DAY_OF_MONTH, day); 
+//             Date currentDate = calendar.getTime();
+//             String theDate = dateFormat.format(currentDate);
+
+//             for (Reservations r : unavalabledates) {
+//                 if (dateFormat.format(currentDate).equals(dateFormat.format(r.getReservationTime().getTime()))) {
+//                     if (!r.getDayAvailability()) {
+//                         isMorningAvailable = false;
+//                     }
+//                     if (!r.getNightAvailability()) {
+//                         isNightAvailable = false;
+//                     }
+//                 }
+//             }
+
+//             if (isMorningAvailable) {
+//                 availableDatesList.add(new String[]{theDate + " - Morning", null});
+//             }
+//             if (isNightAvailable) {
+//                 availableDatesList.add(new String[]{null, theDate + " - Night"});
+//             }
+//         }
+
+//         return availableDatesList.toArray(new String[0][0]);
+// }
+    
+// public String chooseAvailableTime() {
+//     ArrayList<String[]> availableDates = new ArrayList<>();
+//     System.out.println("Available Days (from today to end of month):");
+//     int k = 1;
+//     for (int day = Math.min(today + 3, maxDay); day <= maxDay; day++) {
+//         calendar.set(Calendar.DAY_OF_MONTH, day);
+//     String[][] availableRooms = getAvailableRooms();
+//     System.out.println("Available Days (from today to end of month):");
+//     for (int i = 0; i < availableRooms.length; i++) {
+//         String morning = availableRooms[i][0] != null ? availableRooms[i][0] : "";
+//         String night = availableRooms[i][1] != null ? availableRooms[i][1] : "";
+//         if (!morning.isEmpty()) {
+//             System.out.println((i * 2 + 1) + ": " + morning);
+//         }
+//         if (!night.isEmpty()) {
+//             System.out.println((i * 2 + 2) + ": " + night);
+//             }
+//         }
+    
+//         System.out.println("Please input one of these times to reserve (or 0 to cancel):");
+//         String choice;
+//         int choiceInt;
+//         do {
+//             choice = input.nextLine();
+//             if (!choice.matches("\\d+")) {
+//                 System.out.println("Invalid input. Please enter a numeric value.");
+//                 choiceInt = -1; // Invalid choice to continue the loop
+//                 continue;
+//             }
+//             choiceInt = Integer.parseInt(choice);
+//             if (choiceInt == 0) {
+//                 System.out.println("Reservation cancelled.");
+//                 return null;
+//             }
+//             int index = (choiceInt - 1) / 2;
+//             boolean isMorning = (choiceInt % 2) == 1;
+    
+//             if (index >= 0 && index < availableRooms.length) {
+//                 String selectedTime = isMorning ? availableRooms[index][0] : availableRooms[index][1];
+//                 if (selectedTime != null) {
+//                     return selectedTime;
+//                 } else {
+//                     System.out.println("Selected time is not available. Please try again.");
+//                 }
+//             } else {
+//                 System.out.println("Please choose a number in the range of available options.");
+//             }
+//         } while (true);
+//     }
+//     return null;
+// }
 }
