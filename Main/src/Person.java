@@ -91,11 +91,11 @@ public abstract class Person {
                 }
 
             }
-            else{
-                System.out.println("Username not found. Try again");
-                LogIn();
-            }
         }
+
+        System.out.println("Username not found. Try again");
+        LogIn();
+
     }
 
     protected  Calendar inputDate(){
