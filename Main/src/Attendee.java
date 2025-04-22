@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,10 +11,12 @@ public class Attendee extends Person {
     boolean logout = false;
     
     Attendee(){
-
+        super(null,null,0,0,0);
+        Database.attendees.add(this);
     }
     Attendee(Date dob, Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
+        Database.attendees.add(this);
         this.wallet = wallet;
         this.address = address;
         this.gender = gender;

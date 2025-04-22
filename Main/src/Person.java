@@ -12,29 +12,33 @@ public abstract class Person {
     protected boolean loggedIn;
     static Scanner input = new Scanner(System.in);
     
-    Person(){
-    }
+    Person(){}
     
     Person(String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth){
-    while (true) {
-        boolean taken = false;
+        while (true)
+        {
+            boolean taken = false;
 
-        for (Person p : Database.people) {
-            if (username.equals(p.username)) {
-                taken = true;
-                break;
+            for (Person p : Database.people)
+            {
+                if (username.equals(p.username))
+                {
+                    taken = true;
+                    break;
+                }
             }
-        }
 
-        if (!taken) {
-            break; // username is available!
-        }
+            if (!taken)
+            {
+                Database.people.add(this);
+                break; // username is available!
+            }
 
-        System.out.println("Username already taken. Please enter a new username:");
-        input.nextLine();
-        username = input.nextLine(); // read new username from user
-        
-    }
+            System.out.println("Username already taken. Please enter a new username:");
+            input.nextLine();
+            username = input.nextLine(); // read new username from user
+
+        }
         this.username = username;
         this.loggedIn = false;
         this.password = password;
@@ -46,7 +50,6 @@ public abstract class Person {
     protected String getUsername(){
     return this.username;
     }
-    
     protected String getPassword(){
     return this.password;
     }
@@ -70,27 +73,11 @@ public abstract class Person {
 
     public static final void LogIn(){       
         System.out.println("Please write your username");
-        input.nextLine();
         String username = input.nextLine();
         for(Person p : Database.people){
             if (username.equals(p.username)){
-                int wrongCount = 0 ;
-                System.out.println("Username found please enter password");
-                while (wrongCount >= 3){ 
-                    input.nextLine();
-                    String password = input.nextLine();
-                    
-                    if (password.equals(p.password)){
-                        p.loggedIn = true;
-                    }else{
-                    wrongCount++;
-                        System.out.println("Please input the correct password");
-                    }
-                    if(wrongCount == 3){
-                        System.out.println("failed to input password");
-                        //Main.systemStart(); (will decide name when we get there)
-                    }
-                }
+                System.out.println("Username found. Please Enter password: ");
+                PasswordCheck(p);
                 if (p.loggedIn){
                     System.out.println("Login successful");
                     switch (p) {
@@ -98,18 +85,15 @@ public abstract class Person {
                         case Organizer w -> w.homeScreen();
                         case Admin w -> w.homeScreen();
                         default -> {
-                            // Handle the case where p is not Attendee, Organizer, or Admin
-                            System.out.println("Unknown person type");
+                            System.out.println("Error 404");
+                            Main.main(null);
                         }
                     }
                 }
-                else{
-                    System.out.println("you failed to place the correct password");
-                    LogIn();
-                }
+
             }
             else{
-                System.out.println("username not found double check to make sure you arn't making a mistake and try again");
+                System.out.println("Username not found. Try again");
                 LogIn();
             }
         }
@@ -144,5 +128,27 @@ public abstract class Person {
     }   
     @Override   
     public abstract String toString();
+
+    protected static void PasswordCheck(Person p){
+
+        int wrongCount = 0 ;
+        while (wrongCount >= 3){
+            input.nextLine();
+            String password = input.nextLine();
+
+            if (password.equals(p.password)){
+                p.loggedIn = true;
+            }else{
+                wrongCount++;
+                System.out.println("Please input the correct password");
+            }
+            if(wrongCount == 3){
+                System.out.println("failed to input password");
+                Main.main(null);
+            }
+        }
+    }
+
+
     
 }

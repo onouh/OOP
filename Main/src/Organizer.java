@@ -13,11 +13,14 @@ public class Organizer extends Person implements Employee<Event> {
     ArrayList<Event> mine = new ArrayList<>(1000);
 
     Organizer(){
+        super(null,null,0,0,0);
+        Database.organizers.add(this);
     
     }
     
     Organizer( String username, String password, int yearOfBirth, int monthOfBirth, int dayOfBirth , int balance) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
+        Database.organizers.add(this);
         this.wallet = new Wallet(balance);
     }
 
@@ -216,7 +219,7 @@ public class Organizer extends Person implements Employee<Event> {
                     while(true){
                     switch (choice.toLowerCase()) {
                     case "y" -> {
-                        // Main.systemStart(); (will decide name when we get there)
+                        Main.main(null);
                     
                     }
                     case "n" -> {
