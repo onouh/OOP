@@ -97,6 +97,7 @@ public class App {
                     Wallet wallet = new Wallet(balance);
                     ArrayList<String> interests = new ArrayList<String>(3);
                     System.out.println("Enter 3 interests that reflects your personality: ");
+                    input.nextLine();
                     for(int j = 0; j < 3; j++) interests.add(input.nextLine());
 
 
