@@ -55,7 +55,7 @@ public class App {
 
 
     public static void clearInputBuffer(Scanner scanner) {
-
+        
     }
 
     public static void main(String[] args){
