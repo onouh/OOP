@@ -3,21 +3,21 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+
 public class App {
 
     static Scanner input = new Scanner(System.in);
-    Attendee attendee  = new Attendee();
-    Organizer oragnizer = new Organizer();
+    Attendee attendee1  = new Attendee(new Wallet(250000), Gender.MALE, "Nasr City", new ArrayList<>(List.of("Birthdays", "Football", "Tv Shows")), "John", "MyPassword", 1, 1, 2000 );
+    Attendee attendee2 = new Attendee(new Wallet(20000), Gender.FEMALE, "Tagamo3", new ArrayList<>(List.of("Wedding", "Movies", "Skating")), "Mariam", "MyPassword", 2, 2, 2000 );
+    Organizer oragnizer1 = new Organizer("Magdy", "MyPassword", 3, 3, 2000, 50000);
+    Organizer oragnizer2 = new Organizer("Farah", "MyPassword", 4, 4, 2000, 40000);
 
     public static void main(String[] args){
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
         System.out.println("2- Signup");
-                while(true){
+        while(true){
             String i = input.nextLine();
             switch(i){
                 case "1" -> {

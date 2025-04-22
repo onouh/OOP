@@ -48,31 +48,41 @@ public abstract class Person {
         return username != null ? username.hashCode() : 0;
     }
 
-    public static final void LogIn(){       
-        System.out.println("Please write your username");
-        String username = input.nextLine();
-        for(Person p : Database.people){
-            if (username.equals(p.username)){
-                System.out.println("Username found. Please Enter password: ");
-                PasswordCheck(p);
-                if (p.loggedIn){
-                    System.out.println("Login successful");
-                    switch (p) {
-                        case Attendee w -> w.homeScreen();
-                        case Organizer w -> w.homeScreen();
-                        case Admin w -> w.homeScreen();
-                        default -> {
-                            System.out.println("Error 404");
-                            Main.main(null);
-                        }
+    public static final void LogIn(){
+
+        while(true){
+
+            System.out.println("Please write your username");
+            String username = input.nextLine().trim();
+            Person foundUser = null;
+            for (Person p : Database.people) {
+                if (username.equals(p.username)) {
+                    foundUser = p;
+                    break;
+                }
+            }
+            if (foundUser == null) {
+                System.out.println("Username not found. Try again.");
+                continue;
+            }
+
+            System.out.println("Username found. Please enter password:");
+            PasswordCheck(foundUser);
+            if (foundUser.loggedIn){
+                System.out.println("Login successful");
+                switch (foundUser) {
+                    case Attendee w -> w.homeScreen();
+                    case Organizer w -> w.homeScreen();
+                    case Admin w -> w.homeScreen();
+                    default -> {
+                                System.out.println("Error 404");
+                                return;
                     }
                 }
-
             }
-        }
+            return;
 
-        System.out.println("Username not found. Try again");
-        LogIn();
+        }
 
     }
 
