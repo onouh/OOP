@@ -9,7 +9,7 @@ public class Reservations {
     private boolean dayAvailable ;
     static Scanner input = new Scanner(System.in);
 
-    public Reservations() {
+    Reservations() {
         this.nightAvailable = true;
         this.dayAvailable = true;
     }

@@ -12,7 +12,9 @@ public abstract class Person {
     protected boolean loggedIn;
     static Scanner input = new Scanner(System.in);
     
-    Person(){}
+    Person(){
+        this(null,null,0,0,0);
+    }
     
     Person(String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth){
 

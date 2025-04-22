@@ -17,7 +17,7 @@ public class Room {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
 
-    public Room() {
+    Room() {
         this(0);
     }
 
