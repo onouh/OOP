@@ -2,19 +2,19 @@ public class Wallet {
 
     private double balance;
 
+    Wallet() {
+        balance = 0;
+    }
+
+    Wallet(double balance) {
+        this.balance = balance;
+    }
+
     public double getBalance() {
         return balance;
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public Wallet() {
-        balance = 0;
-    }
-
-    public Wallet(double balance) {
         this.balance = balance;
     }
 

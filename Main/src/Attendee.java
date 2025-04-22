@@ -1,18 +1,19 @@
-import javax.xml.crypto.Data;
+// import javax.xml.crypto.Data;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Attendee extends Person {
-    private String address;
+    private final String address;
+    private final Gender gender;
+    private final ArrayList<String> interests;
     private Wallet wallet;
-    private Gender gender;
-    private ArrayList<String> interests;
     boolean buysuccess = false;
     boolean logout = false;
-    
-    Attendee(){
-        super(null,null,0,0,0);
+
+    Attendee() {
+        this(null, null, null, null, null, null, 0, 0, 0);
     }
+    
+   
     Attendee(Wallet wallet, Gender gender, String address, ArrayList<String> interests, String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
         super(username, password, yearOfBirth, monthOfBirth, dayOfBirth);
         this.wallet = wallet;
@@ -81,19 +82,31 @@ public class Attendee extends Person {
                     case "2" -> System.out.println("Wallet Balance: " + this.wallet.getBalance());
                     case "3" -> {
 
-                        while(!buysuccess){
+                        int attemptCount = 0;
+                        final int maxAttempts = 3; // Limit the number of attempts
+                        while(!buysuccess && attemptCount < maxAttempts){
                             for( int i=0; i < Database.events.size(); i++){
                                 System.out.print(i+1);
                                 System.out.print("- ");
                                 System.out.print(Database.events.get(i).toString());
-
                             }
-                            System.out.println("Enter event number:");
-                            input.nextLine();
+                            System.out.println("Enter event number (or type -1 to cancel):");
                             int eventNum = input.nextInt();
-                            this.buy(Database.events.get(eventNum));
-
+                            input.nextLine(); // Consume the newline character left by nextInt()
+                            if (eventNum == -1) {
+                                System.out.println("Exiting ticket purchase...");
+                                break;
+                            } else if (eventNum >= 0 && eventNum < Database.events.size()) {
+                                this.buy(Database.events.get(eventNum));
+                            } else {
+                                System.out.println("Invalid event number. Please enter a valid number.");
+                            }
+                            attemptCount++;
                         }
+                        if (attemptCount >= maxAttempts) {
+                            System.out.println("Maximum attempts reached. Returning to the main menu.");
+                        }
+                        buysuccess = false; // Reset the flag after the loop ends
                     }
 
                     case "4" -> {

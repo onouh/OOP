@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-     
 
 public class Admin extends Person implements Employee<Categories>{
     private final Calendar workBegin = Calendar.getInstance();
@@ -10,6 +9,7 @@ public class Admin extends Person implements Employee<Categories>{
     private String role;
         
     Admin(){
+        this(null,null,null, 0,0,0,0,0);
     }
     
     Admin(String username, String password, String role, int yearOfBirth, 
@@ -33,22 +33,36 @@ public class Admin extends Person implements Employee<Categories>{
     
     
     public void addRoom() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            scanner.nextLine();
-            int capacity = scanner.nextInt();
-            Database.rooms.add(new Room(capacity));
-        }
+        do { 
+            try (Scanner scanner = new Scanner(System.in)) {
+                System.out.println("Enter the capacity of the room:");
+                int capacity = scanner.nextInt();
+                try {
+                    if (capacity <= 0) {
+                        throw new InputMismatchException("Capacity must be a positive integer.");
+                    } else {
+                        Database.rooms.add(new Room(capacity));
+                        System.out.println("Room added successfully.");
+                        break;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a positive integer for capacity.");
+                    return;
+                }
+            }  
+        } while (true);
     }
     
     @Override
     public void create(){
-        input.nextLine();
-        Categories o = new Categories(input.nextLine());
-        if (!o.getName().equals("<><><>")){
-            Database.categories.add(o);
+        try (Scanner scanner = new Scanner(System.in)) {
+            Categories o = new Categories(scanner.nextLine());
+            if (!o.getName().equals("<><><>")){
+                Database.categories.add(o);
+            }
         }
     }
-    
+
     @Override
     public void read(Categories o){
         System.out.println(o.getName());
@@ -58,8 +72,9 @@ public class Admin extends Person implements Employee<Categories>{
     public void update(Categories o){
         for(Categories c : Database.categories){
             if(o == c){
-                input.nextLine();
-                o.setName(input.nextLine());
+                try (Scanner scanner = new Scanner(System.in)) {
+                    o.setName(scanner.nextLine());
+                }
                 break;
             }
         }
@@ -131,58 +146,57 @@ public class Admin extends Person implements Employee<Categories>{
         System.out.println("3-Add a room");
         System.out.println("4-create and manage categories");
         System.out.println("5-Logout");
-    while(true){
-        input.nextLine();
-        String i = input.nextLine();
-            switch (i) {
-                case "1" -> System.out.println(this.toString());
-                case "2" -> this.show();
-                case "3" -> this.addRoom();
-                case "4" -> {
-                    System.out.println("What do you want to do?");
-                    System.out.println("1-create category  2-read category 3-update category 4-delete category ");
-                    input.nextLine();
-                    String j = input.nextLine();
-                    switch (j) {
-                        case "1" -> this.create();
-                        case "2" -> {
-                            System.out.println("Which category do you want to read");
-                            this.categorySelection("read");
-                        }
-                        case "3" -> {
-                            System.out.println("Which category do you want to update");
-                            this.categorySelection("update");
-                        }
+        while(true){
+            try (Scanner scanner = new Scanner(System.in)) {
+                String i = scanner.nextLine();
+                    switch (i) {
+                        case "1" -> System.out.println(this.toString());
+                        case "2" -> this.show();
+                        case "3" -> this.addRoom();
                         case "4" -> {
-                            System.out.println("Which category do you want to delete");
-                            this.categorySelection("delete");
+                            System.out.println("What do you want to do?");
+                            System.out.println("1-create category  2-read category 3-update category 4-delete category ");
+                            String j = input.nextLine();
+                            switch (j) {
+                                case "1" -> this.create();
+                                case "2" -> {
+                                    System.out.println("Which category do you want to read");
+                                    this.categorySelection("read");
+                                }
+                                case "3" -> {
+                                    System.out.println("Which category do you want to update");
+                                    this.categorySelection("update");
+                                }
+                                case "4" -> {
+                                    System.out.println("Which category do you want to delete");
+                                    this.categorySelection("delete");
+                                }
+                                default -> System.out.println("please enter a valid option");
+                            }
                         }
-                        default -> System.out.println("please enter a valid option");
-                    }
-                }
-                case "5" ->{
-            System.out.println("Are you sure you want to log out?(y/n)");
-            input.nextLine();
-            String choice = input.nextLine();
-            while(true){
-                switch (choice.toLowerCase()) {
-                    case "y" -> {
-                        App.main(null);
-                    }
-                    case "n" -> {
+                        case "5" ->{
+                    System.out.println("Are you sure you want to log out?(y/n)");
+                    String choice = input.nextLine();
+                    while(true){
+                        switch (choice.toLowerCase()) {
+                            case "y" -> {
+                                App.main(null);
+                            }
+                            case "n" -> {
 
+                            }
+                            default -> {
+                                System.out.println("please enter y to refer to yes or n to refer to no");
+                                continue;
+                            }
+                        }
+                        break;
+                    }                
+                        }
+                        default -> System.out.println("please enter one of the options");
                     }
-                    default -> {
-                        System.out.println("please enter y to refer to yes or n to refer to no");
-                        continue;
-                    }
-                }
-                break;
-            }                
-                }
-                default -> System.out.println("please enter one of the options");
             }
-    }
+        }
     }  
     
     private void categorySelection(String mode){
@@ -193,19 +207,19 @@ public class Admin extends Person implements Employee<Categories>{
         }
         do{
             try{
-                input.nextLine();
-                int k = input.nextInt();
-                    if(k < l && k >= 0 ){
-                        switch (mode) {
-                            case "read" -> this.read(Database.categories.get(k));
-                            case "update" -> this.update(Database.categories.get(k));
-                            case "delete" -> this.delete(Database.categories.get(k));
+                try (Scanner scanner = new Scanner(System.in)) {
+                    int k = scanner.nextInt();
+                        if(k < l && k >= 0 ){
+                            switch (mode) {
+                                case "read" -> this.read(Database.categories.get(k));
+                                case "update" -> this.update(Database.categories.get(k));
+                                case "delete" -> this.delete(Database.categories.get(k));
+                            }
+                            break;
+                        }else{
+                            System.out.println("please enter a number within the valid range");
                         }
-                        break;
-                    }else{
-                        System.out.println("please enter a number within the valid range");
-                    }
-
+                }
                 break;
             }catch(InputMismatchException ex){
                 System.out.println("please enter a number in range");

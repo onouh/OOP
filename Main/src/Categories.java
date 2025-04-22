@@ -5,10 +5,10 @@ public class Categories {
     Scanner input = new Scanner(System.in);
     private String name;
 
-    public Categories() {
+    Categories() {
     }
     
-    public Categories(String name){
+    Categories(String name){
        while (true) {
         boolean taken = false;
         

@@ -12,7 +12,9 @@ public abstract class Person {
     protected boolean loggedIn;
     static Scanner input = new Scanner(System.in);
     
-    Person(){}
+    Person(){
+        this(null,null,0,0,0);
+    }
     
     Person(String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth){
 
@@ -81,9 +83,27 @@ public abstract class Person {
                 }
             }
             return;
+    public static final void LogIn(){
+        System.out.println("Please write your username");
+        String username = input.nextLine();
+        for(Person p : Database.people){
+            if (username.equals(p.username)){
+                System.out.println("Username found. Please Enter password: ");
+                PasswordCheck(p);
+                if (p.loggedIn){
+                    System.out.println("Login successful");
+                    switch (p) {
+                        case Attendee w -> w.homeScreen();
+                        case Organizer w -> w.homeScreen();
+                        case Admin w -> w.homeScreen();
+                        default -> {
+                            System.out.println("Error 404");
+                            App.main(null);
+                        }
+                    }
+                }
 
         }
-
     }
 
     protected  Calendar inputDate(){

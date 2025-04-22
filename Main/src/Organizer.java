@@ -213,7 +213,7 @@ public class Organizer extends Person implements Employee<Event> {
                     }
                 }
                 case "4" -> {     
-                    System.out.println("Are you  you want to log out?(y/n)");
+                    System.out.println("Are you sure you want to log out?(y/n)");
                     input.nextLine();
                     String choice = input.nextLine();
                     while(true){
