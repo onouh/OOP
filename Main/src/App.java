@@ -24,9 +24,9 @@ public class App {
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
         System.out.println("2- Signup");
-                while(true){
-            String i = input.nextLine();
-            switch(i){
+        while(true){
+            String choice = input.nextLine();
+            switch(choice){
                 case "1" -> {
                     Person.LogIn();
                     break;
@@ -42,6 +42,7 @@ public class App {
                         int day,month,year;
                         while(true){
                             System.out.println("Enter your Gender (Male/Female): ");
+                            clearInputBuffer(input);
                             genderstring = input.nextLine().toLowerCase();
                             switch(genderstring){
                                 case "male" -> {
@@ -61,6 +62,7 @@ public class App {
                         }
 
                         System.out.println("Enter your Address: ");
+                        clearInputBuffer(input);
                         String address = input.nextLine();
 
                         while(true){
@@ -85,8 +87,8 @@ public class App {
                             }
                         }
                         System.out.println("Enter your Password: ");
+                        clearInputBuffer(input);
                         String password = input.nextLine();
-                        input.close();
 
                         double balance = 0;
                         boolean validInput = false;
@@ -94,6 +96,7 @@ public class App {
                         while (!validInput) {
                             try {
                                 System.out.println("Enter Your balance: ");
+                                clearInputBuffer(input);
                                 balance = input.nextInt();
                                 if(balance >= 0) validInput = true;
                             } catch (InputMismatchException e) {
@@ -104,6 +107,7 @@ public class App {
                         Wallet wallet = new Wallet(balance);
                         ArrayList<String> interests = new ArrayList<String>(3);
                         System.out.println("Enter 3 interests that reflects your personality: ");
+                        clearInputBuffer(input);
                         input.nextLine();
                         for(int j = 0; j < 3; j++) interests.add(input.nextLine());
                         Database.people.add(new Attendee(wallet, gender, address, interests ,username, password, day, month, year ));
@@ -119,7 +123,7 @@ public class App {
                     System.out.println("Invalid Input. Try again.");
                 }
             }
-
+            input.close();
         }
     }
     public static Date parseDate(String dateStr, String format) throws ParseException {
