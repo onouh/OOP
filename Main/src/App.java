@@ -34,7 +34,7 @@ public class App {
                 case "2" -> {
                     System.out.println("Enter your Username: ");
                     clearInputBuffer(input);
-                    try {
+                    // try {
                         String username = input.nextLine();
                         Person.Checkusername(username);
                         String genderstring;
@@ -100,6 +100,7 @@ public class App {
                                 clearInputBuffer(input);
                                 balance = input.nextInt();
                                 if(balance >= 0) validInput = true;
+                                else System.out.println("Balance cannot be negative. Please enter a valid number.");
                             } catch (InputMismatchException e) {
                                 System.out.println("Invalid input. Please enter a valid number.");
                                 input.next();
@@ -118,16 +119,12 @@ public class App {
                             }
                         }
                     }
-                    catch (Exception e) {
-                        System.out.println("An error occurred: " + e.getMessage());
-                        break;
-                    }
-                }
+                // }
                 default -> {
                     System.out.println("Invalid Input. Try again.");
                 }
             }
-            input.close();
+            // input.close();
         }
     }
     public static Date parseDate(String dateStr, String format) throws ParseException {
