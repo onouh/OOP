@@ -63,7 +63,7 @@ public abstract class Person {
                         case Admin w -> w.homeScreen();
                         default -> {
                             System.out.println("Error 404");
-                            Main.main(null);
+                            App.main(null);
                         }
                     }
                 }
@@ -73,7 +73,6 @@ public abstract class Person {
 
         System.out.println("Username not found. Try again");
         LogIn();
-
     }
 
     protected  Calendar inputDate(){

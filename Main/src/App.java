@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class App {
 
     static Scanner input = new Scanner(System.in);
-    Attendee attendee  = new Attendee();
-    Organizer oragnizer = new Organizer();
+    // Attendee attendee  = new Attendee();
+    // Organizer oragnizer = new Organizer();
 
     public static void clearInputBuffer(Scanner scanner) {
         if (scanner.hasNextLine()) {
@@ -34,11 +34,12 @@ public class App {
                 case "2" -> {
                     System.out.println("Enter your Username: ");
                     clearInputBuffer(input);
-                    try (Scanner input = new Scanner(System.in)) {
+                    try {
                         String username = input.nextLine();
                         Person.Checkusername(username);
                         String genderstring;
                         Gender gender;
+                    
                         int day,month,year;
                         while(true){
                             System.out.println("Enter your Gender (Male/Female): ");
@@ -105,7 +106,7 @@ public class App {
                             }
                         }
                         Wallet wallet = new Wallet(balance);
-                        ArrayList<String> interests = new ArrayList<String>(3);
+                        ArrayList<String> interests = new ArrayList<>(3);
                         System.out.println("Enter 3 interests that reflects your personality: ");
                         clearInputBuffer(input);
                         input.nextLine();
@@ -117,7 +118,10 @@ public class App {
                             }
                         }
                     }
-                    break;
+                    catch (Exception e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                        break;
+                    }
                 }
                 default -> {
                     System.out.println("Invalid Input. Try again.");

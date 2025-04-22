@@ -1,6 +1,5 @@
-import javax.xml.crypto.Data;
+// import javax.xml.crypto.Data;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Attendee extends Person {
     private String address;
@@ -10,6 +9,7 @@ public class Attendee extends Person {
     boolean buysuccess = false;
     boolean logout = false;
     
+    @SuppressWarnings("unused")
     Attendee(){
         super(null,null,0,0,0);
     }
