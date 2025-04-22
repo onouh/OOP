@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
 
-public class Organizer extends Person implements Employee<Event> {    
+public class Organizer extends Person implements Employee<Event> {  
+
     private Wallet wallet;
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     ArrayList<Event> mine = new ArrayList<>(1000);
@@ -171,7 +172,7 @@ public class Organizer extends Person implements Employee<Event> {
         } 
     }
     @Override
-    protected void homeScreen() {
+    public void homeScreen() {
         for(Event e:Database.events){
             if(e.getOrganizer().getUsername().equals(this.getUsername())){
                 mine.add(e);
