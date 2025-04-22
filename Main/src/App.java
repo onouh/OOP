@@ -11,9 +11,23 @@ public class App {
         System.out.println("1- Login");
         System.out.println("2- Signup");
         String i = input.nextLine();
+        while(true){
+            switch(i){
+                case "1" -> {
+                    Person.LogIn();
+                    break;
+                }
+                case "2" -> {
+                    Database.people.add(new Attendee());
+                    break;
+                }
+                default -> {
+                    System.out.println("Invalid Input. Try again.");
+                }
+            }
 
+        }
 
-        Database.people.add(new Attendee());
 
     }
 }

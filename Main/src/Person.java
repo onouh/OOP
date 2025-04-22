@@ -131,7 +131,7 @@ public abstract class Person {
     protected static void PasswordCheck(Person p){
 
         int wrongCount = 0 ;
-        while (wrongCount >= 3){
+        while (wrongCount < 3){
             input.nextLine();
             String password = input.nextLine();
 
