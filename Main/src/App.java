@@ -10,7 +10,7 @@ public class App {
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
         System.out.println("2- Signup");
-        while(true){
+                while(true){
             String i = input.nextLine();
             switch(i){
                 case "1" -> {
@@ -18,6 +18,11 @@ public class App {
                     break;
                 }
                 case "2" -> {
+                    System.out.println("Enter your Username: ");
+                    String username = input.nextLine();
+                    Person.Checkusername(username);
+
+
                     Database.people.add(new Attendee());
                     break;
                 }
@@ -30,4 +35,6 @@ public class App {
 
 
     }
+
+
 }

@@ -15,29 +15,7 @@ public abstract class Person {
     Person(){}
     
     Person(String username,String password, int yearOfBirth, int monthOfBirth, int dayOfBirth){
-        while (true)
-        {
-            boolean taken = false;
 
-            for (Person p : Database.people)
-            {
-                if (username.equals(p.username))
-                {
-                    taken = true;
-                    break;
-                }
-            }
-
-            if (!taken)
-            {
-                break; // username is available!
-            }
-
-            System.out.println("Username already taken. Please enter a new username:");
-            input.nextLine();
-            username = input.nextLine(); // read new username from user
-
-        }
         this.username = username;
         this.loggedIn = false;
         this.password = password;
@@ -146,6 +124,36 @@ public abstract class Person {
                 Main.main(null);
             }
         }
+    }
+    public static void Checkusername(String username){
+
+        while (true)
+        {
+            boolean taken = false;
+
+            for (Person p : Database.people)
+            {
+                if (username.equals(p.username))
+                {
+                    taken = true;
+                    break;
+                }
+            }
+
+            if (!taken)
+            {
+                break; // username is available!
+            }
+
+            System.out.println("Username already taken. Please enter a new username:");
+            input.nextLine();
+            username = input.nextLine(); // read new username from user
+
+        }
+
+
+
+
     }
 
 
