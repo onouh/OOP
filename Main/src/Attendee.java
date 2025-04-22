@@ -101,8 +101,7 @@ public class Attendee extends Person {
                         this.loggedIn = false;
                         System.out.println("You have logged out successfully.");
                         logout = true;
-                        Main.main(null);
-
+                        App.main(null);
                     }
                     default -> System.out.println("Invalid choice. Please try again.");
                 }

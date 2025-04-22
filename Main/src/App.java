@@ -13,7 +13,7 @@ public class App {
     Attendee attendee  = new Attendee();
     Organizer oragnizer = new Organizer();
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
         System.out.println("2- Signup");
@@ -97,10 +97,15 @@ public class App {
                     Wallet wallet = new Wallet(balance);
                     ArrayList<String> interests = new ArrayList<String>(3);
                     System.out.println("Enter 3 interests that reflects your personality: ");
-                    for(int j = 0; j < 3; j++) interests.set(j, input.next());
+                    for(int j = 0; j < 3; j++) interests.add(input.nextLine());
 
 
                     Database.people.add(new Attendee(wallet, gender, address, interests ,username, password, day, month, year ));
+                    for(int k=0; k < Database.people.size();k++){
+                        if(Database.people.get(k).getUsername().equals(username)){
+                            Database.people.get(k).homeScreen();
+                        }
+                    }
                     break;
                 }
                 default -> {

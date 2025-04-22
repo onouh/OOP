@@ -121,7 +121,7 @@ public abstract class Person {
             }
             if(wrongCount == 3){
                 System.out.println("failed to input password");
-                Main.main(null);
+                App.main(null);
             }
         }
     }

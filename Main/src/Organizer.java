@@ -218,8 +218,7 @@ public class Organizer extends Person implements Employee<Event> {
                     while(true){
                     switch (choice.toLowerCase()) {
                     case "y" -> {
-                        Main.main(null);
-                    
+                        App.main(null);
                     }
                     case "n" -> {
                     

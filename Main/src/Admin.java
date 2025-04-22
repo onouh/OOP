@@ -167,8 +167,7 @@ public class Admin extends Person implements Employee<Categories>{
             while(true){
                 switch (choice.toLowerCase()) {
                     case "y" -> {
-                        // Main.systemStart(); (will decide name when we get there)
-
+                        App.main(null);
                     }
                     case "n" -> {
 
