@@ -171,11 +171,20 @@ public class Organizer extends Person implements Employee<Event> {
             }
         }
         Calendar cal;
+        String formattedDate;
+      while (true){
         cal = this.inputDate();
         Instant instant = cal.toInstant();
         LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-       String formattedDate = date.format(format);
-        
+        formattedDate = date.format(format);
+       LocalDate minDate = LocalDate.now().plusDays(3);
+       LocalDate maxDate = LocalDate.now().plusDays(17);
+       if(date.isBefore(minDate)||date.isAfter(maxDate)){
+           System.out.println("the date must be after 2 days from now and before 18 days");
+       }else{
+       break;
+       }
+      }
        for(Room r : Database.rooms){
         String [][] avM = r.getAvailableRooms();
            boolean AV = false;
