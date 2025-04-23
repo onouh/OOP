@@ -1,7 +1,3 @@
-
-package com.mycompany.app;
-
-
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;

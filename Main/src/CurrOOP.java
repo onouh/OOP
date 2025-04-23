@@ -1,4 +1,3 @@
-package com.mycompany.curroop;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

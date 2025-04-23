@@ -1,5 +1,3 @@
-package com.mycompany.curroop;
-
 public class Ticket {
     private String ticketID;
     private String eventName;

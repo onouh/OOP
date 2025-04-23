@@ -1,7 +1,3 @@
-
-package com.mycompany.app;
-
-
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -21,7 +17,7 @@ public class Event implements Cloneable{
 
 
     Event(){
-
+        this(null, null, 0, Calendar.getInstance(), null, null);
     }
 
     Event(String name , Categories category , int ticketPrice , Calendar eventTime ,Room room,Organizer madeBy) {

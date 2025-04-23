@@ -1,7 +1,3 @@
-// import javax.xml.crypto.Data;
-
-package com.mycompany.app;
-
 import java.util.ArrayList;
 
 public class Attendee extends Person {
