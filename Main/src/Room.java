@@ -18,7 +18,7 @@ public class Room {
     // int today = calendar.get(Calendar.DAY_OF_MONTH);
     // int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-public final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
+private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
 
 public Room(int capacity) {
     this.roomNo = Room.roomID;
@@ -81,8 +81,8 @@ public Room(int capacity) {
             }
 
             // Add available slots for the current day to the list
-            String morningSlot = isMorningAvailable ? theDate + " - Morning" : "";
-            String nightSlot = isNightAvailable ? theDate + " - Night" : "";
+            String morningSlot = isMorningAvailable ? theDate + " - Morning" : "man";
+            String nightSlot = isNightAvailable ? theDate + " - Night" : "man";
 
             // Only add the row if at least one slot is available for that day
             if (isMorningAvailable || isNightAvailable) {
