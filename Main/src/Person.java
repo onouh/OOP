@@ -11,7 +11,9 @@ public abstract class Person {
     private final Calendar dateOfBirth = Calendar.getInstance() ;
     protected boolean loggedIn;
     static Scanner input = new Scanner(System.in);
-    
+
+
+
     Person(){
         this(null,null,0,0,0);
     }
@@ -49,6 +51,7 @@ public abstract class Person {
     public int hashCode() {
         return username != null ? username.hashCode() : 0;
     }
+
 
     public static final void LogIn(){
 

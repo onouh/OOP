@@ -7,7 +7,6 @@ public class Attendee extends Person {
     private ArrayList<Event> myevents = new ArrayList<Event>();
     private Wallet wallet;
     boolean buysuccess = false;
-    boolean logout = false;
 
     Attendee() {
         this(null, null, null, null, null, null, 0, 0, 0);
@@ -74,60 +73,61 @@ public class Attendee extends Person {
                 ", interests=" + interests +
                 '}';
     }
+
+
     @Override
     public void homeScreen() {
-            while (!logout) {
-                System.out.println("Welcome, " + this.getUsername() + "!");
-                System.out.println("What would you like to do?");
-                System.out.println("1- View Profile");
-                System.out.println("2- View Wallet Balance");
-                System.out.println("3- Buy a Ticket");
-                System.out.println("4- Show my Tickets");
-                System.out.println("5- Log Out");
-                // input.nextLine();
-                String choice = input.nextLine();
 
-                switch (choice) {
-                    case "1" -> System.out.println(this.toString());
-                    case "2" -> System.out.println("Wallet Balance: " + this.wallet.getBalance());
-                    case "3" -> {
+        System.out.println("Welcome, " + this.getUsername() + "!");
+        System.out.println("What would you like to do?");
+        System.out.println("1- View Profile");
+        System.out.println("2- View Wallet Balance");
+        System.out.println("3- Buy a Ticket");
+        System.out.println("4- Show my Tickets");
+        System.out.println("5- Log Out");
+        // input.nextLine();
+        String choice = input.nextLine();
 
-                        while(!buysuccess){
-                            for( int i=0; i < Database.events.size(); i++){
-                                System.out.print(i+1);
-                                System.out.print("- ");
-                                System.out.println(Database.events.get(i).toString());
-                            }
-                            System.out.println("Enter event number:");
-                            int eventNum = input.nextInt(); 
-                            input.nextLine();
-                            this.buy(Database.events.get(eventNum-1));
-                        }
-                        buysuccess = false;
+        switch (choice) {
+            case "1" -> System.out.println(this.toString());
+            case "2" -> System.out.println("Wallet Balance: " + this.wallet.getBalance());
+            case "3" -> {
+
+                while (!buysuccess) {
+                    for (int i = 0; i < Database.events.size(); i++) {
+                        System.out.print(i + 1);
+                        System.out.print("- ");
+                        System.out.println(Database.events.get(i).toString());
                     }
-                    case "4" ->{
-
-                        for(int i =0; i < myevents.size() ; i++){
-                            System.out.print(i+1 + "- ");
-                            System.out.println(myevents.get(i).toString());
-                        }
-
-
-                    }
-
-                    case "5" -> {
-                        System.out.println("Logging out...");
-                        this.loggedIn = false;
-                        System.out.println("You have logged out successfully.");
-                        logout = true;
-                        App.main(null);
-                    }
-                    default -> System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Enter event number:");
+                    int eventNum = input.nextInt();
+                    input.nextLine();
+                    this.buy(Database.events.get(eventNum - 1));
                 }
+                buysuccess = false;
+            }
+            case "4" -> {
+
+                for (int i = 0; i < myevents.size(); i++) {
+                    System.out.print(i + 1 + "- ");
+                    System.out.println(myevents.get(i).toString());
+                }
+
 
             }
 
+            case "5" -> {
+                System.out.println("Logging out...");
+                this.loggedIn = false;
+                System.out.println("You have logged out successfully.");
+                App.main(null);
+            }
+            default -> System.out.println("Invalid choice. Please try again.");
         }
+    }
+
+
+
 
 
     }
