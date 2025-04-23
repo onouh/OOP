@@ -85,7 +85,7 @@ public class Attendee extends Person {
                             for( int i=0; i < Database.events.size(); i++){
                                 System.out.print(i+1);
                                 System.out.print("- ");
-                                System.out.print(Database.events.get(i).toString());
+                                System.out.println(Database.events.get(i).toString());
                             }
                             System.out.println("Enter event number:");
                             int eventNum = input.nextInt(); 
