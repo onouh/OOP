@@ -1,3 +1,6 @@
+
+package com.mycompany.app;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -139,7 +142,7 @@ public Room(int capacity) {
             // Handle cancellation
             if (choiceInt == 0) {
                 System.out.println("Reservation cancelled.");
-                return null;
+                new Organizer().homeScreen();
             }
 
             // Validate if the choice number is within the range of displayed options

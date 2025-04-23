@@ -1,3 +1,4 @@
+package com.mycompany.app;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -226,36 +227,36 @@ public class Organizer extends Person implements Employee<Event> {
             }
         }
           while(true){
-            System.out.println("What would you like to do?");
-            System.out.println("1 - View your profile");
-            System.out.println("2 - Show relevant information");
-            System.out.println("3 - Manage and Create events");
-            System.out.println("4 - Logout");
+            System.out.println("please choose what you want to do");
+            System.out.println("1 - view your profile");
+            System.out.println("2 - show relavent information");
+            System.out.println("3 - manage and create events");
+            System.out.println("4 - log out");
             // input.nextLine();
             String i = input.nextLine();
             switch (i) {
                 case "1" -> System.out.println(this.toString());
                 case "2" -> this.show();
                 case "3" -> {
-                    System.out.println("What would you like to do?");
-                    System.out.println("1-Create Event");
-                    System.out.println("2-Read Event");
-                    System.out.println("3-Update Event name");
-                    System.out.println("4-Delete event");
+                    System.out.println("What do you want to do?");
+                    System.out.println("1-create event");
+                    System.out.println("2-read event");
+                    System.out.println("3-update event name");
+                    System.out.println("4-delete event");
                     // input.nextLine();
                     String j = input.nextLine();
                     switch (j) {
                         case "1" -> this.create();
                         case "2" -> {
-                            System.out.println("Which category do you want to read");
+                            System.out.println("Which event do you want to read");
                             this.eventSelection("read");
                         }
                         case "3" -> {
-                            System.out.println("Which category do you want to update");
+                            System.out.println("Which event do you want to update");
                             this.eventSelection("update");
                         }
                         case "4" -> {
-                            System.out.println("Which category do you want to delete");
+                            System.out.println("Which event do you want to delete");
                             this.eventSelection("delete");
                         }
                         default -> System.out.println("please enter a valid option");
