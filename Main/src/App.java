@@ -1,5 +1,3 @@
-package com.mycompany.app;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,8 +14,8 @@ public class App {
     static Calendar calendar1 = Calendar.getInstance();
     static Calendar calendar2 = Calendar.getInstance();
     static Calendar calendar3 = Calendar.getInstance();
-    static{
-        calendar1.set(2025, Calendar.APRIL, 29, 8, 0, 0);
+    static {
+        calendar1.set(2025, Calendar.JULY, 4, 8, 0, 0);
         calendar2.set(2025, Calendar.AUGUST, 15, 8, 0, 0);
         calendar3.set(2025, Calendar.SEPTEMBER, 27, 8, 0, 0);
     }
@@ -39,11 +37,16 @@ public class App {
     static Organizer organizer2 = new Organizer("Farah", "MyPassword", 4, 4, 2000, 40000);
     static Organizer organizer3= new Organizer("Sarah", "MyPassword", 6, 6, 2000, 30000);
 
-    static Event event1 = new Event("Ali's Wedding", Wedding , 1000, calendar1, room1, organizer1,"Morning");
-    static  Event event2 = new Event("John's Birthday", Birthday , 500, calendar2, room3, organizer2,"Morning");
-    static Event event3 = new Event("Siemens Conference", Conference , 700, calendar3, room2, organizer3,"Morning");
+    static Event event1 = new Event("Ali's Wedding", Wedding , 1000, calendar1, room1, organizer1);
+    static  Event event2 = new Event("John's Birthday", Birthday , 500, calendar2, room3, organizer2);
+    static Event event3 = new Event("Siemens Conference", Conference , 700, calendar3, room2, organizer3);
 
-   
+    static {
+        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3));
+        Database.events.addAll(Arrays.asList(event1, event2, event3));
+        Database.rooms.addAll(Arrays.asList(room1, room2, room3));
+        Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
+    }
     
    
 
@@ -56,14 +59,6 @@ public class App {
     }
 
     public static void main(String[] args){
-        
-        
-        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3));
-        Database.events.addAll(Arrays.asList(event1, event2, event3));
-        Database.rooms.addAll(Arrays.asList(room1, room2, room3));
-        Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
-        System.out.println(Database.rooms.get(0).unavalabledates.get(0).getReservationTime().getTime());
-        
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
         System.out.println("2- Signup");
@@ -86,7 +81,7 @@ public class App {
                         int day,month,year;
                         while(true){
                             System.out.println("Enter your Gender (Male/Female): ");
-                            clearInputBuffer(input);
+                            // clearInputBuffer(input);
                             genderstring = input.nextLine().toLowerCase();
                             switch(genderstring){
                                 case "male" -> {
@@ -142,18 +137,19 @@ public class App {
                                 System.out.println("Enter Your balance: ");
                                 clearInputBuffer(input);
                                 balance = input.nextInt();
+                                clearInputBuffer(input);
                                 if(balance >= 0) validInput = true;
                                 else System.out.println("Balance cannot be negative. Please enter a valid number.");
                             } catch (InputMismatchException e) {
                                 System.out.println("Invalid input. Please enter a valid number.");
-                                input.next();
+                                input.nextLine();
                             }
                         }
                         Wallet wallet = new Wallet(balance);
                         ArrayList<String> interests = new ArrayList<>(3);
                         System.out.println("Enter 3 interests that reflects your personality: ");
-                        clearInputBuffer(input);
-                        input.nextLine();
+                        // clearInputBuffer(input);
+                        // input.nextLine();
                         for(int j = 0; j < 3; j++) interests.add(input.nextLine());
                         Database.people.add(new Attendee(wallet, gender, address, interests ,username, password, day, month, year ));
                         for(int k=0; k < Database.people.size();k++){
