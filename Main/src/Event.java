@@ -62,6 +62,10 @@ public class Event implements Cloneable{
     public Categories getCategory() {
         return category;
     }
+    public String getCategoryname() {
+        return category.getName();
+    }
+
 
     public void setCategory(Categories category) {
         this.category = category;
@@ -93,7 +97,7 @@ public class Event implements Cloneable{
     
       @Override
     public String toString() {
-        return "Event Name :" + getName() + "\nEvent Category :" + getCategory()
+        return "Event Name :" + getName() + "\nEvent Category :" + getCategoryname()
     + "\nEvent Room :" + this.room.getRoomNo()+ "\nTicket Price :" + getTicketPrice() + 
       "\nEvent Time :" +this.eventTime;
     }
