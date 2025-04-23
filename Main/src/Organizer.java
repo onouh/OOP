@@ -179,12 +179,12 @@ public class Organizer extends Person implements Employee<Event> {
                 mine.add(e);
             }
         }
-        System.out.println("please choose what you want to do");
-        System.out.println("1 - view your profile");
-        System.out.println("2 - show relavent information");
-        System.out.println("3 - manage and create events");
-        System.out.println("4 - log out");
           while(true){
+            System.out.println("please choose what you want to do");
+            System.out.println("1 - view your profile");
+            System.out.println("2 - show relavent information");
+            System.out.println("3 - manage and create events");
+            System.out.println("4 - log out");
             input.nextLine();
             String i = input.nextLine();
             switch (i) {

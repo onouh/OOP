@@ -76,7 +76,7 @@ public class App {
                 }
                 case "2" -> {
                     System.out.println("Enter your Username: ");
-                    clearInputBuffer(input);
+
                     // try {
                         String username = input.nextLine();
                         Person.Checkusername(username);
