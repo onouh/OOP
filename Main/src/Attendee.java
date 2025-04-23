@@ -101,7 +101,7 @@ public class Attendee extends Person {
                             System.out.println("Enter event number:");
                             int eventNum = input.nextInt(); 
                             input.nextLine();
-                            this.buy(Database.events.get(eventNum));
+                            this.buy(Database.events.get(eventNum-1));
                         }
                         buysuccess = false;
                     }
