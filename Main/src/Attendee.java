@@ -57,9 +57,9 @@ public class Attendee extends Person {
 
     @Override
     public String toString() {
-        return "Attendee{" +
-                "address='" + address + '\'' +
-                ", wallet=" + wallet +
+        return "Attendee " + this.getUsername() +
+                " {Address='" + address + '\'' +
+                ", wallet=" + wallet.getBalance() +
                 ", gender=" + gender +
                 ", interests=" + interests +
                 '}';

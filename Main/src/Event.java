@@ -75,13 +75,6 @@ public class Event implements Cloneable{
         return IN_EVENT;
     }
 
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 
     public int getAttendeeNum() {
         return attendeeNum;
