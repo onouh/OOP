@@ -105,8 +105,15 @@ public class App {
                         }
 
                         System.out.println("Enter your Address: ");
-                        clearInputBuffer(input);
-                        String address = input.nextLine();
+                        String address;
+                        while(true){
+                            address = input.nextLine();
+                            if(address.isBlank()){
+                            System.out.println("invalid input. Try again");
+                            continue;
+                            }
+                            break;
+                        }
 
                         while(true){
 
