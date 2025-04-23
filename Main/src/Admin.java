@@ -1,3 +1,7 @@
+
+package com.mycompany.app;
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -34,10 +38,9 @@ public class Admin extends Person implements Employee<Categories>{
     
     public void addRoom() {
         do { 
-            try (Scanner scanner = new Scanner(System.in)) {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Enter the capacity of the room:");
                 int capacity = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
                 try {
                     if (capacity <= 0) {
                         throw new InputMismatchException("Capacity must be a positive integer.");
@@ -50,33 +53,43 @@ public class Admin extends Person implements Employee<Categories>{
                     System.out.println("Invalid input. Please enter a positive integer for capacity.");
                     return;
                 }
-            }  
+              
         } while (true);
     }
     
     @Override
     public void create(){
-        try (Scanner scanner = new Scanner(System.in)) {
+        System.out.println("please enter the new Category name");
+        Scanner scanner = new Scanner(System.in);
             Categories o = new Categories(scanner.nextLine());
             if (!o.getName().equals("<><><>")){
                 Database.categories.add(o);
             }
-        }
+        
     }
 
     @Override
     public void read(Categories o){
-        System.out.println(o.getName());
+        int i =Database.categories.indexOf(o);
+        System.out.println(Database.categories.get(i).toString());
     }
     
     @Override 
     public void update(Categories o){
+        System.out.println("Please input the new category name");
         for(Categories c : Database.categories){
             if(o == c){
-                try (Scanner scanner = new Scanner(System.in)) {
-                    o.setName(scanner.nextLine());
-                }
+                Scanner scanner = new Scanner(System.in); 
+                do{
+                String newname = scanner.nextLine();
+                if(!newname.equals("<><><>"))
+                {
+                o.setName(newname);
                 break;
+                }
+                else{}
+                }while(true);
+                        
             }
         }
     }
@@ -104,13 +117,13 @@ public class Admin extends Person implements Employee<Categories>{
         String event = (i<Database.events.size()? Database.events.get(i).getName() : "");
         String attendee = (i<attendees.size()? attendees.get(i) : "");
         
-        System.out.printf("%-20s %-20s %-20s %n", room,event,attendee );
+        System.out.printf("%-20s %-20s %-20s %n","Room No."+room,event,attendee );
         }
     }
     
     @Override
     public String toString(){
-    String adminInfo= "Username: " + this.getUsername() + " role: " + this.role +  " Working hours: " + 
+    String adminInfo= "Username: " + this.getUsername()+ "\n"+ "role: " + this.role + "\n" + "Working hours: " + 
             (workEnd.get(Calendar.HOUR_OF_DAY)-workBegin.get(Calendar.HOUR_OF_DAY));  
         
     return adminInfo;
@@ -141,22 +154,26 @@ public class Admin extends Person implements Employee<Categories>{
 
         System.out.printf("%-20s %-20s %-20s%n", attendee, organizer, event);
     }
-        System.out.println("What would you like to do?");
-        System.out.println("1-View own profile");
-        System.out.println("2-show(rooms events and attendees)");
-        System.out.println("3-Add a room");
-        System.out.println("4-create and manage categories");
-        System.out.println("5-Logout");
         while(true){
-            try (Scanner scanner = new Scanner(System.in)) {
-                String i = scanner.nextLine();
+            System.out.println("What would you like to do?");
+            System.out.println("1-View own profile");
+            System.out.println("2-show(rooms events and attendees)");
+            System.out.println("3-Add a room");
+            System.out.println("4-create and manage categories");
+            System.out.println("5-Logout");
+            String i;
+            Scanner scanner = new Scanner(System.in); 
+                i = scanner.nextLine();
                     switch (i) {
                         case "1" -> System.out.println(this.toString());
                         case "2" -> this.show();
                         case "3" -> this.addRoom();
                         case "4" -> {
                             System.out.println("What do you want to do?");
-                            System.out.println("1-create category  2-read category 3-update category 4-delete category ");
+                            System.out.println("1-create category");
+                            System.out.println("2-read category");
+                            System.out.println("3-update category");
+                            System.out.println("4-delete category");
                             String j = input.nextLine();
                             switch (j) {
                                 case "1" -> this.create();
@@ -196,7 +213,7 @@ public class Admin extends Person implements Employee<Categories>{
                         }
                         default -> System.out.println("please enter one of the options");
                     }
-            }
+            
         }
     }  
     
@@ -208,12 +225,12 @@ public class Admin extends Person implements Employee<Categories>{
         }
         do{
             try{
-                try (Scanner scanner = new Scanner(System.in)) {
+                Scanner scanner = new Scanner(System.in); 
                     int k = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline character
                         if(k < l && k >= 0 ){
                             switch (mode) {
-                                case "read" -> this.read(Database.categories.get(k));
+                                case "read" -> {
+                                    this.read(Database.categories.get(k));}
                                 case "update" -> this.update(Database.categories.get(k));
                                 case "delete" -> this.delete(Database.categories.get(k));
                             }
@@ -221,7 +238,7 @@ public class Admin extends Person implements Employee<Categories>{
                         }else{
                             System.out.println("please enter a number within the valid range");
                         }
-                }
+                
                 break;
             }catch(InputMismatchException ex){
                 System.out.println("please enter a number in range");
