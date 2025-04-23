@@ -122,7 +122,6 @@ public abstract class Person {
 
         int wrongCount = 0 ;
         while (wrongCount < 3){
-            input.nextLine();
             String password = input.nextLine();
 
             if (password.equals(p.password)){
