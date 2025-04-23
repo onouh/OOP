@@ -237,11 +237,11 @@ public class Organizer extends Person implements Employee<Event> {
                 case "1" -> System.out.println(this.toString());
                 case "2" -> this.show();
                 case "3" -> {
-                    System.out.println("What do you want to do?");
-                    System.out.println("1-create event");
-                    System.out.println("2-read event");
-                    System.out.println("3-update event name");
-                    System.out.println("4-delete event");
+                    System.out.println("What would you like to do?");
+                    System.out.println("1-Create Event");
+                    System.out.println("2-Read Event");
+                    System.out.println("3-Update Event name");
+                    System.out.println("4-Delete event");
                     // input.nextLine();
                     String j = input.nextLine();
                     switch (j) {
