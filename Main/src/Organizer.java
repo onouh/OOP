@@ -122,9 +122,9 @@ public class Organizer extends Person implements Employee<Event> {
     
     @Override
     public void show(){
-        ArrayList<String> attendees = new ArrayList<>(1000); //represents his attnedees
-        ArrayList<String> myEvents = new ArrayList<>(1000);
-        ArrayList<String> AvRooms = new ArrayList<>(1000);
+        ArrayList<String> attendees = new ArrayList<>(); //represents his attnedees
+        ArrayList<String> myEvents = new ArrayList<>();
+        ArrayList<String> AvRooms = new ArrayList<>();
         for(Event e:Database.events){
             if(e.getOrganizer().getUsername().equals(this.getUsername())){
                 myEvents.add(e.getName());
@@ -141,9 +141,10 @@ public class Organizer extends Person implements Employee<Event> {
 
         for(Room r : Database.rooms){
             boolean AV = false;
-            for(int i = 0; i<16; i++ ){
-                String theDateA = r.getAvailableRooms()[i][0].substring(0, 11);
-                String theDateB = r.getAvailableRooms()[i][1].substring(0, 11);
+            for(int i = 0; i<15; i++ ){
+                String [][] avM = r.getAvailableRooms();
+                String theDateA = avM[i][0].substring(0, 11);
+                String theDateB = avM[i][1].substring(0, 11);
                 if(theDateA.equals(formattedDate)){
                 AV = true;
                 break;

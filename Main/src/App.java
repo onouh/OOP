@@ -3,9 +3,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.*;
 
 public class App {
@@ -59,6 +56,9 @@ public class App {
     public static void main(String[] args){
         
         Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3));
+        Database.events.addAll(Arrays.asList(event1, event2, event3));
+        Database.rooms.addAll(Arrays.asList(room1, room2, room3));
+        Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
         String[][] s = room1.getAvailableRooms();
         System.out.println(s[0][0]);
         System.out.println("Welcome to The EventHub!\n");

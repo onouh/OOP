@@ -14,7 +14,7 @@ public class Room {
     // private final Calendar calendar = Calendar.getInstance();
     // int today = calendar.get(Calendar.DAY_OF_MONTH);
     // int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
 private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
 
 public Room(int capacity) {
@@ -49,7 +49,7 @@ public Room(int capacity) {
     
     public String[][] getAvailableRooms() {
         ArrayList<String[]> availableDatesList = new ArrayList<>();
-        System.out.println("Available Days (next 15 days starting from 3 days ahead):");
+        // System.out.println("Available Days:");
 
         // Create a calendar instance for iteration, starting 3 days from today
         Calendar baseCalendar = Calendar.getInstance();
