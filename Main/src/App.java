@@ -84,7 +84,7 @@ public class App {
                         int day,month,year;
                         while(true){
                             System.out.println("Enter your Gender (Male/Female): ");
-                            clearInputBuffer(input);
+                            // clearInputBuffer(input);
                             genderstring = input.nextLine().toLowerCase();
                             switch(genderstring){
                                 case "male" -> {
@@ -140,18 +140,19 @@ public class App {
                                 System.out.println("Enter Your balance: ");
                                 clearInputBuffer(input);
                                 balance = input.nextInt();
+                                clearInputBuffer(input);
                                 if(balance >= 0) validInput = true;
                                 else System.out.println("Balance cannot be negative. Please enter a valid number.");
                             } catch (InputMismatchException e) {
                                 System.out.println("Invalid input. Please enter a valid number.");
-                                input.next();
+                                input.nextLine();
                             }
                         }
                         Wallet wallet = new Wallet(balance);
                         ArrayList<String> interests = new ArrayList<>(3);
                         System.out.println("Enter 3 interests that reflects your personality: ");
-                        clearInputBuffer(input);
-                        input.nextLine();
+                        // clearInputBuffer(input);
+                        // input.nextLine();
                         for(int j = 0; j < 3; j++) interests.add(input.nextLine());
                         Database.people.add(new Attendee(wallet, gender, address, interests ,username, password, day, month, year ));
                         for(int k=0; k < Database.people.size();k++){
