@@ -37,12 +37,16 @@ public class App {
     static Organizer organizer2 = new Organizer("Farah", "MyPassword", 4, 4, 2000, 40000);
     static Organizer organizer3= new Organizer("Sarah", "MyPassword", 6, 6, 2000, 30000);
 
+    static Admin admin = new Admin("Noah", "MyPassword", "Developer", 1990, 5, 5,8, 18);
+
+
     static Event event1 = new Event("Ali's Wedding", Wedding , 1000, calendar1, room1, organizer1, "Morning");
     static  Event event2 = new Event("John's Birthday", Birthday , 500, calendar2, room3, organizer2, "Morning");
     static Event event3 = new Event("Siemens Conference", Conference , 700, calendar3, room2, organizer3, "Morning");
 
+
     static {
-        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3));
+        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3, admin));
         Database.events.addAll(Arrays.asList(event1, event2, event3));
         Database.rooms.addAll(Arrays.asList(room1, room2, room3));
         Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
