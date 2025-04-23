@@ -37,6 +37,7 @@ public class Admin extends Person implements Employee<Categories>{
             try (Scanner scanner = new Scanner(System.in)) {
                 System.out.println("Enter the capacity of the room:");
                 int capacity = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
                 try {
                     if (capacity <= 0) {
                         throw new InputMismatchException("Capacity must be a positive integer.");
@@ -209,6 +210,7 @@ public class Admin extends Person implements Employee<Categories>{
             try{
                 try (Scanner scanner = new Scanner(System.in)) {
                     int k = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline character
                         if(k < l && k >= 0 ){
                             switch (mode) {
                                 case "read" -> this.read(Database.categories.get(k));
