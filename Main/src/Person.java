@@ -165,7 +165,7 @@ public abstract class Person {
             }
 
             System.out.println("Username already taken. Please enter a new username:");
-            input.nextLine();
+            // input.nextLine();
             username = input.nextLine(); // read new username from user
 
         }
