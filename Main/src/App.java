@@ -59,6 +59,9 @@ public class App {
         Database.events.addAll(Arrays.asList(event1, event2, event3));
         Database.rooms.addAll(Arrays.asList(room1, room2, room3));
         Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
+        Database.rooms.get(0).chooseAvailableTime();
+
+
         String[][] s = room1.getAvailableRooms();
         System.out.println(s[0][0]);
         System.out.println("Welcome to The EventHub!\n");
