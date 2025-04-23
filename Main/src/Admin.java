@@ -1,3 +1,7 @@
+
+package com.mycompany.app;
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;

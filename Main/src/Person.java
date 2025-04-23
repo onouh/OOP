@@ -1,3 +1,4 @@
+package com.mycompany.app;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -88,7 +89,7 @@ public abstract class Person {
     }
     protected Calendar inputDate () {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        System.out.println("please enter a day with the format (dd/mm/yyyy)");
+        System.out.println("please enter a day with the format (dd/MM/yyyy)");
         while (true) {
            // input.nextLine();
             String date = input.nextLine();
@@ -102,7 +103,7 @@ public abstract class Person {
                 );
                 return cal;
             } catch (DateTimeParseException ex) {
-                System.out.println("please enter the day in the correct format dd/mm/YYYY it is very strict with the format");
+                System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
             }
         }
     }

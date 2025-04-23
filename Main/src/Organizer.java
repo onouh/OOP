@@ -1,3 +1,7 @@
+
+package com.mycompany.app;
+
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -122,9 +126,9 @@ public class Organizer extends Person implements Employee<Event> {
     
     @Override
     public void show(){
-        ArrayList<String> attendees = new ArrayList<>(); //represents his attnedees
-        ArrayList<String> myEvents = new ArrayList<>();
-        ArrayList<String> AvRooms = new ArrayList<>();
+        ArrayList<String> attendees = new ArrayList<>(1000); //represents his attnedees
+        ArrayList<String> myEvents = new ArrayList<>(1000);
+        ArrayList<String> AvRooms = new ArrayList<>(1000);
         for(Event e:Database.events){
             if(e.getOrganizer().getUsername().equals(this.getUsername())){
                 myEvents.add(e.getName());
@@ -137,14 +141,12 @@ public class Organizer extends Person implements Employee<Event> {
         cal = this.inputDate();
         Instant instant = cal.toInstant();
         LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        String formattedDate = date.format(format);
-
+       String formattedDate = date.format(format);
         for(Room r : Database.rooms){
             boolean AV = false;
             for(int i = 0; i<15; i++ ){
-                String [][] avM = r.getAvailableRooms();
-                String theDateA = avM[i][0].substring(0, 11);
-                String theDateB = avM[i][1].substring(0, 11);
+                String theDateA = r.getAvailableRooms()[i][0].substring(0, 10);
+                String theDateB = r.getAvailableRooms()[i][1].substring(0, 10);
                 if(theDateA.equals(formattedDate)){
                 AV = true;
                 break;
@@ -155,18 +157,18 @@ public class Organizer extends Person implements Employee<Event> {
                 }
             }
             if (AV){
-            AvRooms.add(String.valueOf(r.getRoomNo()));
+                AvRooms.add(String.valueOf(r.getRoomNo()));
             }
         }
         
         int max1 = Math.max(attendees.size(),myEvents.size());
         int max  = Math.max(AvRooms.size(), max1);
+         System.out.printf("%-20s %-20s %-20s %n", "Free rooms","events","attendees" );
         for(int i = 0 ; i < max ; i++){
         
             String room = (i<AvRooms.size()? AvRooms.get(i) : "");
             String event = (i<myEvents.size()? myEvents.get(i) : "");
             String attendee = (i<attendees.size()? attendees.get(i) : "");
-            System.out.printf("%-20s %-20s %-20s %n", "Free rooms","events","attendees" );
             System.out.printf("%-20s %-20s %-20s %n", room,event,attendee );
         } 
     }
