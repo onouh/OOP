@@ -1,3 +1,5 @@
+package com.mycompany.app;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -33,7 +35,7 @@ public class Organizer extends Person implements Employee<Event> {
         int k = 1;
         for(Categories c: Database.categories){
             System.out.print(k + "-");
-            System.out.print(c.getName());
+            System.out.println(c.getName());
             k++;
         }
         System.out.println("Please Choose the category");
@@ -50,6 +52,7 @@ public class Organizer extends Person implements Employee<Event> {
         // input.nextLine();
         String name = input.nextLine();
         // input.nextLine();
+        System.out.println("please enter the price");
         int price;
         do { 
             try {
@@ -63,35 +66,34 @@ public class Organizer extends Person implements Employee<Event> {
                 System.out.println("Invalid input. Please enter a valid number for price.");
                 // e.printStackTrace();
             }
-            
+            System.out.println("please choose the room you would like to rent");
         } while (true);
-        int t = 1;
+        int t = 0;
         for(Room r: Database.rooms){
             System.out.print(t + "-");
-            System.out.print( r.getRoomNo());
+            System.out.println( "Room no. " + r.getRoomNo());
             t++;
         }
         System.out.println("Please Choose a room");
         while(true){
-            input.nextLine();
             String choice = input.nextLine();
             if ((Integer.parseInt(choice) > Database.rooms.size()) || Integer.parseInt(choice) < 0 ){
                 System.out.println("please choose something in range");
                 continue;
             }
-            int index = -1;
+            int ind = -1;
             for (int i = 0; i < Database.rooms.size(); i++) {
                 if (Database.rooms.get(i).getRoomNo() == Integer.parseInt(choice)) {
-                    index = i;
+                    ind = i;
                     break;
                 }
             }
-            myRoom = Database.rooms.get(index);
+            myRoom = Database.rooms.get(ind);
             break;
         }
         String myTime = myRoom.chooseAvailableTime();
-        String calvalue = myTime.substring(0,11);
-        String State = myTime.substring(14,myTime.length());
+        String calvalue = myTime.substring(0,10);
+        String State = myTime.substring(13,myTime.length());
         LocalDate date;
 
         do { 
@@ -100,9 +102,8 @@ public class Organizer extends Person implements Employee<Event> {
                 Calendar cal = Calendar.getInstance();
                 cal.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth());
                 Reservations res = new Reservations();
-                res.reserve(myRoom, cal, State);
                 this.wallet.pay(this, myRoom);
-                Database.events.add(new Event(name,myCat,price,cal,myRoom,this));    
+                Database.events.add(new Event(name,myCat,price,cal,myRoom,this,State));    
                 System.out.println("Event created successfully");
                 break; 
             } catch (Exception e) {
@@ -168,16 +169,21 @@ public class Organizer extends Person implements Employee<Event> {
 
                 int beginIndex = 0, endIndex = 10;
                 String [][] avM = r.getAvailableRooms();
+                if(!avM[i][0].equals("")){
                 String theDateA = avM[i][0].substring(beginIndex, endIndex);
-                String theDateB = avM[i][1].substring(beginIndex, endIndex);
                 if(theDateA.equals(formattedDate)){
                 AV = true;
                 break;
                 }
+                }
+                if(!avM[i][1].equals("")){
+                String theDateB = avM[i][1].substring(beginIndex, endIndex);
                 if(theDateB.equals(formattedDate)){
                 AV = true;
                 break;
                 }
+                }
+
             }
             if (AV){
                 AvRooms.add(String.valueOf(r.getRoomNo()));
@@ -192,7 +198,7 @@ public class Organizer extends Person implements Employee<Event> {
             String room = (i<AvRooms.size()? AvRooms.get(i) : "");
             String event = (i<myEvents.size()? myEvents.get(i) : "");
             String attendee = (i<attendees.size()? attendees.get(i) : "");
-            System.out.printf("%-20s %-20s %-20s %n", room,event,attendee );
+            System.out.printf("%-20s %-20s %-20s %n", "Room no."+room,event,attendee );
         } 
     }
     @Override
@@ -215,7 +221,10 @@ public class Organizer extends Person implements Employee<Event> {
                 case "2" -> this.show();
                 case "3" -> {
                     System.out.println("What do you want to do?");
-                    System.out.println("1-create event  2-read event 3-update event name 4-delete event");
+                    System.out.println("1-create event");
+                    System.out.println("2-read event");
+                    System.out.println("3-update event name");
+                    System.out.println("4-delete event");
                     // input.nextLine();
                     String j = input.nextLine();
                     switch (j) {

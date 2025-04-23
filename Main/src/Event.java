@@ -1,3 +1,5 @@
+package com.mycompany.app;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -20,13 +22,15 @@ public class Event implements Cloneable{
 
     }
 
-    Event(String name , Categories category , int ticketPrice , Calendar eventTime ,Room room,Organizer madeBy) {
+    Event(String name , Categories category , int ticketPrice , Calendar eventTime ,Room room,Organizer madeBy , String DnN) {
         this.name = name;
         this.category = category;
         this.ticketPrice = ticketPrice;
         this.eventTime = (Calendar) eventTime.clone() ;
         this.room = room;
         this.madeBy = madeBy;
+        Reservations res = new Reservations();
+        res.reserve(room, eventTime, DnN);
     }
 
     public Organizer getMadeBy() {

@@ -1,3 +1,6 @@
+
+package com.mycompany.app;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,7 +18,7 @@ public class Room {
     // int today = calendar.get(Calendar.DAY_OF_MONTH);
     // int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-private final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
+public final ArrayList<Reservations> unavalabledates = new ArrayList<>(INITIAL_CAPACITY);
 
 public Room(int capacity) {
     this.roomNo = Room.roomID;
@@ -78,8 +81,8 @@ public Room(int capacity) {
             }
 
             // Add available slots for the current day to the list
-            String morningSlot = isMorningAvailable ? theDate + " - Morning" : null;
-            String nightSlot = isNightAvailable ? theDate + " - Night" : null;
+            String morningSlot = isMorningAvailable ? theDate + " - Morning" : "";
+            String nightSlot = isNightAvailable ? theDate + " - Night" : "";
 
             // Only add the row if at least one slot is available for that day
             if (isMorningAvailable || isNightAvailable) {
@@ -131,12 +134,7 @@ public Room(int capacity) {
                 System.out.println("Invalid input. Please enter a numeric value.");
                 continue;
             }
-            try {
-                choiceInt = Integer.parseInt(choice);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a numeric value.");
-                continue; // Continue to the next iteration of the loop
-            }
+            choiceInt = Integer.parseInt(choice);
             // Now that we have a valid number, proceed to check if it's 0 or within the valid range
 
             // Handle cancellation
