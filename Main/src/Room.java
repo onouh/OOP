@@ -47,13 +47,20 @@ public Room(int capacity) {
     return unavalabledates;
     }
     
+    /**
+     * Retrieves the available room slots for the next 15 days, starting 3 days from today.
+     * Each slot indicates whether the room is available in the morning or night.
+     *
+     * @return A 2D array where each row contains two strings: 
+     *         the morning slot and the night slot for a specific day. 
+     *         If a slot is unavailable, it will be null.
+     */
     public String[][] getAvailableRooms() {
         ArrayList<String[]> availableDatesList = new ArrayList<>();
         // System.out.println("Available Days:");
 
         // Create a calendar instance for iteration, starting 3 days from today
-        Calendar baseCalendar = Calendar.getInstance();
-        Calendar iterationCalendar = (Calendar) baseCalendar.clone();
+        Calendar iterationCalendar = Calendar.getInstance();
         iterationCalendar.add(Calendar.DAY_OF_MONTH, 3); // Start 3 days ahead
 
         // Loop for the next 15 days
@@ -66,14 +73,16 @@ public Room(int capacity) {
 
             // Check against unavailable dates
             for (Reservations r : unavalabledates) {
-                // Compare only the date part, ignoring time
-                String reservationDateOnly = dateFormat.format(r.getReservationTime().getTime());
-                if (formattedDateOnly.equals(reservationDateOnly)) {
-                    if (!r.getDayAvailability()) {
-                        isMorningAvailable = false;
-                    }
-                    if (!r.getNightAvailability()) {
-                        isNightAvailable = false;
+                if (r != null && r.getReservationTime() != null) {
+                    // Compare only the date part, ignoring time
+                    String reservationDateOnly = dateFormat.format(r.getReservationTime().getTime());
+                    if (formattedDateOnly.equals(reservationDateOnly)) {
+                        if (!r.getDayAvailability()) {
+                            isMorningAvailable = false;
+                        }
+                        if (!r.getNightAvailability()) {
+                            isNightAvailable = false;
+                        }
                     }
                 }
             }
@@ -91,7 +100,8 @@ public Room(int capacity) {
             iterationCalendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        return availableDatesList.toArray(new String[0][0]);
+        String[][] availableDatesArray = new String[availableDatesList.size()][2];
+        return availableDatesList.toArray(availableDatesArray);
     }
 
     public String chooseAvailableTime() {
