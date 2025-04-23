@@ -41,7 +41,12 @@ public class App {
     static  Event event2 = new Event("John's Birthday", Birthday , 500, calendar2, room3, organizer2);
     static Event event3 = new Event("Siemens Conference", Conference , 700, calendar3, room2, organizer3);
 
-   
+    static {
+        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3));
+        Database.events.addAll(Arrays.asList(event1, event2, event3));
+        Database.rooms.addAll(Arrays.asList(room1, room2, room3));
+        Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
+    }
     
    
 
@@ -54,15 +59,6 @@ public class App {
     }
 
     public static void main(String[] args){
-
-
-
-        
-        Database.people.addAll(Arrays.asList(attendee1,attendee2, attendee3, organizer1, organizer2, organizer3));
-        Database.events.addAll(Arrays.asList(event1, event2, event3));
-        Database.rooms.addAll(Arrays.asList(room1, room2, room3));
-        Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
-        
 
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
