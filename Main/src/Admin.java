@@ -1,3 +1,7 @@
+
+package com.mycompany.app;
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -216,7 +220,7 @@ public class Admin extends Person implements Employee<Categories>{
     private void categorySelection(String mode){
         int l = 0;
         for(Categories c : Database.categories){
-            System.out.println(l + " " + c.getName());
+            System.out.println(l + " - " + c.getName());
             l++;
         }
         do{
@@ -225,8 +229,7 @@ public class Admin extends Person implements Employee<Categories>{
                     int k = scanner.nextInt();
                         if(k < l && k >= 0 ){
                             switch (mode) {
-                                case "read" -> {
-                                    this.read(Database.categories.get(k));}
+                                case "read" -> this.read(Database.categories.get(k));
                                 case "update" -> this.update(Database.categories.get(k));
                                 case "delete" -> this.delete(Database.categories.get(k));
                             }
