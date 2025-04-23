@@ -1,3 +1,4 @@
+package com.mycompany.app;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -89,6 +90,8 @@ public abstract class Person {
     protected Calendar inputDate () {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("please enter a day with the format (dd/MM/yyyy)");
+        System.out.println("Note that you can only regester dates that are 3 days from now and no futhur than 18 days");
+        System.out.println("I.E. if today is 23 of Apr. you can pick days from 26 Apr. up till 5 of May");
         while (true) {
            // input.nextLine();
             String date = input.nextLine();
