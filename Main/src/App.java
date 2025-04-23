@@ -15,9 +15,9 @@ public class App {
     static Calendar calendar2 = Calendar.getInstance();
     static Calendar calendar3 = Calendar.getInstance();
     static {
-        calendar1.set(2025, Calendar.JULY, 4, 8, 0, 0);
-        calendar2.set(2025, Calendar.AUGUST, 15, 8, 0, 0);
-        calendar3.set(2025, Calendar.SEPTEMBER, 27, 8, 0, 0);
+        calendar1.set(2025, Calendar.JULY, 4);
+        calendar2.set(2025, Calendar.AUGUST, 15);
+        calendar3.set(2025, Calendar.SEPTEMBER, 27);
     }
 
 
