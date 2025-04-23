@@ -1,3 +1,5 @@
+package com.mycompany.app;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -5,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 
 public class Organizer extends Person implements Employee<Event> {  
 
@@ -120,18 +123,17 @@ public class Organizer extends Person implements Employee<Event> {
     
     @Override
     public void delete(Event e){
-        for (var r :e.getRoom().getUnavailableDates()){
-        if(r.getBelonging().equals(e)){
-        int i = e.getRoom().getUnavailableDates().indexOf(r);
-        e.getRoom().getUnavailableDates().remove(i);
-        }
-        }
         
+    Iterator<Reservations> iterator = e.getRoom().getUnavailableDates().iterator();
+    while (iterator.hasNext()) {
+        Reservations r = iterator.next();
+        if (r.getBelonging().equals(e)) {
+            iterator.remove(); 
+        }
+    }
         int index;
         index = Database.events.indexOf(e);
         Database.events.remove(index);
-        int pIndex;
-        pIndex = mine.indexOf(e);
         mine.remove(e);
     }
     
