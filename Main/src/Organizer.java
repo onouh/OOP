@@ -103,7 +103,9 @@ public class Organizer extends Person implements Employee<Event> {
                 cal.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth());
                 Reservations res = new Reservations();
                 this.wallet.pay(this, myRoom);
-                Database.events.add(new Event(name,myCat,price,cal,myRoom,this,State));    
+                Event eve=new Event(name,myCat,price,cal,myRoom,this,State);
+                Database.events.add(eve);    
+                mine.add(eve);
                 System.out.println("Event created successfully");
                 break; 
             } catch (Exception e) {
@@ -120,9 +122,19 @@ public class Organizer extends Person implements Employee<Event> {
     
     @Override
     public void delete(Event e){
+        for (var r :e.getRoom().getUnavailableDates()){
+        if(r.getBelonging().equals(e)){
+        int i = e.getRoom().getUnavailableDates().indexOf(r);
+        e.getRoom().getUnavailableDates().remove(i);
+        }
+        }
+        
         int index;
         index = Database.events.indexOf(e);
         Database.events.remove(index);
+        int pIndex;
+        pIndex = mine.indexOf(e);
+        mine.remove(e);
     }
     
     @Override
@@ -163,25 +175,31 @@ public class Organizer extends Person implements Employee<Event> {
         Instant instant = cal.toInstant();
         LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
        String formattedDate = date.format(format);
-        for(Room r : Database.rooms){
-            boolean AV = false;
+        
+       for(Room r : Database.rooms){
+        String [][] avM = r.getAvailableRooms();
+           boolean AV = false;
             for(int i = 0; i<15; i++ ){
-
+                int indStartA= (avM[i][0].indexOf('-')+2);
+                int indStartb= (avM[i][1].indexOf('-')+2);
+               
+                String StateA = avM[i][0].substring(indStartA,avM[i][0].length());
+                String StateB = avM[i][1].substring(indStartb,avM[i][1].length());
                 int beginIndex = 0, endIndex = 10;
-                String [][] avM = r.getAvailableRooms();
-                if(!avM[i][0].equals("")){
-                String theDateA = avM[i][0].substring(beginIndex, endIndex);
-                if(theDateA.equals(formattedDate)){
-                AV = true;
-                break;
+
+                if(!StateA.equals("occupied")){
+                    String theDateA = avM[i][0].substring(beginIndex, endIndex);
+                    if(theDateA.equals(formattedDate)){
+                    AV = true;
+                    break;
                 }
                 }
-                if(!avM[i][1].equals("")){
-                String theDateB = avM[i][1].substring(beginIndex, endIndex);
-                if(theDateB.equals(formattedDate)){
-                AV = true;
-                break;
-                }
+                if(!StateB.equals("occupied")){
+                    String theDateB = avM[i][1].substring(beginIndex, endIndex);
+                    if(theDateB.equals(formattedDate)){
+                    AV = true;
+                    break;
+                    }
                 }
 
             }
@@ -247,8 +265,9 @@ public class Organizer extends Person implements Employee<Event> {
                 case "4" -> {     
                     System.out.println("Are you sure you want to log out?(y/n)");
                     // input.nextLine();
-                    String choice = input.nextLine();
+                    
                     while(true){
+                    String choice = input.nextLine();
                     switch (choice.toLowerCase()) {
                     case "y" -> {
                         App.main(null);

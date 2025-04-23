@@ -30,7 +30,7 @@ public class Event implements Cloneable{
         this.room = room;
         this.madeBy = madeBy;
         Reservations res = new Reservations();
-        res.reserve(room, eventTime, DnN);
+        res.reserve(room, eventTime, DnN,this);
     }
 
     public Organizer getMadeBy() {

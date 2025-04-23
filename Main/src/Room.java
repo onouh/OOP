@@ -81,13 +81,14 @@ public Room(int capacity) {
             }
 
             // Add available slots for the current day to the list
-            String morningSlot = isMorningAvailable ? theDate + " - Morning" : "man";
-            String nightSlot = isNightAvailable ? theDate + " - Night" : "man";
-
+            String morningSlot = isMorningAvailable ? theDate + " - Morning" : theDate + " - occupied" ;
+            String nightSlot = isNightAvailable ? theDate + " - Night" : theDate + " - occupied"  ;
+            
+            
             // Only add the row if at least one slot is available for that day
-            if (isMorningAvailable || isNightAvailable) {
-                availableDatesList.add(new String[]{morningSlot, nightSlot});
-            }
+
+            availableDatesList.add(new String[]{morningSlot, nightSlot});
+           
 
             // Move to the next day
             iterationCalendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -124,10 +125,11 @@ public Room(int capacity) {
             }
         }
 
-        System.out.println("Please input the number of the time slot to reserve (or 0 to cancel):");
-        String choice;
-        int choiceInt;
+        
         do {
+            System.out.println("Please input the number of the time slot to reserve (or 0 to cancel):");
+            String choice;
+            int choiceInt;
             choice = input.nextLine();
             // Input validation: Check if it's a number
             if (!choice.matches("\\d+")) {
@@ -145,8 +147,12 @@ public Room(int capacity) {
 
             // Validate if the choice number is within the range of displayed options
             if (choiceInt > 0 && choiceInt <= optionsList.size()) {
-                // Return the selected time slot using the index (choiceInt - 1)
+                if(! optionsList.get(choiceInt - 1).substring(13, optionsList.get(choiceInt - 1).length()).equals("occupied")){
                 return optionsList.get(choiceInt - 1);
+                }
+                else{
+                    System.out.println("the chosen room must not be occupied");
+                }
             } else {
                 System.out.println("Please choose a number corresponding to one of the available options.");
             }

@@ -1,3 +1,7 @@
+package com.mycompany.app;
+
+
+
 public class Wallet {
 
     private double balance;
@@ -39,8 +43,7 @@ public class Wallet {
                 System.out.println("Insufficient balance");
                 return false;
             } else{
-                balance -= o.getWallet().getBalance();
-                o.getWallet().setBalance(o.getWallet().getBalance() - room.getRoomCost());
+                o.getWallet().setBalance((o.getWallet().getBalance() - room.getRoomCost()));
                 return true;
             }
         }

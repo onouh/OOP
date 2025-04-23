@@ -1,7 +1,12 @@
+
+package com.mycompany.app;
+
+
 import java.util.Calendar;
 import java.util.Scanner;
 
 public class Reservations {
+    private Event belongsTo;
     private Calendar Reservationtime=Calendar.getInstance();
     private boolean nightAvailable ;
     private boolean dayAvailable ;
@@ -12,11 +17,15 @@ public class Reservations {
         this.dayAvailable = true;
     }
     
-    public void reserve(Room room,Calendar reserveTime,String DnN){
+    public Event getBelonging(){
+    return this.belongsTo;
+    }
+    
+    public void reserve(Room room,Calendar reserveTime,String DnN,Event e){
+        this.belongsTo = e;
         this.Reservationtime = reserveTime;
         boolean continueInput =true;
         do{
-            input.nextLine();
                 switch (DnN) {
                     case "Morning" -> {
                         this.dayAvailable = false;
