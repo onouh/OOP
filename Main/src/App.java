@@ -155,8 +155,7 @@ public class App {
                         while (!validInput) {
                             try {
                                 System.out.println("Enter Your balance: ");
-                                clearInputBuffer(input);
-                                balance = input.nextInt();
+                                balance = input.nextDouble();
                                 clearInputBuffer(input);
                                 if(balance >= 0) validInput = true;
                                 else System.out.println("Balance cannot be negative. Please enter a valid number.");
