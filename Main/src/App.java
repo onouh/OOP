@@ -130,8 +130,17 @@ public class App {
                             }
                         }
                         System.out.println("Enter your Password: ");
-                        clearInputBuffer(input);
-                        String password = input.nextLine();
+                        String password;
+                        while(true){
+                            password = input.nextLine();
+                            if(password.isBlank()){
+                                System.out.println("invalid input. Try again");
+                                continue;
+                            }
+                            break;
+                        }
+
+
 
                         double balance = 0;
                         boolean validInput = false;
