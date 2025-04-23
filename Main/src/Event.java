@@ -92,7 +92,7 @@ public class Event implements Cloneable{
     public String toString() {
         return "Event Name :" + getName() + "\nEvent Category :" + getCategoryname()
     + "\nEvent Room :" + this.room.getRoomNo()+ "\nTicket Price :" + getTicketPrice() + 
-      "\nEvent Time :" +this.eventTime.getTime();
+      "\nEvent Time :" +this.eventTime.getTime() + "\n";
     }
     
     

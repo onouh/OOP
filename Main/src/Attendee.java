@@ -4,6 +4,7 @@ public class Attendee extends Person {
     private final String address;
     private final Gender gender;
     private final ArrayList<String> interests;
+    private ArrayList<Event> myevents = new ArrayList<Event>();
     private Wallet wallet;
     boolean buysuccess = false;
     boolean logout = false;
@@ -35,6 +36,14 @@ public class Attendee extends Person {
         this.wallet = wallet;
     }
 
+    public ArrayList<Event> getMyevents() {
+        return myevents;
+    }
+
+    public void setMyevents(ArrayList<Event> myevents) {
+        this.myevents = myevents;
+    }
+
     public void buy(Event event){
         if (this.wallet.getBalance() >= event.getTicketPrice()){
             if(event.getAttendeeNum() < event.getRoom().getCapacity()){
@@ -42,6 +51,7 @@ public class Attendee extends Person {
                 event.setAttendeeNum(event.getAttendeeNum() + 1);
                 System.out.println("Ticket bought successfully");
                 event.getAttendee().add(this);
+                myevents.add(event);
                 buysuccess = true;
             }
             else{
@@ -72,7 +82,8 @@ public class Attendee extends Person {
                 System.out.println("1- View Profile");
                 System.out.println("2- View Wallet Balance");
                 System.out.println("3- Buy a Ticket");
-                System.out.println("4- Log Out");
+                System.out.println("4- Show my Tickets");
+                System.out.println("5- Log Out");
                 // input.nextLine();
                 String choice = input.nextLine();
 
@@ -92,9 +103,19 @@ public class Attendee extends Person {
                             input.nextLine();
                             this.buy(Database.events.get(eventNum));
                         }
+                        buysuccess = false;
+                    }
+                    case "4" ->{
+
+                        for(int i =0; i < myevents.size() ; i++){
+                            System.out.print(i+1 + "- ");
+                            System.out.println(myevents.get(i).toString());
+                        }
+
+
                     }
 
-                    case "4" -> {
+                    case "5" -> {
                         System.out.println("Logging out...");
                         this.loggedIn = false;
                         System.out.println("You have logged out successfully.");

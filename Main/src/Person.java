@@ -56,6 +56,7 @@ public abstract class Person {
 
             System.out.println("Please write your username");
             String username = input.nextLine().trim();
+            if(username.equalsIgnoreCase("exit")) App.main(null);
             Person foundUser = null;
             for (Person p : Database.people) {
                 if (username.equals(p.username)) {
@@ -65,6 +66,7 @@ public abstract class Person {
             }
             if (foundUser == null) {
                 System.out.println("Username not found. Try again.");
+                System.out.println("If you would like to create an account, Enter exit.");
                 continue;
             }
 
