@@ -38,7 +38,6 @@ public class Organizer extends Person implements Employee<Event> {
         }
         System.out.println("Please Choose the category");
         while(true){
-            input.nextLine();
             String choice = input.nextLine();
             if ((Integer.parseInt(choice) > Database.categories.size()) || Integer.parseInt(choice) < 0){
                 System.out.println("Please choose something in range");
@@ -48,10 +47,24 @@ public class Organizer extends Person implements Employee<Event> {
             break;
         }
         System.out.println("Please Enter the name of the event");
-        input.nextLine();
+        // input.nextLine();
         String name = input.nextLine();
-        input.nextLine();
-        int price = Integer.parseInt(input.nextLine());
+        // input.nextLine();
+        int price;
+        do { 
+            try {
+                price = Integer.parseInt(input.nextLine());
+                if (price <= 0) {
+                    throw new InputMismatchException("Price must be a positive integer.");
+                } else {
+                    break;
+                }
+            } catch (NumberFormatException | InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number for price.");
+                // e.printStackTrace();
+            }
+            
+        } while (true);
         int t = 1;
         for(Room r: Database.rooms){
             System.out.print(t + "-");
@@ -79,13 +92,24 @@ public class Organizer extends Person implements Employee<Event> {
         String myTime = myRoom.chooseAvailableTime();
         String calvalue = myTime.substring(0,11);
         String State = myTime.substring(14,myTime.length());
-        LocalDate date = LocalDate.parse(calvalue, format);
-        Calendar cal = Calendar.getInstance();
-        cal.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth());
-        Reservations res = new Reservations();
-        res.reserve(myRoom, cal, State);
-        this.wallet.pay(this, myRoom);
-        Database.events.add(new Event(name,myCat,price,cal,myRoom,this));    
+        LocalDate date;
+
+        do { 
+            try {
+                date = LocalDate.parse(calvalue, format);
+                Calendar cal = Calendar.getInstance();
+                cal.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth());
+                Reservations res = new Reservations();
+                res.reserve(myRoom, cal, State);
+                this.wallet.pay(this, myRoom);
+                Database.events.add(new Event(name,myCat,price,cal,myRoom,this));    
+                System.out.println("Event created successfully");
+                break; 
+            } catch (Exception e) {
+                System.out.println("please enter the day in the correct format DD/MM/YYYY it is very strict with the format");
+                continue;
+            }
+        } while (true); 
     }
     
     @Override

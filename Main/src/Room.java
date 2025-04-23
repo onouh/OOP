@@ -131,7 +131,12 @@ public Room(int capacity) {
                 System.out.println("Invalid input. Please enter a numeric value.");
                 continue;
             }
-            choiceInt = Integer.parseInt(choice);
+            try {
+                choiceInt = Integer.parseInt(choice);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                continue; // Continue to the next iteration of the loop
+            }
             // Now that we have a valid number, proceed to check if it's 0 or within the valid range
 
             // Handle cancellation
