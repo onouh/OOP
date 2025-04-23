@@ -1,3 +1,6 @@
+package com.mycompany.app;
+
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -63,13 +66,16 @@ public class App {
     }
 
     public static void main(String[] args){
+        
         System.out.println("Welcome to The EventHub!\n");
         System.out.println("1- Login");
         System.out.println("2- Signup");
+        System.out.println("3- close program");
         while(true){
             String choice = input.nextLine();
             switch(choice){
                 case "1" -> {
+                        
                     Person.LogIn();
                     break;
                 }
@@ -105,15 +111,7 @@ public class App {
                         }
 
                         System.out.println("Enter your Address: ");
-                        String address;
-                        while(true){
-                            address = input.nextLine();
-                            if(address.isBlank()){
-                            System.out.println("invalid input. Try again");
-                            continue;
-                            }
-                            break;
-                        }
+                        String address = input.nextLine();
 
                         while(true){
 
@@ -137,17 +135,7 @@ public class App {
                             }
                         }
                         System.out.println("Enter your Password: ");
-                        String password;
-                        while(true){
-                            password = input.nextLine();
-                            if(password.isBlank()){
-                                System.out.println("invalid input. Try again");
-                                continue;
-                            }
-                            break;
-                        }
-
-
+                        String password = input.nextLine();
 
                         double balance = 0;
                         boolean validInput = false;
@@ -155,20 +143,18 @@ public class App {
                         while (!validInput) {
                             try {
                                 System.out.println("Enter Your balance: ");
-                                balance = input.nextDouble();
-                                clearInputBuffer(input);
+                                balance = input.nextInt();
+                                input.nextLine();
                                 if(balance >= 0) validInput = true;
                                 else System.out.println("Balance cannot be negative. Please enter a valid number.");
                             } catch (InputMismatchException e) {
                                 System.out.println("Invalid input. Please enter a valid number.");
-                                input.nextLine();
                             }
                         }
                         Wallet wallet = new Wallet(balance);
                         ArrayList<String> interests = new ArrayList<>(3);
                         System.out.println("Enter 3 interests that reflects your personality: ");
-                        // clearInputBuffer(input);
-                        // input.nextLine();
+     
                         for(int j = 0; j < 3; j++) interests.add(input.nextLine());
                         Database.people.add(new Attendee(wallet, gender, address, interests ,username, password, day, month, year ));
                         for(int k=0; k < Database.people.size();k++){
@@ -177,12 +163,13 @@ public class App {
                             }
                         }
                     }
-                // }
+                case "3" -> {
+                    System.exit(0);
+                }
                 default -> {
                     System.out.println("Invalid Input. Try again.");
                 }
             }
-            // input.close();
         }
     }
     public static Date parseDate(String dateStr, String format) throws ParseException {
