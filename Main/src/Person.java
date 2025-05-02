@@ -1,10 +1,10 @@
+package com.example.app_gui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.VBox;
@@ -15,8 +15,7 @@ public abstract class Person {
     private String password;
     private final Calendar dateOfBirth = Calendar.getInstance() ;
     protected boolean loggedIn;
-    Scanner input = new Scanner(System.in);
-
+    
     Person(){
     }
     
@@ -49,7 +48,7 @@ public abstract class Person {
         }
     }
 
-    public static final String LogIn(String username, String password, VBox pwUsername, VBox pwPassword){
+    public static final String LogIn(String username, String password,VBox pwUsername,VBox pwPassword){
         
         while(true) {
             Person foundUser = null;
@@ -126,7 +125,7 @@ public abstract class Person {
          validInput = true;
         }
         else{
-        Label balanceLogic = new Label("please enter a positive balance value");
+        pwBalance.getChildren().add(new Label("please enter a positive balance value"));
         valid = false;
         }
 
@@ -145,37 +144,15 @@ public abstract class Person {
         return null;
     }
     
-    
-    protected Calendar inputDate () {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        System.out.println("please enter a day with the format (dd/MM/yyyy)");
-        System.out.println("Note that you can only regester dates that are 3 days from now and no futhur than 18 days");
-        System.out.println("I.E. if today is 23 of Apr. you can pick days from 26 Apr. up till 5 of May");
-        while (true) {
-           // input.nextLine();
-            String date = input.nextLine();
-            try {
-                LocalDate dateInst = LocalDate.parse(date, format);
-                Calendar cal = Calendar.getInstance();
-                cal.set(
-                        dateInst.getYear(),
-                        dateInst.getMonthValue() - 1,
-                        dateInst.getDayOfMonth()
-                );
-                return cal;
-            } catch (DateTimeParseException ex) {
-                System.out.println("please enter the day in the correct format dd/MM/YYYY it is very strict with the format");
-            }
-        }
-    }
+   
 
-        protected static void PasswordCheck(Person p, String password, VBox pwPasswod){
-            if (password.equals(p.password)){
-                p.loggedIn = true;
-            }else{
-            pwPasswod.getChildren().add(new Label("Please input the correct password"));
-        } 
-    }
+protected static void PasswordCheck(Person p, String password, VBox pwPasswod){
+    if (password.equals(p.password)){
+        p.loggedIn = true;
+    }else{
+    pwPasswod.getChildren().add(new Label("Please input the correct password"));
+    }   
+}
     
     public static boolean Checkusername(String username){
 
