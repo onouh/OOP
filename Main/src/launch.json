@@ -5,7 +5,7 @@
             "type": "java",
             "name": "Launch JavaFX App",
             "request": "launch",
-            "mainClass": "App", // Replace with your main class name
+            "mainClass": "App",
             "vmArgs": "--module-path /Users/ONouh/Downloads/GitHub/javafx-sdk-24.0.1 --add-modules javafx.controls,javafx.fxml"
         }
     ]
