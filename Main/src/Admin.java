@@ -1,7 +1,15 @@
+
+package com.example.app_gui;
+
+
+import static com.example.app_gui.Room.input;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+
 
 public class Admin extends Person implements Employee<Categories>{
     private final Calendar workBegin = Calendar.getInstance();
@@ -32,60 +40,49 @@ public class Admin extends Person implements Employee<Categories>{
     }
     
     
-    public void addRoom() {
-        do { 
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("Enter the capacity of the room:");
-                int capacity = scanner.nextInt();
-                try {
-                    if (capacity <= 0) {
-                        throw new InputMismatchException("Capacity must be a positive integer.");
-                    } else {
-                        Database.rooms.add(new Room(capacity));
-                        System.out.println("Room added successfully.");
-                        break;
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a positive integer for capacity.");
-                    return;
-                }
-              
-        } while (true);
+    public boolean addRoom(String capacity,VBox pwCapacity,VBox theButtonThatCreatesTheRoom) {
+        boolean valid;
+        if(capacity.matches("\\d+") && (Integer.valueOf(capacity)>0) ){ 
+          valid = true;
+        }
+        else{
+        pwCapacity.getChildren().add(new Label("please enter a positive capacity value"));
+        valid = false;
+        }  
+        if (valid){
+            Database.rooms.add(new Room(Integer.valueOf(capacity)));
+            theButtonThatCreatesTheRoom.getChildren().add(pwCapacity);
+            return true;
+        }else{
+            return false;
+        }
     }
     
     @Override
-    public void create(){
-        System.out.println("please enter the new Category name");
-        Scanner scanner = new Scanner(System.in);
-            Categories o = new Categories(scanner.nextLine());
-            if (!o.getName().equals("<><><>")){
-                Database.categories.add(o);
-            }
-        
+    public void create(String categoryName, VBox pwCategoryName){
+        Categories o = new Categories(categoryName,pwCategoryName);
+        if (!o.getName().equals("<><><>")){
+            Database.categories.add(o);
+        }
     }
 
     @Override
-    public void read(Categories o){
+    public String read(Categories o){
         int i =Database.categories.indexOf(o);
-        System.out.println(Database.categories.get(i).toString());
+        return Database.categories.get(i).toString();
     }
     
     @Override 
-    public void update(Categories o){
-        System.out.println("Please input the new category name");
+    public void update(Categories o,String newName, VBox theInputOfTheNewName){
         for(Categories c : Database.categories){
             if(o == c){
-                Scanner scanner = new Scanner(System.in); 
-                do{
-                String newname = scanner.nextLine();
-                if(!newname.equals("<><><>"))
-                {
-                o.setName(newname);
+                if(!newName.equals("<><><>")){
+                o.setName(newName);
                 break;
                 }
-                else{}
-                }while(true);
-                        
+                else{
+                theInputOfTheNewName.getChildren().add(new Label("the new category name exists please try again"));
+                }     
             }
         }
     }
@@ -125,7 +122,6 @@ public class Admin extends Person implements Employee<Categories>{
     return adminInfo;
     }
     
-    @Override
     public void homeScreen(){
     ArrayList<String> attendees = new ArrayList<>();
     ArrayList<String> organizers = new ArrayList<>();
@@ -150,94 +146,13 @@ public class Admin extends Person implements Employee<Categories>{
 
         System.out.printf("%-20s %-20s %-20s%n", attendee, organizer, event);
     }
-        while(true){
-            System.out.println("What would you like to do?");
-            System.out.println("1-View own profile");
-            System.out.println("2-show(rooms events and attendees)");
-            System.out.println("3-Add a room");
-            System.out.println("4-create and manage categories");
-            System.out.println("5-Logout");
-            String i;
-            Scanner scanner = new Scanner(System.in); 
-                i = scanner.nextLine();
-                    switch (i) {
-                        case "1" -> System.out.println(this.toString());
-                        case "2" -> this.show();
-                        case "3" -> this.addRoom();
-                        case "4" -> {
-                            System.out.println("What do you want to do?");
-                            System.out.println("1-create category");
-                            System.out.println("2-read category");
-                            System.out.println("3-update category");
-                            System.out.println("4-delete category");
-                            String j = input.nextLine();
-                            switch (j) {
-                                case "1" -> this.create();
-                                case "2" -> {
-                                    System.out.println("Which category do you want to read");
-                                    this.categorySelection("read");
-                                }
-                                case "3" -> {
-                                    System.out.println("Which category do you want to update");
-                                    this.categorySelection("update");
-                                }
-                                case "4" -> {
-                                    System.out.println("Which category do you want to delete");
-                                    this.categorySelection("delete");
-                                }
-                                default -> System.out.println("please enter a valid option");
-                            }
-                        }
-                        case "5" ->{
-                    System.out.println("Are you sure you want to log out?(y/n)");
-                    String choice = input.nextLine();
-                    while(true){
-                        switch (choice.toLowerCase()) {
-                            case "y" -> {
-                                App.main(null);
-                            }
-                            case "n" -> {
-
-                            }
-                            default -> {
-                                System.out.println("please enter y to refer to yes or n to refer to no");
-                                continue;
-                            }
-                        }
-                        break;
-                    }                
-                        }
-                        default -> System.out.println("please enter one of the options");
-                    }
-            
-        }
-    }  
+    }
     
-    private void categorySelection(String mode){
-        int l = 0;
+    private ArrayList<String> categorySelection(String mode){
+        ArrayList<String> categoriesListForComboBox = new ArrayList<>(1000);
         for(Categories c : Database.categories){
-            System.out.println(l + " - " + c.getName());
-            l++;
+            categoriesListForComboBox.add(c.getName());
         }
-        do{
-            try{
-                Scanner scanner = new Scanner(System.in); 
-                    int k = scanner.nextInt();
-                        if(k < l && k >= 0 ){
-                            switch (mode) {
-                                case "read" -> this.read(Database.categories.get(k));
-                                case "update" -> this.update(Database.categories.get(k));
-                                case "delete" -> this.delete(Database.categories.get(k));
-                            }
-                            break;
-                        }else{
-                            System.out.println("please enter a number within the valid range");
-                        }
-                
-                break;
-            }catch(InputMismatchException ex){
-                System.out.println("please enter a number in range");
-            }
-        }while(true);
+        return categoriesListForComboBox;
     }
 }

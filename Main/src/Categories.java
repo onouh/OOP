@@ -1,3 +1,6 @@
+
+package com.example.app_gui;
+
 import java.util.Scanner;
 
 public class Categories {
@@ -27,9 +30,8 @@ public class Categories {
             break; // username is available!
         }
 
-        System.out.println("Username already taken. Please enter a new username:");
+        System.out.println("Category name already taken. Please enter a new Category name:");
         System.out.println("if you no longer want to create category enter 0");
-        // input.nextLine();
         name = input.nextLine(); // read new category name from user
         if(name.equals("0")) {
             name = "<><><>";
@@ -43,9 +45,13 @@ public class Categories {
         return name;
     }
     
+    public String toString(){
+    return this.name;
+    }
+    
     public void setName(String name){
       this.name = name;
     }
-    
+
   
 }

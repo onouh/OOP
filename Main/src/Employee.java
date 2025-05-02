@@ -1,3 +1,6 @@
+
+package com.example.app_gui;
+
 public interface Employee <T> {
         public void create();
         public void read(T o);
