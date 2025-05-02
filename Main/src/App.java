@@ -52,7 +52,7 @@ public class App {
         Database.categories.addAll(Arrays.asList(Wedding, Birthday, Conference));
     }
     
-   
+    
 
 
 
