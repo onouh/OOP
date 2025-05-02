@@ -1,10 +1,10 @@
-package com.example.app_gui;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Scanner;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.VBox;
@@ -15,7 +15,8 @@ public abstract class Person {
     private String password;
     private final Calendar dateOfBirth = Calendar.getInstance() ;
     protected boolean loggedIn;
-    
+    Scanner input = new Scanner(System.in);
+
     Person(){
     }
     
@@ -48,7 +49,7 @@ public abstract class Person {
         }
     }
 
-    public static final String LogIn(String username, String password,VBox pwUsername,VBox pwPassword){
+    public static final String LogIn(String username, String password, VBox pwUsername, VBox pwPassword){
         
         while(true) {
             Person foundUser = null;
