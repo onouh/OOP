@@ -1,7 +1,0 @@
-{
-    "java.project.sourcePaths": [
-        "src",
-        "Main/src",
-        "Frontend/src/main/java/GUI/UX"
-    ]
-}
