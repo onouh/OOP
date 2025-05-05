@@ -1,6 +1,4 @@
 
-package com.example.app_gui;
-
 import java.util.Scanner;
 
 public class Categories {
