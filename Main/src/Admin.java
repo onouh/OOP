@@ -1,7 +1,4 @@
 
-package com.example.app_gui;
-
-
 import static com.example.app_gui.Room.input;
 import java.util.ArrayList;
 import java.util.Calendar;
