@@ -22,7 +22,7 @@ public class AttendeeHscreen extends Application{
     public AttendeeHscreen(Attendee a) {
         this.a = a;
     }
-       @Override
+    @Override
     public void start(Stage stage) {
         String styleBg = "-fx-background-color: #2A363F;";
         String ButStyleUA = "-fx-background-color:#6ED9A0; -fx-text-fill: white;";
@@ -35,7 +35,7 @@ public class AttendeeHscreen extends Application{
         VBox HomePageAT = new VBox();
         StackPane name = new StackPane();
         name.prefHeightProperty().bind(HomePageAT.heightProperty().multiply(0.33));        HomePageAT.setStyle(styleBg);
-        Label Welcome= new Label("Hello" + a.getUsername());
+        Label Welcome= new Label("Hello");
         Welcome.setStyle(textHeader);
         name.getChildren().add(Welcome);
         
@@ -58,8 +58,8 @@ public class AttendeeHscreen extends Application{
         l2.startXProperty().bind(theLines.widthProperty());
         l2.endXProperty().bind(theLines.widthProperty().multiply(0.7));
 
-        l2.startYProperty().bind(theLines.heightProperty().multiply(0.2));
-        l2.endYProperty().bind(theLines.heightProperty().multiply(0.2));
+        l2.startYProperty().bind(theLines.heightProperty().multiply(0.3));
+        l2.endYProperty().bind(theLines.heightProperty().multiply(0.3));
         theLines.getChildren().addAll(l1,l2);
        
 
@@ -68,7 +68,10 @@ public class AttendeeHscreen extends Application{
         Buttons.prefHeightProperty().bind(HomePageAT.heightProperty().multiply(0.20));
         Buttons.setVgap(30);
         Buttons.setHgap(30);
-        
+        HomePageAT.widthProperty().addListener((obs,oldPad,newPad)->{
+            double ButtonMar = HomePageAT.getWidth()*0.045;
+            VBox.setMargin(Buttons, new Insets(0,ButtonMar,0,ButtonMar));
+        });
         
         ColumnConstraints colgrid1 = new ColumnConstraints();
         colgrid1.setPercentWidth(33); 
@@ -105,6 +108,7 @@ public class AttendeeHscreen extends Application{
         Buttons.add(but2, 1 ,0);
         Buttons.add(but3, 2 ,0);
         
+
         HomePageAT.getChildren().addAll(name,theLines,Buttons);
         Scene root = new Scene(HomePageAT,600,400);
         stage.setScene(root);
