@@ -1,16 +1,16 @@
-package com.example.eventhub;
-
-import javafx.scene.layout.VBox;
+package com.example.app_gui;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.InputMismatchException;
+import java.util.Iterator;
 
-public class Organizer extends Person implements Employee<Event> {
+public class Organizer extends Person{ 
 
-    static Scanner input = new Scanner(System.in);
 
     private Wallet wallet;
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -30,6 +30,7 @@ public class Organizer extends Person implements Employee<Event> {
         return (wallet != null) ? wallet.getBalance() : 0;
     }
 
+    
     public void create(){
         Categories myCat ;
         Room myRoom;
@@ -41,7 +42,7 @@ public class Organizer extends Person implements Employee<Event> {
         }
         System.out.println("Please Choose the category");
         while(true){
-            String choice = input.nextLine();
+            String choice = "test";
             if ((Integer.parseInt(choice) > Database.categories.size()) || Integer.parseInt(choice) < 0){
                 System.out.println("Please choose something in range");
                 continue;
@@ -51,13 +52,13 @@ public class Organizer extends Person implements Employee<Event> {
         }
         System.out.println("Please Enter the name of the event");
         // input.nextLine();
-        String name = input.nextLine();
+        String name = "test";
         // input.nextLine();
         System.out.println("please enter the price");
         int price;
         do { 
             try {
-                price = Integer.parseInt(input.nextLine());
+                price = Integer.parseInt("test");
                 if (price <= 0) {
                     throw new InputMismatchException("Price must be a positive integer.");
                 } else {
@@ -77,7 +78,7 @@ public class Organizer extends Person implements Employee<Event> {
         }
         System.out.println("Please Choose a room");
         while(true){
-            String choice = input.nextLine();
+            String choice = "test";
             if ((Integer.parseInt(choice) > Database.rooms.size()) || Integer.parseInt(choice) < 0 ){
                 System.out.println("please choose something in range");
                 continue;
@@ -115,29 +116,13 @@ public class Organizer extends Person implements Employee<Event> {
             }
         } while (true); 
     }
-
-    @Override
-    public void create(String jack, VBox john) {
-
-    }
-
-    @Override
-    public String read(Event o) {
-        return "";
-    }
-
-    /*
-    @Override
+    
+    
     public void read(Event e){
         System.out.println(e.toString());
     }
-    */
-    @Override
-    public void update(Event o, String newValue, VBox theInputOfTheNewValue) {
-
-    }
-
-    @Override
+    
+   
     public void delete(Event e){
         
     Iterator<Reservations> iterator = e.getRoom().getUnavailableDates().iterator();
@@ -152,18 +137,13 @@ public class Organizer extends Person implements Employee<Event> {
         Database.events.remove(index);
         mine.remove(e);
     }
-
-    @Override
-    public void show() {
-
-    }
-
-
+    
+    
     public void update(Event o){
         for(Event e : Database.events){
             if(o == e){
                 // input.nextLine();
-                o.setName(input.nextLine());
+                o.setName("test");
                 break;
             }
         }
@@ -178,8 +158,78 @@ public class Organizer extends Person implements Employee<Event> {
                 '}';
     }
     
+    public void show(){
+        ArrayList<String> attendees = new ArrayList<>(1000); //represents his attnedees
+        ArrayList<String> myEvents = new ArrayList<>(1000);
+        ArrayList<String> AvRooms = new ArrayList<>(1000);
+        for(Event e:Database.events){
+            if(e.getOrganizer().getUsername().equals(this.getUsername())){
+                myEvents.add(e.getName());
+                for (Attendee a:e.getAttendee() ){
+                attendees.add(a.getUsername());
+                }
+            }
+        }
+        Calendar cal = Calendar.getInstance();
+        String formattedDate;
+      while (true){
 
-    @Override
+        Instant instant = cal.toInstant();
+        LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        formattedDate = date.format(format);
+       LocalDate minDate = LocalDate.now().plusDays(3);
+       LocalDate maxDate = LocalDate.now().plusDays(17);
+       if(date.isBefore(minDate)||date.isAfter(maxDate)){
+           System.out.println("the date must be after 2 days from now and before 18 days");
+       }else{
+       break;
+       }
+      }
+       for(Room r : Database.rooms){
+        String [][] avM = r.getAvailableRooms();
+           boolean AV = false;
+            for(int i = 0; i<15; i++ ){
+                int indStartA= (avM[i][0].indexOf('-')+2);
+                int indStartb= (avM[i][1].indexOf('-')+2);
+               
+                String StateA = avM[i][0].substring(indStartA,avM[i][0].length());
+                String StateB = avM[i][1].substring(indStartb,avM[i][1].length());
+                int beginIndex = 0, endIndex = 10;
+
+                if(!StateA.equals("occupied")){
+                    String theDateA = avM[i][0].substring(beginIndex, endIndex);
+                    if(theDateA.equals(cal)){
+                    AV = true;
+                    break;
+                }
+                }
+                if(!StateB.equals("occupied")){
+                    String theDateB = avM[i][1].substring(beginIndex, endIndex);
+                    if(theDateB.equals(formattedDate)){
+                    AV = true;
+                    break;
+                    }
+                }
+
+            }
+            if (AV){
+                AvRooms.add(String.valueOf(r.getRoomNo()));
+            }
+        }
+        
+       
+        int max1 = Math.max(attendees.size(),myEvents.size());
+        int max  = Math.max(AvRooms.size(), max1);
+         System.out.printf("%-20s %-20s %-20s %n", "Free rooms","events","attendees" );
+        for(int i = 0 ; i < max ; i++){
+        
+            String room = (i<AvRooms.size()? AvRooms.get(i) : "");
+            String event = (i<myEvents.size()? myEvents.get(i) : "");
+            String attendee = (i<attendees.size()? attendees.get(i) : "");
+            System.out.printf("%-20s %-20s %-20s %n", "Room no."+room,event,attendee );
+        } 
+    }
+    
     public void homeScreen() {
         for(Event e:Database.events){
             if(e.getOrganizer().getUsername().equals(this.getUsername())){
@@ -193,7 +243,7 @@ public class Organizer extends Person implements Employee<Event> {
             System.out.println("3 - manage and create events");
             System.out.println("4 - log out");
             // input.nextLine();
-            String i = input.nextLine();
+            String i = "1";
             switch (i) {
                 case "1" -> System.out.println(this.toString());
                 case "2" -> this.show();
@@ -204,7 +254,7 @@ public class Organizer extends Person implements Employee<Event> {
                     System.out.println("3-update event name");
                     System.out.println("4-delete event");
                     // input.nextLine();
-                    String j = input.nextLine();
+                    String j = "1";
                     switch (j) {
                         case "1" -> this.create();
                         case "2" -> {
@@ -227,9 +277,10 @@ public class Organizer extends Person implements Employee<Event> {
                     // input.nextLine();
                     
                     while(true){
-                    String choice = input.nextLine();
+                    String choice = "y";
                     switch (choice.toLowerCase()) {
                     case "y" -> {
+                        App.main(null);
                     }
                     case "n" -> {
                     
@@ -260,8 +311,8 @@ public class Organizer extends Person implements Employee<Event> {
         }
         do{
             try{
-                int k = input.nextInt(); 
-                input.nextLine();              
+                int k = 5; 
+      
                     if(k < l && k >= 0 ){
                         switch (mode) {
                             case "read" -> this.read(mine.get(k));

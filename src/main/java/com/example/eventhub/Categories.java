@@ -1,6 +1,9 @@
-package com.example.eventhub;
+
+package com.example.app_gui;
 
 import java.util.Scanner;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class Categories {
     
@@ -10,8 +13,8 @@ public class Categories {
     public Categories() {
     }
     
-    public Categories(String name){
-       while (true) {
+    public Categories(String name,VBox pwCategoryName){
+  
         boolean taken = false;
         
         if(name.equals("<><><>")){
@@ -26,18 +29,11 @@ public class Categories {
         }
 
         if (!taken) {
-            break; // username is available!
+            this.name = name; 
+        }else{
+            pwCategoryName.getChildren().add(new Label("Category name already in use"));
+            this.name = "<><><>";
         }
-
-        System.out.println("Category name already taken. Please enter a new Category name:");
-        System.out.println("if you no longer want to create category enter 0");
-        name = input.nextLine(); // read new category name from user
-        if(name.equals("0")) {
-            name = "<><><>";
-            break;}
-    }
-        this.name = name;
-        
     }
 
     public String getName(){

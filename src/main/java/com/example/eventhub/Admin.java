@@ -1,4 +1,7 @@
-package com.example.eventhub;
+package com.example.app_gui;
+
+
+import static com.example.app_gui.Room.input;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
@@ -7,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 
-public class Admin extends Person implements Employee<Categories> {
+public class Admin extends Person implements Employee<Categories>{
     private final Calendar workBegin = Calendar.getInstance();
     private final Calendar workEnd = Calendar.getInstance();
     private String role;
@@ -56,12 +59,10 @@ public class Admin extends Person implements Employee<Categories> {
     
     @Override
     public void create(String categoryName, VBox pwCategoryName){
-        /*
         Categories o = new Categories(categoryName,pwCategoryName);
         if (!o.getName().equals("<><><>")){
             Database.categories.add(o);
         }
-        */
     }
 
     @Override

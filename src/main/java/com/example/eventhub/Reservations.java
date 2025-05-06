@@ -1,4 +1,5 @@
-package com.example.eventhub;
+
+package com.example.app_gui;
 
 import java.util.Calendar;
 import java.util.Scanner;

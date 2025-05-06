@@ -78,7 +78,7 @@ public class AttendeeInfo extends Application {
         BuyBut.setMaxWidth(Double.MAX_VALUE); 
         BuyBut.setStyle(ButStyleA);
         BuyBut.prefWidthProperty().bind(BorPane.widthProperty().multiply(0.175));
-            ButtonsVbox.heightProperty().addListener((obs,oldPad,newPad)->{
+        ButtonsVbox.heightProperty().addListener((obs,oldPad,newPad)->{
             double ButtonMar = ButtonsVbox.getHeight()*0.025;
             VBox.setMargin(BuyBut, new Insets(ButtonMar,0,0,0));
         });

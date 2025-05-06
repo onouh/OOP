@@ -1,4 +1,4 @@
-package com.example.eventhub;
+package com.example.app_gui;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,7 +30,7 @@ public class Event implements Cloneable{
         this.room = room;
         this.madeBy = madeBy;
         Reservations res = new Reservations();
-        res.reserve(room, eventTime, DnN,this);
+        res.reserve(room, eventTime, DnN, this);
     }
 
     public Organizer getMadeBy() {

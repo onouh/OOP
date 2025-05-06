@@ -1,6 +1,9 @@
-package com.example.eventhub;
+package com.example.app_gui;
 
-public class Wallet {
+
+
+
+ public class Wallet {
 
     private double balance;
 
