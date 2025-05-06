@@ -1,7 +1,0 @@
-<dependencies>
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-controls</artifactId>
-        <version>20</version> <!-- Use the latest version -->
-    </dependency>
-</dependencies>
