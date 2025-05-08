@@ -76,6 +76,15 @@ public class AdminShow {
             VBox.setMargin(ShowBut, new Insets(ButtonMar,0,0,0));
         });
         
+        JFXButton createRoom = new JFXButton("Create Room");
+        createRoom.setMaxWidth(Double.MAX_VALUE); 
+        createRoom.setStyle(ButStyleA);
+        createRoom.prefWidthProperty().bind(BorPane.widthProperty().multiply(0.175));
+        ButtonsVbox.heightProperty().addListener((obs,oldPad,newPad)->{
+        double ButtonMar = ButtonsVbox.getHeight()*0.025;
+        VBox.setMargin(createRoom, new Insets(ButtonMar,0,0,0));
+        });
+        
         JFXButton CRUDbut = new JFXButton("CRUD cate.");
         CRUDbut.setMaxWidth(Double.MAX_VALUE); 
         CRUDbut.setStyle(ButStyleA);
@@ -96,7 +105,7 @@ public class AdminShow {
             VBox.setMargin(LogOutBut, new Insets(ButtonMar,0,0,0));
         });
         
-        ButtonsVbox.getChildren().addAll(UserInfoBut,ShowBut,CRUDbut,LogOutBut);
+        ButtonsVbox.getChildren().addAll(UserInfoBut,ShowBut,createRoom,CRUDbut,LogOutBut);
         
         Line l = new Line();
         l.setStroke(Color.web("#465058"));
