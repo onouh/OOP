@@ -460,4 +460,4 @@ public class AdminCRUD {
         BorPane.setCenter(crudMain);
         Scene root = new Scene(BorPane, 600, 400);
     }
-    }
+}
