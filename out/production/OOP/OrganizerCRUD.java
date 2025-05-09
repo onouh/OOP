@@ -214,7 +214,7 @@ public class OrganizerCRUD {
         
             confirm.setOnAction(z -> {
             pwCap.getChildren().removeIf(node -> node instanceof Label);
-            a.create(capacity.getText(), pwCap);
+            o.create(capacity.getText(), pwCap);
             capacity.clear();
             });
         
@@ -229,7 +229,7 @@ public class OrganizerCRUD {
         but2.setOnAction(e -> {
         functionality.getChildren().clear();
         
-        VBox cap= new VBox();
+        VBox cap = new VBox();
         cap.prefWidthProperty().bind(functionality.widthProperty());
         cap.setAlignment(Pos.CENTER);
         
@@ -273,7 +273,7 @@ public class OrganizerCRUD {
             confirm.setOnAction(z -> {
             
             pwCap.getChildren().removeIf(node -> node instanceof Label);
-            a.update(((Categories)combobox.getValue()), capacity.getText(), pwCap,pwCom);
+            o.update(((Categories)combobox.getValue()), capacity.getText(), pwCap,pwCom);
             capacity.clear();
             combobox.setValue(null);
             });
@@ -325,7 +325,7 @@ public class OrganizerCRUD {
             confirm.setOnAction(z -> {
             
             pwCom.getChildren().removeIf(node -> node instanceof Label);
-            Label read = new Label (a.read(((Categories)combobox.getValue())));
+            Label read = new Label (o.read(((Categories)combobox.getValue())));
             read.translateYProperty().bind(functionality.heightProperty().multiply(0.30));
             read.setStyle(textTable);
             pwCom.getChildren().add(read);
@@ -346,7 +346,7 @@ public class OrganizerCRUD {
         but3.setOnAction(e -> {
         functionality.getChildren().clear();
         
-        VBox cap= new VBox();
+        VBox cap = new VBox();
         cap.prefWidthProperty().bind(functionality.widthProperty());
         cap.setAlignment(Pos.CENTER);
         
@@ -376,7 +376,7 @@ public class OrganizerCRUD {
             confirm.setOnAction(z -> {
             
             pwCom.getChildren().removeIf(node -> node instanceof Label);
-            a.delete(((Categories)combobox.getValue()));
+            o.delete(((Categories)combobox.getValue()));
             Label confmes = new Label("sucsess");
             confmes.setStyle(textgood);
             pwCom.getChildren().add(confmes);
