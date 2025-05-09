@@ -24,10 +24,10 @@ import javafx.stage.Stage;
 
 public class OrganizerInfo extends Application {
 
-    private Organizer a;
+    private Organizer o;
 
-    public OrganizerInfo(Admin a) {
-        this.a = a;
+    public OrganizerInfo(Organizer o) {
+        this.o = o;
     }
 
     @Override
@@ -62,8 +62,9 @@ public class OrganizerInfo extends Application {
         leftHbox.getChildren().addAll(ButtonsVbox, linePane);
 
         JFXButton UserInfoBut = new JFXButton("User Info");
+        UserInfoBut.disableProperty().set(true);
         UserInfoBut.setMaxWidth(Double.MAX_VALUE);
-        UserInfoBut.setStyle(ButStyleA);
+        UserInfoBut.setStyle(ButStyleUA);
         UserInfoBut.prefWidthProperty().bind(BorPane.widthProperty().multiply(0.175));
         ButtonsVbox.heightProperty().addListener((obs, oldPad, newPad) -> {
             double ButtonPadding = ButtonsVbox.getHeight() * 0.08;
@@ -72,9 +73,8 @@ public class OrganizerInfo extends Application {
 
 
         JFXButton ShowBut = new JFXButton("Show Data");
-        ShowBut.disableProperty().set(true);
         ShowBut.setMaxWidth(Double.MAX_VALUE);
-        ShowBut.setStyle(ButStyleUA);
+        ShowBut.setStyle(ButStyleA);
         ShowBut.prefWidthProperty().bind(BorPane.widthProperty().multiply(0.175));
         ButtonsVbox.heightProperty().addListener((obs, oldPad, newPad) -> {
             double ButtonMar = ButtonsVbox.getHeight() * 0.025;
@@ -118,7 +118,7 @@ public class OrganizerInfo extends Application {
 
 
         VBox Body = new VBox();
-        Label welcomin = new Label("Welcome" + a.getUsername() );
+        Label welcomin = new Label("Welcome" + o.getUsername() );
         welcomin.setStyle(textHeader);
 
         GridPane usernameAndProfile = new GridPane();
@@ -159,10 +159,10 @@ public class OrganizerInfo extends Application {
             Body.setMargin(main3, new Insets(gridMar, 0, 0, 0));
         });
 
-        Label password = new Label("Password : " + a.getPassword());
+        Label password = new Label("Password : " + o.getPassword());
         password.setStyle(textNormal);
 
-        Label balance = new Label("Balance : " + a.getBalance());
+        Label balance = new Label("Balance : " + o.getBalance());
         balance.setStyle(textNormal);
 
 
