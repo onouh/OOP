@@ -23,7 +23,6 @@ public class Admin extends Person implements Employee<Categories>{
         this.workBegin.set(Calendar.HOUR_OF_DAY, start);
         this.workEnd.set(Calendar.HOUR_OF_DAY, End);
     }
-    // This constructor is reserved for future use when Admin instances need to be initialized with specific data.
     
     
     public String getRole(){
