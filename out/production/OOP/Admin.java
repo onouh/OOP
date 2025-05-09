@@ -1,11 +1,9 @@
 package com.example.app_gui;
 
 
-import static com.example.app_gui.Room.input;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -31,6 +29,16 @@ public class Admin extends Person implements Employee<Categories>{
     
     public String getRole(){
         return role;
+    }
+
+    public String getWorkBegin() {
+        SimpleDateFormat militaryTimeFormat = new SimpleDateFormat("HH");
+        return militaryTimeFormat.format(workBegin.getTime());
+    }
+
+    public String getWorkEnd() {
+        SimpleDateFormat militaryTimeFormat = new SimpleDateFormat("HH");
+        return militaryTimeFormat.format(workEnd.getTime());
     }
 
 
