@@ -49,7 +49,7 @@ public class Admin extends Person implements Employee<Categories>{
     }
     
     
-    public boolean addRoom(String capacity,VBox pwCapacity,VBox theButtonThatCreatesTheRoom) {
+    public boolean addRoom(String capacity,VBox pwCapacity) {
         boolean valid;
         if(capacity.matches("\\d+") && (Integer.valueOf(capacity)>0) ){ 
         valid = true;
