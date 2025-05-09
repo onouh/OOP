@@ -12,6 +12,8 @@ public class Admin extends Person implements Employee<Categories>{
     private final Calendar workBegin = Calendar.getInstance();
     private final Calendar workEnd = Calendar.getInstance();
     private String role;
+    String texterr = "-fx-font-family:'Century Gothic'; -fx-font-size : 16;-fx-text-fill: #FF0000; ";
+    
         
     Admin(){
         this(null,null,null, 0,0,0,0,0);
@@ -50,15 +52,13 @@ public class Admin extends Person implements Employee<Categories>{
     public boolean addRoom(String capacity,VBox pwCapacity,VBox theButtonThatCreatesTheRoom) {
         boolean valid;
         if(capacity.matches("\\d+") && (Integer.valueOf(capacity)>0) ){ 
-          valid = true;
+        valid = true;
         }
         else{
-        pwCapacity.getChildren().add(new Label("please enter a positive capacity value"));
         valid = false;
         }  
         if (valid){
             Database.rooms.add(new Room(Integer.valueOf(capacity)));
-            theButtonThatCreatesTheRoom.getChildren().add(pwCapacity);
             return true;
         }else{
             return false;
@@ -71,6 +71,7 @@ public class Admin extends Person implements Employee<Categories>{
         if (!o.getName().equals("<><><>")){
             Database.categories.add(o);
         }
+        
     }
 
     @Override
@@ -80,7 +81,7 @@ public class Admin extends Person implements Employee<Categories>{
     }
     
     @Override 
-    public void update(Categories o,String newName, VBox theInputOfTheNewName){
+    public void update(Categories o,String newName, VBox theInputOfTheNewName,VBox theInputOfTheCategory){
         for(Categories c : Database.categories){
             if(o == c){
                 if(!newName.equals("<><><>")){
@@ -88,7 +89,10 @@ public class Admin extends Person implements Employee<Categories>{
                 break;
                 }
                 else{
-                theInputOfTheNewName.getChildren().add(new Label("the new category name exists please try again"));
+                Label errormsg = new Label("the new category name");
+                errormsg.setStyle(texterr);
+                theInputOfTheNewName.getChildren().add(errormsg);
+                theInputOfTheCategory.getChildren().add(new Label(""));
                 }     
             }
         }
