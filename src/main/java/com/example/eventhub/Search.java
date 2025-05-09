@@ -21,7 +21,7 @@ public class Search extends Application {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 for (Event event : Database.events) {
                     if (event.getName().matches(newValue)) {
-                        System.out.println("Event not found.");
+                        System.out.println("Event found.");
                         return;
                     }
                 }
