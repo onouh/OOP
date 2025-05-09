@@ -123,8 +123,16 @@ public class OrganizerShow {
         
         //the datepicker
         VBox totalSituation = new VBox();
+        StackPane LabelStack = new StackPane();
+        LabelStack.setAlignment(Pos.CENTER);
+        LabelStack.prefHeightProperty().bind(totalSituation.heightProperty().multiply(0.07));
+        Label theDateLabel = new Label("Please enter the day you want to check");
+        theDateLabel.setStyle(textHeader);
+        LabelStack.getChildren().add(theDateLabel);
+
         StackPane initialStack = new StackPane();
         DatePicker datePicker = new DatePicker();
+        
         
         datePicker.setValue(LocalDate.now()); // Set default to today
         datePicker.setDayCellFactory(picker -> new DateCell() {
@@ -141,7 +149,7 @@ public class OrganizerShow {
         });
 
         initialStack.getChildren().addAll(datePicker);
-        totalSituation.getChildren().addAll(initialStack);
+        totalSituation.getChildren().addAll(LabelStack,initialStack);
         
         
         datePicker.setOnAction(e -> {
