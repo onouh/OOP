@@ -3,17 +3,18 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Search extends Application {
+public class EventSearch extends Application {
     
-    private TextArea textBox;
+    private TextField textBox;
+    private Event evnt;
 
     @Override
     public void start(Stage primaryStage) {
-        textBox = new TextArea();
+        textBox = new TextField();
 
         // Add a listener to the text property of the text box
         textBox.textProperty().addListener(new ChangeListener<String>() {
@@ -21,7 +22,8 @@ public class Search extends Application {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 for (Event event : Database.events) {
                     if (event.getName().matches(newValue)) {
-                        System.out.println("Event found.");
+                        evnt = event;
+                        System.out.println("Event found: " + event.toString());
                         return;
                     }
                 }
