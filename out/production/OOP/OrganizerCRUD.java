@@ -251,7 +251,7 @@ public class OrganizerCRUD {
         HBox combContainer = new HBox();
         combContainer.setAlignment(Pos.CENTER);
         combContainer.setMaxWidth(Double.MAX_VALUE); 
-        ObservableList<Categories> observableList = FXCollections.observableArrayList(Database.categories);
+        ObservableList<Event> observableList = FXCollections.observableArrayList(Database.events);
         
         ComboBox combobox = new ComboBox(observableList);
         combobox.prefWidthProperty().bind(functionality.widthProperty().multiply(0.25));
@@ -273,7 +273,7 @@ public class OrganizerCRUD {
             confirm.setOnAction(z -> {
             
             pwCap.getChildren().removeIf(node -> node instanceof Label);
-            o.update(((Categories)combobox.getValue()), capacity.getText(), pwCap,pwCom);
+            o.update(((Event)combobox.getValue()), capacity.getText(), pwCap,pwCom);
             capacity.clear();
             combobox.setValue(null);
             });

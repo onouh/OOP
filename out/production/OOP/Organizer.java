@@ -1,5 +1,6 @@
 package com.example.app_gui;
 
+import java.lang.classfile.Label;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -11,7 +12,7 @@ import java.util.Iterator;
 
 public class Organizer extends Person{ 
 
-
+    String textgood = "-fx-font-family:'Century Gothic'; -fx-font-size : 16;-fx-text-fill: #00ff00; ";
     private Wallet wallet;
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     ArrayList<Event> mine = new ArrayList<>(1000);
@@ -138,12 +139,15 @@ public class Organizer extends Person{
         mine.remove(e);
     }
     
-    
-    public void update(Event o){
+    @Override
+    public void update(Event o, String capacity, VBox pwCap, VBox pwCom){
         for(Event e : Database.events){
             if(o == e){
-                // input.nextLine();
-                o.setName("test");
+                Label l = new Label("Change successful");
+                l.setStyle(textgood);
+                pwCap.getChildren().add(l);
+                pwCom.getChildren().add(new Label(""));
+                o.setName(capacity);
                 break;
             }
         }
