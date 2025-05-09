@@ -1,4 +1,3 @@
-package com.example.app_gui;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;

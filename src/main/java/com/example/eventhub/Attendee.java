@@ -1,4 +1,3 @@
-package com.example.app_gui;
 
 import static com.example.app_gui.Room.input;
 import java.util.ArrayList;
@@ -91,7 +90,15 @@ public class Attendee extends Person {
                 '}';
     }
 
-
+    // public Event search(String eventName) {
+    //     for (Event event : Database.events) {
+    //         if (event.getName().equalsIgnoreCase(eventName)) {
+    //             return event;
+    //         }
+    //     }
+    //     System.out.println("Event not found.");
+    //     return null;
+    // }
     
     public void homeScreen() {
 

@@ -1,4 +1,4 @@
-package com.example.eventhub;
+
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;

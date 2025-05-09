@@ -1,4 +1,3 @@
-package com.example.app_gui;
 
 import java.time.Instant;
 import java.time.LocalDate;

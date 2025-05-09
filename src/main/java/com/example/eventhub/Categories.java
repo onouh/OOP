@@ -1,6 +1,4 @@
 
-package com.example.app_gui;
-
 import java.util.Scanner;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;

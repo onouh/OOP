@@ -1,6 +1,4 @@
 
-package com.example.app_gui;
-
 import javafx.scene.control.Label;
 import java.util.ArrayList;
 

@@ -1,4 +1,3 @@
-package com.example.eventhub;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

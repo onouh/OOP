@@ -1,6 +1,4 @@
 
-package com.example.app_gui;
-
 import javafx.scene.layout.VBox;
 
 public interface Employee <T> {
