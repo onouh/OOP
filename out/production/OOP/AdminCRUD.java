@@ -443,9 +443,15 @@ public class AdminCRUD {
             confirm.setOnAction(z -> {
             
             pwCap.getChildren().removeIf(node -> node instanceof Label);
-            //admin buy false         Label errormes = new Label("please enter a positive capacity value");  pwCapacity.getChildren().add(errormes); 
-            Label errormes = new Label("please enter a positive capacity value");
-            pwCap.getChildren().add(errormes);
+            if(a.addRoom(capacity.getText(), pwCap)){
+            Label confmes = new Label("sucsess");
+            confmes.setStyle(textgood);
+            pwCap.getChildren().add(confmes);
+            }else{
+            Label errormsg = new Label("please enter a positive capacity value");
+            errormsg.setStyle(texterr);
+            pwCap.getChildren().add(errormsg);
+            }
             capacity.clear();
             });
         
@@ -460,4 +466,4 @@ public class AdminCRUD {
         BorPane.setCenter(crudMain);
         Scene root = new Scene(BorPane, 600, 400);
     }
-}
+    }
