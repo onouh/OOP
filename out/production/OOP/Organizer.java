@@ -1,18 +1,21 @@
 package com.example.app_gui;
 
-import java.lang.classfile.Label;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Iterator;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
-public class Organizer extends Person{ 
+public class Organizer extends Person implements Employee<Event>{ 
 
-    String textgood = "-fx-font-family:'Century Gothic'; -fx-font-size : 16;-fx-text-fill: #00ff00; ";
+    String texterr = "-fx-font-family:'Century Gothic'; -fx-font-size : 16;-fx-text-fill: #FF0000; ";
     private Wallet wallet;
     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     ArrayList<Event> mine = new ArrayList<>(1000);
@@ -31,96 +34,40 @@ public class Organizer extends Person{
         return (wallet != null) ? wallet.getBalance() : 0;
     }
 
-    
-    public void create(){
-        Categories myCat ;
-        Room myRoom;
-        int k = 1;
-        for(Categories c: Database.categories){
-            System.out.print(k + "-");
-            System.out.println(c.getName());
-            k++;
-        }
-        System.out.println("Please Choose the category");
-        while(true){
-            String choice = "test";
-            if ((Integer.parseInt(choice) > Database.categories.size()) || Integer.parseInt(choice) < 0){
-                System.out.println("Please choose something in range");
-                continue;
-            }
-            myCat = Database.categories.get(Integer.parseInt(choice)-1);
-            break;
-        }
-        System.out.println("Please Enter the name of the event");
-        // input.nextLine();
-        String name = "test";
-        // input.nextLine();
-        System.out.println("please enter the price");
-        int price;
-        do { 
-            try {
-                price = Integer.parseInt("test");
-                if (price <= 0) {
-                    throw new InputMismatchException("Price must be a positive integer.");
-                } else {
-                    break;
-                }
-            } catch (NumberFormatException | InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid number for price.");
-                // e.printStackTrace();
-            }
-            System.out.println("please choose the room you would like to rent");
-        } while (true);
-        int t = 0;
-        for(Room r: Database.rooms){
-            System.out.print(t + "-");
-            System.out.println( "Room no. " + r.getRoomNo());
-            t++;
-        }
-        System.out.println("Please Choose a room");
-        while(true){
-            String choice = "test";
-            if ((Integer.parseInt(choice) > Database.rooms.size()) || Integer.parseInt(choice) < 0 ){
-                System.out.println("please choose something in range");
-                continue;
-            }
-            int ind = -1;
-            for (int i = 0; i < Database.rooms.size(); i++) {
-                if (Database.rooms.get(i).getRoomNo() == Integer.parseInt(choice)) {
-                    ind = i;
-                    break;
-                }
-            }
-            myRoom = Database.rooms.get(ind);
-            break;
-        }
-        String myTime = myRoom.chooseAvailableTime();
-        String calvalue = myTime.substring(0,10);
-        String State = myTime.substring(13,myTime.length());
-        LocalDate date;
+    @Override
+    public void create(String jack, VBox john) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-        do { 
-            try {
-                date = LocalDate.parse(calvalue, format);
-                Calendar cal = Calendar.getInstance();
-                cal.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth());
-                Reservations res = new Reservations();
-                this.wallet.pay(this, myRoom);
-                Event eve=new Event(name,myCat,price,cal,myRoom,this,State);
-                Database.events.add(eve);    
-                mine.add(eve);
-                System.out.println("Event created successfully");
-                break; 
-            } catch (Exception e) {
-                System.out.println("please enter the day in the correct format DD/MM/YYYY it is very strict with the format");
-                continue;
-            }
-        } while (true); 
+    
+    
+    
+    public void create(String name , Categories myCat ,Room myRoom, String price,LocalDate occupation,String State,VBox pwPrice){        
+        boolean valid = true;
+        if(!(price.matches("\\d+")) || !((Integer.valueOf(price)>0)) ){ 
+        Label errormsg1 = new Label ("price must be a positive number");
+        errormsg1.setStyle(texterr);
+        pwPrice.getChildren().add(errormsg1);
+        valid = false;
+        }
+        
+        Calendar cal = GregorianCalendar.from(
+            occupation.atStartOfDay(ZoneId.systemDefault())
+        );
+        
+        if(valid){
+        Reservations res = new Reservations();
+        this.wallet.pay(this, myRoom);
+        Event eve = new Event(name,myCat,Integer.parseInt(price),cal,myRoom,this,State);
+        Database.events.add(eve);    
+        mine.add(eve);
+        }
     }
     
     
-    public void read(Event e){
+    public String read(Event e){
         System.out.println(e.toString());
+        return "kill me";
     }
     
    
@@ -139,15 +86,11 @@ public class Organizer extends Person{
         mine.remove(e);
     }
     
-    @Override
-    public void update(Event o, String capacity, VBox pwCap, VBox pwCom){
+    
+    public void update(Event o, String newValue , VBox theInputOfTheNewValue,VBox theInputOfTheCategory){
         for(Event e : Database.events){
             if(o == e){
-                Label l = new Label("Change successful");
-                l.setStyle(textgood);
-                pwCap.getChildren().add(l);
-                pwCom.getChildren().add(new Label(""));
-                o.setName(capacity);
+                o.setName(newValue);
                 break;
             }
         }
@@ -234,105 +177,9 @@ public class Organizer extends Person{
         } 
     }
     
-    
-    public void homeScreen() {
-        for(Event e:Database.events){
-            if(e.getOrganizer().getUsername().equals(this.getUsername())){
-                mine.add(e);
-            }
-        }
-          while(true){
-            System.out.println("please choose what you want to do");
-            System.out.println("1 - view your profile");
-            System.out.println("2 - show relavent information");
-            System.out.println("3 - manage and create events");
-            System.out.println("4 - log out");
-            // input.nextLine();
-            String i = "1";
-            switch (i) {
-                case "1" -> System.out.println(this.toString());
-                case "2" -> this.show();
-                case "3" -> {
-                    System.out.println("What do you want to do?");
-                    System.out.println("1-create event");
-                    System.out.println("2-read event");
-                    System.out.println("3-update event name");
-                    System.out.println("4-delete event");
-                    // input.nextLine();
-                    String j = "1";
-                    switch (j) {
-                        case "1" -> this.create();
-                        case "2" -> {
-                            System.out.println("Which event do you want to read");
-                            this.eventSelection("read");
-                        }
-                        case "3" -> {
-                            System.out.println("Which event do you want to update");
-                            this.eventSelection("update");
-                        }
-                        case "4" -> {
-                            System.out.println("Which event do you want to delete");
-                            this.eventSelection("delete");
-                        }
-                        default -> System.out.println("please enter a valid option");
-                    }
-                }
-                case "4" -> {     
-                    System.out.println("Are you sure you want to log out?(y/n)");
-                    // input.nextLine();
-                    
-                    while(true){
-                    String choice = "y";
-                    switch (choice.toLowerCase()) {
-                    case "y" -> {
-                        App.main(null);
-                    }
-                    case "n" -> {
-                    
-                    }
-                    default -> {
-                        System.out.println("please enter y to refer to yes or n to refer to no");
-                        continue;
-                    }   
-                    }
-                    break;
-                    }
-                }
-                default -> System.out.println("please enter one of the options");
-            }
-
-        }
-    }
     public Wallet getWallet(){
     return this.wallet;
     }
-    
-     
-    private void eventSelection(String mode){
-        int l = 0;
-        for(Event e : mine){
-            System.out.println(l + " " + e.getName());
-            l++;
-        }
-        do{
-            try{
-                int k = 5; 
-      
-                    if(k < l && k >= 0 ){
-                        switch (mode) {
-                            case "read" -> this.read(mine.get(k));
-                            case "update" -> this.update(mine.get(k));
-                            case "delete" -> this.delete(mine.get(k));
-                        }
-                        break;
-                    }else{
-                        System.out.println("please enter a number within the valid range");
-                    }
-               
-            }catch(InputMismatchException ex){
-                System.out.println("please enter a number in range");
-            }
-        }while(true);
-    }
-    
 }
+    
+   

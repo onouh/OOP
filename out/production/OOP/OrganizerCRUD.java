@@ -1,4 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.example.app_gui;
+
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -20,6 +25,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+/**
+ *
+ * @author omara
+ */
 public class OrganizerCRUD {
     private Organizer o;
 
@@ -214,7 +223,7 @@ public class OrganizerCRUD {
         
             confirm.setOnAction(z -> {
             pwCap.getChildren().removeIf(node -> node instanceof Label);
-            o.create(capacity.getText(), pwCap);
+            //a.create(capacity.getText(), pwCap);
             capacity.clear();
             });
         
@@ -228,8 +237,8 @@ public class OrganizerCRUD {
         Buttons.add(but2, 1 ,0);
         but2.setOnAction(e -> {
         functionality.getChildren().clear();
-        
-        VBox cap = new VBox();
+
+        VBox cap= new VBox();
         cap.prefWidthProperty().bind(functionality.widthProperty());
         cap.setAlignment(Pos.CENTER);
         
@@ -251,7 +260,7 @@ public class OrganizerCRUD {
         HBox combContainer = new HBox();
         combContainer.setAlignment(Pos.CENTER);
         combContainer.setMaxWidth(Double.MAX_VALUE); 
-        ObservableList<Event> observableList = FXCollections.observableArrayList(Database.events);
+        ObservableList<Categories> observableList = FXCollections.observableArrayList(Database.categories);
         
         ComboBox combobox = new ComboBox(observableList);
         combobox.prefWidthProperty().bind(functionality.widthProperty().multiply(0.25));
@@ -273,7 +282,7 @@ public class OrganizerCRUD {
             confirm.setOnAction(z -> {
             
             pwCap.getChildren().removeIf(node -> node instanceof Label);
-            o.update(((Event)combobox.getValue()), capacity.getText(), pwCap,pwCom);
+            //a.update(((Categories)combobox.getValue()), capacity.getText(), pwCap,pwCom);
             capacity.clear();
             combobox.setValue(null);
             });
@@ -325,10 +334,10 @@ public class OrganizerCRUD {
             confirm.setOnAction(z -> {
             
             pwCom.getChildren().removeIf(node -> node instanceof Label);
-            Label read = new Label (o.read(((Categories)combobox.getValue())));
-            read.translateYProperty().bind(functionality.heightProperty().multiply(0.30));
-            read.setStyle(textTable);
-            pwCom.getChildren().add(read);
+            //Label read = new Label (a.read(((Categories)combobox.getValue())));
+            //read.translateYProperty().bind(functionality.heightProperty().multiply(0.30));
+            //read.setStyle(textTable);
+            //pwCom.getChildren().add(read);
             combobox.setValue(null);
             });
         
@@ -343,10 +352,10 @@ public class OrganizerCRUD {
         
         Buttons.add(but4, 3 ,0);
         
-        but3.setOnAction(e -> {
+        but4.setOnAction(e -> {
         functionality.getChildren().clear();
         
-        VBox cap = new VBox();
+        VBox cap= new VBox();
         cap.prefWidthProperty().bind(functionality.widthProperty());
         cap.setAlignment(Pos.CENTER);
         
@@ -376,7 +385,7 @@ public class OrganizerCRUD {
             confirm.setOnAction(z -> {
             
             pwCom.getChildren().removeIf(node -> node instanceof Label);
-            o.delete(((Categories)combobox.getValue()));
+            //a.delete(((Categories)combobox.getValue()));
             Label confmes = new Label("sucsess");
             confmes.setStyle(textgood);
             pwCom.getChildren().add(confmes);
@@ -392,63 +401,12 @@ public class OrganizerCRUD {
         functionality.getChildren().addAll(cap);
         });
         
-        
-        
-        HBox buttonContainer = new HBox();
-        buttonContainer.setAlignment(Pos.CENTER);
-        JFXButton createroom = new JFXButton("Create Room");
-        createroom.prefWidthProperty().bind(buttonContainer.widthProperty().multiply(0.25));
-        createroom.setStyle(ButStyleUA);
-        buttonContainer.heightProperty().addListener((obs, oldPad, newPad) -> {
-            double pane = buttonContainer.getHeight()* 0.05;
-            HBox.setMargin(createroom, new Insets(pane, 0, 0, 0));
-        });
-        
-        buttonContainer.getChildren().add(createroom);
-        createroom.setOnAction(e -> {
-        functionality.getChildren().clear();
-        
-        VBox cap= new VBox();
-        cap.prefWidthProperty().bind(functionality.widthProperty());
-        cap.setAlignment(Pos.CENTER);
-        
-        VBox pwCap = new VBox();
-        pwCap.translateYProperty().bind(functionality.heightProperty().multiply(0.250));
 
-        pwCap.setAlignment(Pos.CENTER);
-        HBox fieldContainer = new HBox();
-  
-        fieldContainer.setAlignment(Pos.CENTER);
-        fieldContainer.setMaxWidth(Double.MAX_VALUE); 
-        TextField capacity = new TextField();
-        capacity.prefWidthProperty().bind(buttonContainer.widthProperty().multiply(0.25));
-
-        JFXButton confirm = new JFXButton("Confirm");
-        confirm.prefWidthProperty().bind(buttonContainer.widthProperty().multiply(0.15));
-        confirm.setStyle(ButStyleUA);
-        confirm.translateYProperty().bind(functionality.heightProperty().multiply(0.40));
+      
         
-        confirm.setDisable(true);
-        confirm.disableProperty().bind(capacity.textProperty().isEmpty());
-        
-            confirm.setOnAction(z -> {
-            
-            pwCap.getChildren().removeIf(node -> node instanceof Label);
-            //admin buy false         Label errormes = new Label("please enter a positive capacity value");  pwCapacity.getChildren().add(errormes); 
-            Label errormes = new Label("please enter a positive capacity value");
-            pwCap.getChildren().add(errormes);
-            capacity.clear();
-            });
-        
-        fieldContainer.getChildren().add(capacity);
-        pwCap.getChildren().add(fieldContainer);
-        cap.getChildren().addAll(pwCap,confirm);
-        functionality.getChildren().addAll(cap);
-        });
-        
-        crudMain.getChildren().addAll(crudnamelocate,Buttons,stackFunctionality,buttonContainer);
+        crudMain.getChildren().addAll(crudnamelocate,Buttons,stackFunctionality);
         
         BorPane.setCenter(crudMain);
         Scene root = new Scene(BorPane, 600, 400);
     }
-}
+}   
